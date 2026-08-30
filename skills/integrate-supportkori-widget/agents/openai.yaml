@@ -1,0 +1,4 @@
+interface:
+  display_name: "Integrate SupportKori Widget"
+  short_description: "Audit and repair themed SupportKori widgets"
+  default_prompt: "Use $integrate-supportkori-widget to audit this project and add or repair a theme-consistent embedded SupportKori widget."

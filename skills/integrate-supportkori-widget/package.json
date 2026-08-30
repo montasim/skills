@@ -1,0 +1,50 @@
+{
+  "name": "integrate-supportkori-widget",
+  "version": "0.1.0",
+  "description": "Install a portable skill that audits or integrates theme-consistent SupportKori widgets.",
+  "type": "module",
+  "bin": {
+    "integrate-supportkori-widget": "bin/integrate-supportkori-widget.js"
+  },
+  "files": [
+    "bin/",
+    "skills/"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run",
+    "prepublishOnly": "npm test && npm run pack:check",
+    "pretest": "node ../../scripts/stage-package-skill.mjs stage integrate-supportkori-widget test",
+    "posttest": "node ../../scripts/stage-package-skill.mjs clean integrate-supportkori-widget test",
+    "prepack": "node ../../scripts/stage-package-skill.mjs stage integrate-supportkori-widget pack",
+    "postpack": "node ../../scripts/stage-package-skill.mjs clean integrate-supportkori-widget pack"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "agent-skill",
+    "codex",
+    "claude-code",
+    "supportkori",
+    "support-widget",
+    "browser-extension",
+    "frontend-integration",
+    "developer-tools"
+  ],
+  "author": "Montasim",
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/montasim/skills/tree/main/skills/integrate-supportkori-widget#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montasim/skills.git",
+    "directory": "skills/integrate-supportkori-widget"
+  },
+  "bugs": {
+    "url": "https://github.com/montasim/skills/issues"
+  },
+  "funding": "https://www.supportkori.com/montasim",
+  "publishConfig": {
+    "access": "public"
+  }
+}
