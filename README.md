@@ -20,18 +20,18 @@ The private npm workspace is named `montasim-skills`; it is an orchestration sur
 
 | Skill | Purpose | Distribution | Version | License |
 | --- | --- | --- | --- | --- |
-| `find-ui-inconsistencies` | Find visual and interaction inconsistencies | npm | 0.1.0 | MIT |
-| `publish-verified-github-release` | Publish evidence-backed GitHub releases | npm | 0.2.0 | MIT |
-| `fix-social-link-previews` | Fix and verify social link previews | npm | 0.3.0 | MIT |
-| `integrate-supportkori-widget` | Integrate and verify SupportKori widgets | npm | 0.1.0 | UNLICENSED |
-| `deploy-prebuilt-app-to-netlify` | Deploy prebuilt apps directly to Netlify | npm | 0.1.0 | MIT |
-| `make-project-github-ready` | Make projects ready for professional GitHub repositories | npm | 0.1.0 | MIT |
-| `make-app-netlify-ready` | Make applications ready for Netlify | npm | 0.1.0 | MIT |
-| `update-skillfolio-catalog` | Add or update verified Skillfolio catalog entries | npm | 0.1.0 | MIT |
-| `release-agent-skill` | Validate and release agent skills | npm | 0.1.0 | MIT |
-| `fix-project-metadata-mismatches` | Find and repair project metadata mismatches | npm | 0.1.0 | MIT |
-| `verify-github-npm-release` | Verify GitHub and npm releases | npm | 0.1.0 | MIT |
-| `write-complete-project-readme` | Write complete evidence-based READMEs | npm | 0.4.0 | MIT |
+| [`find-ui-inconsistencies`](https://github.com/montasim/skills/tree/main/skills/find-ui-inconsistencies) | Find visual and interaction inconsistencies | [npm](https://www.npmjs.com/package/find-ui-inconsistencies) | 0.1.0 | MIT |
+| [`publish-verified-github-release`](https://github.com/montasim/skills/tree/main/skills/publish-verified-github-release) | Publish evidence-backed GitHub releases | [npm](https://www.npmjs.com/package/publish-verified-github-release) | 0.2.0 | MIT |
+| [`fix-social-link-previews`](https://github.com/montasim/skills/tree/main/skills/fix-social-link-previews) | Fix and verify social link previews | [npm](https://www.npmjs.com/package/fix-social-link-previews) | 0.3.0 | MIT |
+| [`integrate-supportkori-widget`](https://github.com/montasim/skills/tree/main/skills/integrate-supportkori-widget) | Integrate and verify SupportKori widgets | [npm](https://www.npmjs.com/package/integrate-supportkori-widget) | 0.1.0 | UNLICENSED |
+| [`deploy-prebuilt-app-to-netlify`](https://github.com/montasim/skills/tree/main/skills/deploy-prebuilt-app-to-netlify) | Deploy prebuilt apps directly to Netlify | [npm](https://www.npmjs.com/package/deploy-prebuilt-app-to-netlify) | 0.1.0 | MIT |
+| [`make-project-github-ready`](https://github.com/montasim/skills/tree/main/skills/make-project-github-ready) | Make projects ready for professional GitHub repositories | [npm](https://www.npmjs.com/package/make-project-github-ready) | 0.1.0 | MIT |
+| [`make-app-netlify-ready`](https://github.com/montasim/skills/tree/main/skills/make-app-netlify-ready) | Make applications ready for Netlify | [npm](https://www.npmjs.com/package/make-app-netlify-ready) | 0.1.0 | MIT |
+| [`update-skillfolio-catalog`](https://github.com/montasim/skills/tree/main/skills/update-skillfolio-catalog) | Add or update verified Skillfolio catalog entries | [npm](https://www.npmjs.com/package/update-skillfolio-catalog) | 0.1.0 | MIT |
+| [`release-agent-skill`](https://github.com/montasim/skills/tree/main/skills/release-agent-skill) | Validate and release agent skills | [npm](https://www.npmjs.com/package/release-agent-skill) | 0.1.0 | MIT |
+| [`fix-project-metadata-mismatches`](https://github.com/montasim/skills/tree/main/skills/fix-project-metadata-mismatches) | Find and repair project metadata mismatches | [npm](https://www.npmjs.com/package/fix-project-metadata-mismatches) | 0.1.0 | MIT |
+| [`verify-github-npm-release`](https://github.com/montasim/skills/tree/main/skills/verify-github-npm-release) | Verify GitHub and npm releases | [npm](https://www.npmjs.com/package/verify-github-npm-release) | 0.1.0 | MIT |
+| [`write-complete-project-readme`](https://github.com/montasim/skills/tree/main/skills/write-complete-project-readme) | Write complete evidence-based READMEs | [npm](https://www.npmjs.com/package/write-complete-project-readme) | 0.4.0 | MIT |
 
 `catalog.json` is the machine-readable inventory and records each canonical identity, package, version, source directory, distribution decision, evidence profile, and imported source commit.
 
@@ -152,6 +152,7 @@ The first publication of a new package requires authenticated npm ownership. Fut
 - Package metadata points to the central `montasim/skills` repository and is verified as part of each release.
 - Historical repositories should be archived only after a release from the monorepo installs and verifies successfully.
 - `integrate-supportkori-widget` and Skillfolio remain unlicensed. The SupportKori package is public but does not grant open-source reuse rights; the other eleven skills are MIT-licensed.
+- Skillfolio's Netlify development dependency graph has one upstream `extract-zip` advisory whose named patched version is not yet published on npm. It does not enter any skill package; see [SECURITY.md](SECURITY.md#known-development-dependency-advisory).
 - The repository deliberately uses normal directories rather than symlinked skill directories so local validation and packaging agree.
 
 See [MIGRATION.md](MIGRATION.md) for the remaining remote cutover and [LICENSING.md](LICENSING.md) for per-skill licensing.
