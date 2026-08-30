@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "packages": {
+    "find-ui-inconsistencies": { "errorStatus": 1 },
+    "publish-verified-github-release": { "errorStatus": 2 },
+    "deploy-prebuilt-app-to-netlify": { "errorStatus": 1 },
+    "fix-social-link-previews": { "errorStatus": 1 },
+    "integrate-supportkori-widget": { "errorStatus": 1 },
+    "make-app-netlify-ready": { "errorStatus": 1 },
+    "make-project-github-ready": { "errorStatus": 1 },
+    "release-agent-skill": { "errorStatus": 1 },
+    "fix-project-metadata-mismatches": { "errorStatus": 2 },
+    "update-skillfolio-catalog": { "errorStatus": 1 },
+    "verify-github-npm-release": { "errorStatus": 1 }
+  },
+  "compatibilityExceptions": {
+    "write-complete-project-readme": "Retains its mature custom installer because it owns legacy Codex-root migration and conservative host auto-detection."
+  }
+}

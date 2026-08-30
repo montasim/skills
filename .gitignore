@@ -1,0 +1,7 @@
+node_modules/
+*.tgz
+.DS_Store
+
+# Created only during npm test/pack lifecycle hooks.
+skills/*/skills/
+skills/*/.monorepo-stage-owners.json

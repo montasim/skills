@@ -1,0 +1,37 @@
+{
+  "name": "montasim-skills",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Canonical source and release workspace for Montasim's reusable agent skills.",
+  "workspaces": [
+    "skills/*"
+  ],
+  "scripts": {
+    "build": "pnpm --dir apps/skillfolio build",
+    "generate:installers": "node scripts/generate-installers.mjs",
+    "generate:skillfolio-catalog": "node scripts/generate-skillfolio-catalog.mjs",
+    "validate": "node scripts/validate-all.mjs && node scripts/generate-installers.mjs --check && node scripts/generate-skillfolio-catalog.mjs --check",
+    "test:packages": "npm test --workspaces --if-present",
+    "test:repository": "node --test test/*.test.mjs",
+    "test:supportkori": "node --test skills/integrate-supportkori-widget/tests/*.test.mjs",
+    "test": "npm run validate && npm run test:packages && npm run test:supportkori && npm run test:repository && npm run validate",
+    "pack:check": "npm run pack:check --workspaces --if-present",
+    "smoke:install": "node scripts/smoke-install-all.mjs",
+    "test:skillfolio-catalog": "node --test test/skillfolio-catalog.test.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "funding": {
+    "type": "custom",
+    "url": "https://www.supportkori.com/montasim"
+  },
+  "homepage": "https://github.com/montasim/skills#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montasim/skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/montasim/skills/issues"
+  }
+}

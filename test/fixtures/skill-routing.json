@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "skills": {
+    "find-ui-inconsistencies": {
+      "positive": "Audit the inconsistent typography and loading states across these routes.",
+      "negative": { "prompt": "Create a branded Open Graph preview image.", "routeTo": "fix-social-link-previews" },
+      "ambiguous": { "prompt": "Review this redesign and fix the systemic UI drift you find.", "allowed": ["find-ui-inconsistencies"] },
+      "authorization": "Audit the UI only; do not implement the repairs.",
+      "unavailableTool": "Audit these supplied screenshots because the running app is unavailable."
+    },
+    "publish-verified-github-release": {
+      "positive": "Draft release notes for v1.4.0 and create the named GitHub release.",
+      "negative": { "prompt": "Verify whether v1.4.0 is already aligned across npm and GitHub.", "routeTo": "verify-github-npm-release" },
+      "ambiguous": { "prompt": "Prepare release notes now; publication authorization will come later.", "allowed": ["publish-verified-github-release"] },
+      "authorization": "Draft the notes without changing GitHub release state.",
+      "unavailableTool": "Draft release notes from local Git evidence because GitHub access is unavailable."
+    },
+    "deploy-prebuilt-app-to-netlify": {
+      "positive": "Build locally and upload the verified output to the existing Netlify production site.",
+      "negative": { "prompt": "Audit why this Netlify build cannot find its publish directory.", "routeTo": "make-app-netlify-ready" },
+      "ambiguous": { "prompt": "Manually deploy this build; use a draft because production was not requested.", "allowed": ["deploy-prebuilt-app-to-netlify"] },
+      "authorization": "Upload a draft deploy only; do not change site settings or domains.",
+      "unavailableTool": "Preflight the local artifact and stop if Netlify CLI is unavailable."
+    },
+    "fix-social-link-previews": {
+      "positive": "Repair the missing Open Graph image and verify the deployed link card.",
+      "negative": { "prompt": "Add the established SupportKori control to the extension popup.", "routeTo": "integrate-supportkori-widget" },
+      "ambiguous": { "prompt": "Diagnose whether the stale social card is code or platform cache.", "allowed": ["fix-social-link-previews"] },
+      "authorization": "Repair local social metadata but do not deploy or invalidate caches.",
+      "unavailableTool": "Audit the raw HTML file because the production URL is unavailable."
+    },
+    "integrate-supportkori-widget": {
+      "positive": "Audit the SupportKori widget CSP and navigation behavior in this browser extension.",
+      "negative": { "prompt": "Improve the generic donation documentation.", "routeTo": "write-complete-project-readme" },
+      "ambiguous": { "prompt": "Make the existing SupportKori trigger match this app's established theme.", "allowed": ["integrate-supportkori-widget"] },
+      "authorization": "Audit the widget only; do not add or restyle it.",
+      "unavailableTool": "Inspect source and manifest evidence because the extension runtime is unavailable."
+    },
+    "make-app-netlify-ready": {
+      "positive": "Repair this monorepo's Netlify base and publish-directory configuration.",
+      "negative": { "prompt": "Upload the already verified local build to the linked Netlify site.", "routeTo": "deploy-prebuilt-app-to-netlify" },
+      "ambiguous": { "prompt": "Make this SSR app deployment-ready without deploying it.", "allowed": ["make-app-netlify-ready"] },
+      "authorization": "Fix local Netlify configuration only; do not link or deploy a site.",
+      "unavailableTool": "Audit configuration and report build verification as blocked when dependencies are unavailable."
+    },
+    "make-project-github-ready": {
+      "positive": "Prepare this project with CI, security guidance, topics, and GitHub metadata.",
+      "negative": { "prompt": "Synchronize the version and repository URL across local manifests.", "routeTo": "fix-project-metadata-mismatches" },
+      "ambiguous": { "prompt": "Audit GitHub readiness and propose remote settings without applying them.", "allowed": ["make-project-github-ready"] },
+      "authorization": "Prepare local community files but do not create or update a GitHub repository.",
+      "unavailableTool": "Complete the local readiness audit and mark remote checks blocked without GitHub access."
+    },
+    "release-agent-skill": {
+      "positive": "Coordinate the authorized npm, GitHub release, Skillfolio, and verification stages for this skill.",
+      "negative": { "prompt": "Only verify the existing npm and GitHub release.", "routeTo": "verify-github-npm-release" },
+      "ambiguous": { "prompt": "Resume this partially completed Agent Skill shipment from the failed release stage.", "allowed": ["release-agent-skill"] },
+      "authorization": "Prepare the complete shipment plan but stop before every external mutation.",
+      "unavailableTool": "Coordinate available specialists and report an explicit fallback when one is unavailable."
+    },
+    "fix-project-metadata-mismatches": {
+      "positive": "Align the package version, lockfile, install command, and catalog metadata locally.",
+      "negative": { "prompt": "Create community files and configure GitHub topics.", "routeTo": "make-project-github-ready" },
+      "ambiguous": { "prompt": "Audit local release metadata drift before deciding whether to edit.", "allowed": ["fix-project-metadata-mismatches"] },
+      "authorization": "Synchronize local metadata only; do not publish, push, tag, or release.",
+      "unavailableTool": "Perform the manual metadata audit and report that the bundled auditor could not run."
+    },
+    "update-skillfolio-catalog": {
+      "positive": "Update this repository's local Skillfolio authorities and regenerate the catalog.",
+      "negative": { "prompt": "Publish the skill package and create its GitHub release.", "routeTo": "release-agent-skill" },
+      "ambiguous": { "prompt": "Add one verified skill to local Skillfolio without deploying the app.", "allowed": ["update-skillfolio-catalog"] },
+      "authorization": "Update local Skillfolio data only; do not publish or deploy anything.",
+      "unavailableTool": "Update authoritative data and mark the build blocked if the app toolchain is unavailable."
+    },
+    "verify-github-npm-release": {
+      "positive": "Audit whether the GitHub tag, release, npm version, dist-tag, and CI all agree.",
+      "negative": { "prompt": "Draft and publish the GitHub release notes.", "routeTo": "publish-verified-github-release" },
+      "ambiguous": { "prompt": "Check the release and provide remediation guidance without applying it.", "allowed": ["verify-github-npm-release"] },
+      "authorization": "Keep the release audit strictly read-only.",
+      "unavailableTool": "Mark online release checks blocked when credentials or network access are unavailable."
+    },
+    "write-complete-project-readme": {
+      "positive": "Regenerate the complete root README from verified repository evidence.",
+      "negative": { "prompt": "Audit the existing README and report findings without editing it.", "routeTo": null },
+      "ambiguous": { "prompt": "Replace the weak root README while preserving verified project facts.", "allowed": ["write-complete-project-readme"] },
+      "authorization": "Write only the root README.md and leave every other project file unchanged.",
+      "unavailableTool": "Write from local evidence and report that external endpoints could not be verified."
+    }
+  }
+}

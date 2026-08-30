@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "evidenceProfiles": {
+    "portable-npm-2026-08-30": {
+      "auditedOn": "2026-08-30",
+      "format": "Agent Skills structure validated",
+      "documentedHosts": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "installerTested": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "runtimeVerified": [
+        "OpenAI Codex"
+      ]
+    },
+    "readme-installer-2026-08-30": {
+      "auditedOn": "2026-08-30",
+      "format": "Agent Skills structure validated",
+      "documentedHosts": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "installerTested": [
+        "OpenAI Codex",
+        "Claude Code"
+      ],
+      "runtimeVerified": [
+        "OpenAI Codex"
+      ]
+    }
+  },
+  "applications": [
+    {
+      "name": "skillfolio",
+      "directory": "apps/skillfolio",
+      "description": "Searchable web catalog for discovering, evaluating, and installing reusable agent skills.",
+      "legacyRepository": "https://github.com/montasim/Skillfoliox",
+      "sourceCommit": "e5d5212b5e3a434af6f5fb88ea6643a41beed18f",
+      "liveUrl": "https://skillfoliox.netlify.app",
+      "license": "UNLICENSED"
+    }
+  ],
+  "skills": [
+    {
+      "name": "find-ui-inconsistencies",
+      "description": "Find visual and interaction inconsistencies across frontend routes, states, themes, and viewports.",
+      "distribution": "npm",
+      "package": "find-ui-inconsistencies",
+      "version": "0.1.0",
+      "license": "MIT",
+      "evidenceProfile": "portable-npm-2026-08-30",
+      "sourceCommit": "69f608bfae1033a1c46a8eb4c7c468834dd6262b",
+      "repository": "https://github.com/montasim/skills",
+      "sourceDirectory": "skills/find-ui-inconsistencies"
+    },
+    {
+      "name": "publish-verified-github-release",
+      "description": "Publish evidence-backed GitHub releases with explicit mutation boundaries.",
+      "distribution": "npm",
+      "package": "publish-verified-github-release",
+      "version": "0.2.0",
+      "license": "MIT",
+      "evidenceProfile": "portable-npm-2026-08-30",
+      "sourceCommit": "96e383555d54faef139fb0fb123ba86f7d74fbb3",
+      "repository": "https://github.com/montasim/skills",
+      "sourceDirectory": "skills/publish-verified-github-release"
+    },
+    {
+      "name": "fix-social-link-previews",
+      "description": "Fix and verify crawler-visible social link previews.",
+      "distribution": "npm",
+      "package": "fix-social-link-previews",
+      "version": "0.3.0",
+      "license": "MIT",
+      "evidenceProfile": "portable-npm-2026-08-30",
+      "sourceCommit": "4f78b0c247883f8c5a0fde036432349eef9ea8e5",
+      "repository": "https://github.com/montasim/skills",
+      "sourceDirectory": "skills/fix-social-link-previews"
+    },
+    {
+      "name": "integrate-supportkori-widget",
+      "description": "Integrate and verify SupportKori widgets in websites and browser extensions.",
+      "distribution": "npm",
+      "package": "integrate-supportkori-widget",
+      "version": "0.1.0",
+      "license": "UNLICENSED",
+      "evidenceProfile": "portable-npm-2026-08-30",
+      "sourceCommit": null,
+      "repository": "https://github.com/montasim/skills",
+      "sourceDirectory": "skills/integrate-supportkori-widget"
+    },
+    {
+      "name": "deploy-prebuilt-app-to-netlify",
+      "description": "Deploy verified prebuilt app artifacts to Netlify without a remote build.",
+      "distribution": "npm",
+      "package": "deploy-prebuilt-app-to-netlify",
+      "version": "0.1.0",
+      "license": "MIT",
+      "evidenceProfile": "portable-npm-2026-08-30",
+      "sourceCommit": "d9b17b714d0f41d26c172742ae2269dd42d62688",
+      "repository": "https://github.com/montasim/skills",
+      "sourceDirectory": "skills/deploy-prebuilt-app-to-netlify"
+    },
+    {
+      "name": "make-project-github-ready",
+      "description": "Make local projects ready for professional GitHub repositories.",
+      "distribution": "npm",
+      "package": "make-project-github-ready",
+      "version": "0.1.0",
+      "license": "MIT",
+      "evidenceProfile": "portable-npm-2026-08-30",
+      "sourceCommit": "da41975fe0bfc3f9c6b87d1e41a25a2a34d08b1c",
+      "repository": "https://github.com/montasim/skills",
+      "sourceDirectory": "skills/make-project-github-ready"
+    },
+    {
+      "name": "make-app-netlify-ready",
+      "description": "Make web applications ready for reproducible Netlify builds.",
+      "distribution": "npm",
+      "package": "make-app-netlify-ready",
+      "version": "0.1.0",
+      "license": "MIT",
+      "evidenceProfile": "portable-npm-2026-08-30",
+      "sourceCommit": "5f8f771ab59ba0c3e920449d278ae71fb0d9e967",
+      "repository": "https://github.com/montasim/skills",
+      "sourceDirectory": "skills/make-app-netlify-ready"
+    },
+    {
+      "name": "update-skillfolio-catalog",
+      "description": "Add or update one verified agent skill in the Skillfolio catalog.",
+      "distribution": "npm",
+      "package": "update-skillfolio-catalog",
+      "version": "0.1.0",
+      "license": "MIT",
+      "evidenceProfile": "portable-npm-2026-08-30",
+      "sourceCommit": "8af5a17d68337226ac87dde3c8be436d5abce090",
+      "repository": "https://github.com/montasim/skills",
+      "sourceDirectory": "skills/update-skillfolio-catalog"
+    },
+    {
+      "name": "release-agent-skill",
+      "description": "Validate, package, publish, release, and verify agent skills.",
+      "distribution": "npm",
+      "package": "release-agent-skill",
+      "version": "0.1.0",
+      "license": "MIT",
+      "evidenceProfile": "portable-npm-2026-08-30",
+      "sourceCommit": "579c49367e6ab254b48c22cc9be74815eb58437e",
+      "repository": "https://github.com/montasim/skills",
+      "sourceDirectory": "skills/release-agent-skill"
+    },
+    {
+      "name": "fix-project-metadata-mismatches",
+      "description": "Find and repair project identity and release metadata mismatches.",
+      "distribution": "npm",
+      "package": "fix-project-metadata-mismatches",
+      "version": "0.1.0",
+      "license": "MIT",
+      "evidenceProfile": "portable-npm-2026-08-30",
+      "sourceCommit": "b44373b73378cfd73923d19775ca793964a0f125",
+      "repository": "https://github.com/montasim/skills",
+      "sourceDirectory": "skills/fix-project-metadata-mismatches"
+    },
+    {
+      "name": "verify-github-npm-release",
+      "description": "Verify GitHub and npm releases without changing them.",
+      "distribution": "npm",
+      "package": "verify-github-npm-release",
+      "version": "0.1.0",
+      "license": "MIT",
+      "evidenceProfile": "portable-npm-2026-08-30",
+      "sourceCommit": "0b947cba17e7b9b39e87ece974255c5b3f5aa052",
+      "repository": "https://github.com/montasim/skills",
+      "sourceDirectory": "skills/verify-github-npm-release"
+    },
+    {
+      "name": "write-complete-project-readme",
+      "description": "Write complete project README files from verified repository evidence.",
+      "distribution": "npm",
+      "package": "write-complete-project-readme",
+      "version": "0.4.0",
+      "license": "MIT",
+      "evidenceProfile": "readme-installer-2026-08-30",
+      "sourceCommit": "f3e4fe796601ca231e208de5c27fe2275a0c068b",
+      "repository": "https://github.com/montasim/skills",
+      "sourceDirectory": "skills/write-complete-project-readme"
+    }
+  ]
+}

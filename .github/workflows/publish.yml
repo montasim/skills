@@ -1,0 +1,146 @@
+name: Publish skill package
+
+on:
+  push:
+    tags:
+      - '*-v*'
+
+concurrency:
+  group: release-${{ github.repository }}-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  publish:
+    name: Publish npm package
+    if: github.repository == 'montasim/skills'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      id-token: write
+    outputs:
+      name: ${{ steps.release.outputs.name }}
+      version: ${{ steps.release.outputs.version }}
+      workspace: ${{ steps.release.outputs.workspace }}
+      tag: ${{ steps.release.outputs.tag }}
+    steps:
+      - name: Check out the release tag
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+      - name: Resolve the package from the namespaced tag
+        id: release
+        run: node scripts/resolve-release.mjs "$GITHUB_REF_NAME"
+      - name: Verify the tag belongs to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main
+          tag_commit="$(git rev-list -n 1 "$GITHUB_REF_NAME")"
+          git merge-base --is-ancestor "$tag_commit" origin/main
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+      - name: Validate the repository
+        run: npm run validate
+      - name: Test the selected package
+        run: npm test --workspace "${{ steps.release.outputs.workspace }}"
+      - name: Inspect the selected package archive
+        run: npm run pack:check --workspace "${{ steps.release.outputs.workspace }}"
+      - name: Check whether the exact version is already published
+        id: registry
+        shell: bash
+        env:
+          PACKAGE_NAME: ${{ steps.release.outputs.name }}
+          RELEASE_VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          set -euo pipefail
+          published_version="$(npm view --prefer-online "$PACKAGE_NAME@$RELEASE_VERSION" version 2>/dev/null || true)"
+          if [[ "$published_version" == "$RELEASE_VERSION" ]]; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Publish with trusted publishing
+        if: steps.registry.outputs.published != 'true'
+        run: npm publish --workspace "${{ steps.release.outputs.workspace }}" --access public --provenance
+
+  verify:
+    name: Verify published package
+    needs: publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+      - name: Wait for npm registry propagation
+        shell: bash
+        env:
+          PACKAGE_NAME: ${{ needs.publish.outputs.name }}
+          RELEASE_VERSION: ${{ needs.publish.outputs.version }}
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3 4 5 6 7 8 9 10; do
+            published_version="$(npm view --prefer-online "$PACKAGE_NAME@$RELEASE_VERSION" version 2>/dev/null || true)"
+            if [[ "$published_version" == "$RELEASE_VERSION" ]]; then
+              exit 0
+            fi
+            if [[ "$attempt" == "10" ]]; then
+              echo "$PACKAGE_NAME@$RELEASE_VERSION did not become available" >&2
+              exit 1
+            fi
+            sleep 6
+          done
+      - name: Smoke-test the published installer
+        shell: bash
+        env:
+          PACKAGE_NAME: ${{ needs.publish.outputs.name }}
+          RELEASE_VERSION: ${{ needs.publish.outputs.version }}
+        run: |
+          set -euo pipefail
+          install_root="$RUNNER_TEMP/skill-install"
+          npx --yes --package="$PACKAGE_NAME@$RELEASE_VERSION" "$PACKAGE_NAME" \
+            --target codex --path "$install_root"
+          test -f "$install_root/$PACKAGE_NAME/SKILL.md"
+
+  github-release:
+    name: Create GitHub release
+    needs: [publish, verify]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Create the package release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PACKAGE_NAME: ${{ needs.publish.outputs.name }}
+          RELEASE_VERSION: ${{ needs.publish.outputs.version }}
+          RELEASE_TAG: ${{ needs.publish.outputs.tag }}
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release $RELEASE_TAG already exists."
+          else
+            gh release create "$RELEASE_TAG" \
+              --repo "$GITHUB_REPOSITORY" \
+              --verify-tag \
+              --title "$PACKAGE_NAME v$RELEASE_VERSION" \
+              --generate-notes \
+              --latest=false
+          fi
