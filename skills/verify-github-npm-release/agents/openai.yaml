@@ -1,0 +1,4 @@
+interface:
+  display_name: "Verify GitHub and npm Release"
+  short_description: "Audit a project release across GitHub and npm"
+  default_prompt: "Use $verify-github-npm-release to audit this project release and report verified evidence without changing anything."

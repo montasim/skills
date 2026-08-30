@@ -1,0 +1,50 @@
+{
+  "name": "verify-github-npm-release",
+  "version": "0.1.0",
+  "description": "Install a portable Codex and Claude skill for auditing GitHub and npm releases.",
+  "type": "module",
+  "bin": {
+    "verify-github-npm-release": "bin/verify-github-npm-release.js"
+  },
+  "files": [
+    "bin/",
+    "skills/"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run",
+    "prepublishOnly": "npm test && npm run pack:check",
+    "pretest": "node ../../scripts/stage-package-skill.mjs stage verify-github-npm-release test",
+    "posttest": "node ../../scripts/stage-package-skill.mjs clean verify-github-npm-release test",
+    "prepack": "node ../../scripts/stage-package-skill.mjs stage verify-github-npm-release pack",
+    "postpack": "node ../../scripts/stage-package-skill.mjs clean verify-github-npm-release pack"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "agent-skill",
+    "codex",
+    "claude-code",
+    "release-verification",
+    "github-release",
+    "npm",
+    "ci",
+    "audit"
+  ],
+  "author": "Montasim",
+  "license": "MIT",
+  "homepage": "https://github.com/montasim/skills/tree/main/skills/verify-github-npm-release#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montasim/skills.git",
+    "directory": "skills/verify-github-npm-release"
+  },
+  "bugs": {
+    "url": "https://github.com/montasim/skills/issues"
+  },
+  "funding": "https://www.supportkori.com/montasim",
+  "publishConfig": {
+    "access": "public"
+  }
+}
