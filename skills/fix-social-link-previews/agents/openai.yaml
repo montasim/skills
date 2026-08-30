@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fix Social Link Previews"
+  short_description: "Audit, create, repair, and verify previews"
+  default_prompt: "Use $fix-social-link-previews to audit this web app and create or repair its large-image social preview."

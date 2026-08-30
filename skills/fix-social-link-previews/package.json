@@ -1,0 +1,52 @@
+{
+  "name": "fix-social-link-previews",
+  "version": "0.3.0",
+  "description": "Audit, create, repair, and verify large-image social previews for web apps and websites.",
+  "type": "module",
+  "bin": {
+    "fix-social-link-previews": "bin/fix-social-link-previews.js"
+  },
+  "files": [
+    "bin/",
+    "skills/"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run",
+    "prepublishOnly": "npm test && npm run pack:check",
+    "pretest": "node ../../scripts/stage-package-skill.mjs stage fix-social-link-previews test",
+    "posttest": "node ../../scripts/stage-package-skill.mjs clean fix-social-link-previews test",
+    "prepack": "node ../../scripts/stage-package-skill.mjs stage fix-social-link-previews pack",
+    "postpack": "node ../../scripts/stage-package-skill.mjs clean fix-social-link-previews pack"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "codex",
+    "claude-code",
+    "agent-skill",
+    "open-graph",
+    "social-preview",
+    "twitter-card",
+    "og-image",
+    "seo",
+    "npx"
+  ],
+  "author": "Montasim",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montasim/skills.git",
+    "directory": "skills/fix-social-link-previews"
+  },
+  "bugs": {
+    "url": "https://github.com/montasim/skills/issues"
+  },
+  "homepage": "https://github.com/montasim/skills/tree/main/skills/fix-social-link-previews#readme",
+  "funding": "https://www.supportkori.com/montasim",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
