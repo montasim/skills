@@ -1,0 +1,48 @@
+{
+  "name": "deploy-prebuilt-app-to-netlify",
+  "version": "0.1.0",
+  "description": "Install a portable skill for safely uploading verified local build artifacts to Netlify.",
+  "type": "module",
+  "bin": {
+    "deploy-prebuilt-app-to-netlify": "bin/deploy-prebuilt-app-to-netlify.js"
+  },
+  "files": [
+    "bin/",
+    "skills/"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run",
+    "prepublishOnly": "npm test && npm run pack:check",
+    "pretest": "node ../../scripts/stage-package-skill.mjs stage deploy-prebuilt-app-to-netlify test",
+    "posttest": "node ../../scripts/stage-package-skill.mjs clean deploy-prebuilt-app-to-netlify test",
+    "prepack": "node ../../scripts/stage-package-skill.mjs stage deploy-prebuilt-app-to-netlify pack",
+    "postpack": "node ../../scripts/stage-package-skill.mjs clean deploy-prebuilt-app-to-netlify pack"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "agent-skill",
+    "netlify",
+    "manual-deploy",
+    "local-build",
+    "deployment",
+    "developer-tools"
+  ],
+  "author": "Montasim",
+  "license": "MIT",
+  "homepage": "https://github.com/montasim/skills/tree/main/skills/deploy-prebuilt-app-to-netlify#readme",
+  "funding": "https://www.supportkori.com/montasim",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montasim/skills.git",
+    "directory": "skills/deploy-prebuilt-app-to-netlify"
+  },
+  "bugs": {
+    "url": "https://github.com/montasim/skills/issues"
+  }
+}

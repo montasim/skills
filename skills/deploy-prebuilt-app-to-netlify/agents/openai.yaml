@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deploy Prebuilt App to Netlify"
+  short_description: "Deploy prebuilt sites without remote builds"
+  default_prompt: "Use $deploy-prebuilt-app-to-netlify to build locally and deploy this project to Netlify without a remote build."
