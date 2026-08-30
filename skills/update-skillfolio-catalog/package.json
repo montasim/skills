@@ -1,0 +1,49 @@
+{
+  "name": "update-skillfolio-catalog",
+  "version": "0.1.0",
+  "description": "Install a portable skill for synchronizing a verified skill with a local Skillfolio catalog.",
+  "type": "module",
+  "bin": {
+    "update-skillfolio-catalog": "bin/update-skillfolio-catalog.js"
+  },
+  "files": [
+    "bin/",
+    "skills/"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run",
+    "prepublishOnly": "npm test && npm run pack:check",
+    "pretest": "node ../../scripts/stage-package-skill.mjs stage update-skillfolio-catalog test",
+    "posttest": "node ../../scripts/stage-package-skill.mjs clean update-skillfolio-catalog test",
+    "prepack": "node ../../scripts/stage-package-skill.mjs stage update-skillfolio-catalog pack",
+    "postpack": "node ../../scripts/stage-package-skill.mjs clean update-skillfolio-catalog pack"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "agent-skill",
+    "codex",
+    "claude-code",
+    "skillfolio",
+    "skill-catalog",
+    "sitemap",
+    "catalog-validation"
+  ],
+  "author": "Montasim",
+  "license": "MIT",
+  "funding": "https://www.supportkori.com/montasim",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montasim/skills.git",
+    "directory": "skills/update-skillfolio-catalog"
+  },
+  "bugs": {
+    "url": "https://github.com/montasim/skills/issues"
+  },
+  "homepage": "https://github.com/montasim/skills/tree/main/skills/update-skillfolio-catalog#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}

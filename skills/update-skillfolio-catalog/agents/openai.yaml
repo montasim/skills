@@ -1,0 +1,4 @@
+interface:
+  display_name: "Update Skillfolio Catalog"
+  short_description: "Sync a verified Skillfolio catalog entry"
+  default_prompt: "Use $update-skillfolio-catalog to synchronize this skill with my local Skillfolio catalog and verify the app."
