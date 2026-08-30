@@ -1,130 +1,130 @@
 # Update Skillfolio Catalog
 
+> Synchronize one verified Agent Skill with a local Skillfolio application's real authorities, generated runtime catalog, README index, and sitemap.
+
 [![npm version](https://img.shields.io/npm/v/update-skillfolio-catalog.svg)](https://www.npmjs.com/package/update-skillfolio-catalog)
 [![CI](https://github.com/montasim/skills/actions/workflows/ci.yml/badge.svg)](https://github.com/montasim/skills/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Support on SupportKori](https://img.shields.io/badge/Support_on-SupportKori-00B8B5)](https://www.supportkori.com/montasim)
 
-Install a portable agent skill that adds or updates a verified agent skill in a local Skillfolio catalog while preserving the application's authority boundaries, schema, indexes, sitemap, and validation workflow.
+Update Skillfolio Catalog gives an AI coding agent a schema-discovery workflow for catalog maintenance. It verifies the skill identity from primary source or release evidence, traces runtime data through generators and route consumers, edits the minimum authoritative inputs, regenerates projections, and checks that source, install, detail-route, README, and sitemap links agree.
 
-It helps Codex and Claude Code trace the live catalog into its consumers, verify package and repository evidence, and synchronize exactly one entry without treating a local catalog update as permission to push or deploy.
+This package is public and independently installable from npm. Invoking it updates an explicitly identified local Skillfolio checkout; it does not silently publish, push, release, or deploy that catalog.
 
-## Install
-
-Requires Node.js 18 or newer. Python 3.9 or newer is required when the installed skill runs its bundled catalog validator.
-
-### From this source checkout
-
-```bash
-npm ci
-npm test
-node ./bin/update-skillfolio-catalog.js --target codex --scope project
-```
-
-This installs the skill into `.agents/skills/update-skillfolio-catalog` in the current project. The npm package, executable, installed directory, and invocation share the same name.
-
-### From npm
-
-Codex, user scope:
-
-```bash
+```sh
 npx --yes --package=update-skillfolio-catalog@latest update-skillfolio-catalog --target codex
 ```
 
-Claude Code, user scope:
+**[npm package](https://www.npmjs.com/package/update-skillfolio-catalog) · [source](https://github.com/montasim/skills/tree/main/skills/update-skillfolio-catalog) · [issues](https://github.com/montasim/skills/issues)**
 
-```bash
-npx --yes --package=update-skillfolio-catalog@latest update-skillfolio-catalog --target claude
+## Use it when
+
+- A published or verified skill must be added to a Skillfolio catalog.
+- One existing entry needs a version, repository, package, install command, compatibility, category, or presentation update.
+- Runtime JSON is generated from several authorities and must not be edited directly.
+- Detail routes, README indexes, and sitemaps need to remain synchronized with the catalog entry.
+
+Use `release-agent-skill` when this local catalog update is one separately authorized stage of a larger package and GitHub release.
+
+## Install and invoke
+
+Node.js 18 or newer is required for the installer and repository generators. Python 3 is required for the bundled entry validator; the target app's declared package manager is required for its own checks.
+
+```sh
+npx --yes --package=update-skillfolio-catalog@latest update-skillfolio-catalog \
+  --target codex --scope project
 ```
 
-Install for both agents:
-
-```bash
-npx --yes --package=update-skillfolio-catalog@latest update-skillfolio-catalog --target both
-```
-
-Use `--scope project` to install into the current repository. Use `--path <skills-root>` with exactly one target to choose an explicit skills directory. Add `--dry-run` to inspect the destination or `--force` to atomically replace an existing copy.
-
-Start a new agent session after installation so the host refreshes its skill catalog.
-
-## Use
-
-In Codex:
+The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` or an exact `--path` when needed.
 
 ```text
-Use $update-skillfolio-catalog to synchronize this published skill with my local Skillfolio app.
+Use $update-skillfolio-catalog to add the published package@example-version to /absolute/path/to/skillfolio. Update exactly one skill and do not push or deploy.
 ```
-
-In Claude Code:
 
 ```text
-/update-skillfolio-catalog synchronize this published skill with my local Skillfolio app
+/update-skillfolio-catalog Synchronize this skill's verified npm and GitHub release facts with the local catalog, generated route data, README index, and sitemap.
 ```
 
-## Capabilities
+## Evidence accepted
 
-- Verifies skill identity, version, repository, package, install command, and agent compatibility from primary evidence.
-- Discovers catalog authorities and generators, then traces runtime data into list and detail routes before editing.
-- Updates one skill identity in authoritative inputs, regenerates derived output, and synchronizes an existing README index and sitemap workflow when present.
-- Runs deterministic duplicate, shape, URL, README, and sitemap checks alongside the app's own formatting, type, test, and build commands.
-- Keeps commits, pull requests, package publication, and deployment behind explicit authorization.
+- A local skill root containing `SKILL.md`
+- A canonical GitHub repository, tag, or release URL
+- An npm package name or package URL
+- An explicit local Skillfolio application path
 
-## How installation works
+Stable version, package, executable, repository, install command, and supported hosts come from primary evidence. Badge images, screenshots, stale README sentences, and branch names are not treated as release facts.
 
-The npm executable copies the portable `skills/update-skillfolio-catalog` directory into the selected host's skill root. Installation does not locate a Skillfolio checkout, edit its catalog, commit changes, open a pull request, or deploy the application. Those actions occur only when the installed skill is invoked with the relevant local path and authority.
+## Catalog workflow
 
-## Limits
+1. Resolve the source identity and the intended Skillfolio app without assuming filenames or directory layout.
+2. Trace imported runtime data to its generator, types, list/detail routes, README index, sitemap, and editing authorities.
+3. Inspect sibling records to learn field order, value types, slug rules, ordering, taxonomy, and link conventions.
+4. Run the validator before editing to capture the baseline.
+5. Update exactly one skill identity across the minimum authoritative records.
+6. Run the existing generator and inspect the projection for unrelated movement.
+7. Synchronize the established README table and sitemap workflow when they exist.
+8. Run generator check mode, entry validation, formatting, typecheck, focused tests, crawler generation, production build, and representative route inspection.
 
-The bundled validator discovers JSON-backed runtime catalogs heuristically. It does not determine editing authority by itself and does not replace generator inspection, TypeScript checks, production builds, route inspection, or source verification. The workflow updates a local Skillfolio checkout by default and does not grant permission to push or deploy changes.
+## Generated-catalog authority model
 
-## Installer options
+When the target repository uses this monorepo's pattern, ownership is split deliberately:
 
-| Option | Meaning |
+| Authority | Owns |
 | --- | --- |
-| `--target codex\|claude\|both` | Required agent destination |
-| `--scope user\|project` | User scope by default; project scope uses the current directory |
-| `--path <skills-root>` | Exact skills root for one target |
-| `--dry-run` | Show resolved destinations without writing |
-| `--force` | Atomically replace an existing installation |
-| `--help` / `--version` | Print CLI information |
+| Root `catalog.json` | Managed release, package, version, repository, distribution, provenance, and license facts |
+| `categories.json` | Outcome-based category names and definitions |
+| `skill-presentation.json` | Display name, category assignment, featured state, summary, description, and uses |
+| `external-skills.json` | Skills whose release identity is maintained outside the monorepo |
+| `skills.generated.json` | Generated runtime and review projection; never the manual editing target |
 
-## Development
+Other Skillfolio applications may use different authorities. The skill discovers and follows the target application's actual data flow rather than forcing this schema.
 
-```bash
-npm ci
-npm test
-npm run pack:check
+## Run the entry validator
+
+```sh
+python3 /absolute/skill/root/scripts/validate_catalog_entry.py \
+  --app /absolute/path/to/skillfolio --entry skill-slug
 ```
 
-`npm test` exercises the installer, its safety boundaries, and the bundled catalog validator against a deterministic fixture. `npm run pack:check` previews the publish archive, and `prepublishOnly` runs both checks before publication.
+The validator checks discoverable JSON-backed runtime shape, duplicates, URLs, README index references, and sitemap presence. It cannot decide editing authority, verify every rendered detail, or replace typecheck, build, route, and source-release verification.
 
-## Updating and removing
+## Completion gate
 
-Rerun the `@latest` installation command with `--force` to replace an older installation. To uninstall, remove only the `update-skillfolio-catalog` directory from the relevant user or project skill root.
+The entry is complete only when identity and version match primary sources; package, slug, repository, and URLs are unique; generated output matches its inputs; source and install links resolve; the README and sitemap agree; and the target app's relevant checks pass or isolate a pre-existing failure.
 
-## Contributing
+## Bundled resources and installer
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) for requirements, the local workflow, required checks, and pull-request guidance.
+```text
+update-skillfolio-catalog/
+├── SKILL.md
+├── agents/openai.yaml
+├── references/
+│   ├── entry-acceptance.md
+│   └── generated-catalogs.md
+└── scripts/validate_catalog_entry.py
+```
 
-## Support and security
+Use `--scope user|project`, `--dry-run`, `--force`, `--migrate`, a provider list, or `--path`. Installation does not locate a catalog, edit data, commit, open a pull request, or deploy.
 
-Read [SUPPORT.md](SUPPORT.md) and use [GitHub Issues](https://github.com/montasim/skills/issues) for reproducible bugs and focused requests. Report vulnerabilities privately according to [SECURITY.md](SECURITY.md), never through a public issue. The SupportKori link is funding, not technical support.
+## Develop and verify
 
-## Project links
+```sh
+git clone https://github.com/montasim/skills.git
+cd skills
+npm ci
+npm test --workspace skills/update-skillfolio-catalog
+npm run pack:check --workspace skills/update-skillfolio-catalog
+```
 
-- [npm package](https://www.npmjs.com/package/update-skillfolio-catalog)
-- [Source repository](https://github.com/montasim/skills/tree/main/skills/update-skillfolio-catalog)
-- [Issue tracker](https://github.com/montasim/skills/issues)
-- [Security policy](SECURITY.md)
+## Limits and safety
 
-## Funding
+- Local files are evidence for their inspected revision, not proof of a public release.
+- Conflicting authoritative values block synchronization instead of being guessed.
+- “Publish to Skillfolio” means update and verify the local catalog unless external publication is separately authorized.
+- Commits, pushes, pull requests, npm publication, GitHub releases, deployments, and remote settings remain out of scope by default.
 
-Optional support through [SupportKori](https://www.supportkori.com/montasim) helps maintain catalog compatibility and verification guidance.
+## Support, contribution, and license
 
-## Author
+Use [GitHub Issues](https://github.com/montasim/skills/issues) for reproducible defects. Follow the repository [support](https://github.com/montasim/skills/blob/main/SUPPORT.md), [contribution](https://github.com/montasim/skills/blob/main/CONTRIBUTING.md), and [security](https://github.com/montasim/skills/blob/main/SECURITY.md) guidance.
 
-Built and maintained by [Montasim](https://github.com/montasim).
-
-## License
-
-Update Skillfolio Catalog is available under the [MIT License](LICENSE).
+Built and maintained by [Montasim](https://github.com/montasim). Optional [SupportKori funding](https://www.supportkori.com/montasim) supports catalog compatibility work. Licensed under the [MIT License](LICENSE).

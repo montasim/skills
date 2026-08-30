@@ -1,138 +1,143 @@
 # Verify GitHub and npm Release
 
-Install one portable skill for Codex, Claude Code, or both that audits an existing GitHub and npm release without changing it.
+> Audit a claimed GitHub and npm release across Git, tags, release state, registry metadata, install commands, CI, and optional catalogs—without changing anything.
 
 [![npm version](https://img.shields.io/npm/v/verify-github-npm-release.svg)](https://www.npmjs.com/package/verify-github-npm-release)
 [![CI](https://github.com/montasim/skills/actions/workflows/ci.yml/badge.svg)](https://github.com/montasim/skills/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Support on SupportKori](https://img.shields.io/badge/Support_on-SupportKori-00B8B5)](https://www.supportkori.com/montasim)
 
-Verify GitHub and npm Release compares a claimed release identity across local Git state, GitHub tags and releases, npm versions and dist-tags, advertised install commands, CI, and an optional catalog. It reports direct evidence as pass, warning, fail, or blocked while preserving a strict read-only boundary.
+Verify GitHub and npm Release gives an AI coding agent a strict read-only release audit. It establishes one expected release identity, checks local and remote evidence independently, preserves authentication and timeout failures as `blocked`, and requires every critical artifact to match before returning `verified`.
 
-## Install
-
-Requires Node.js 18 or newer and a filesystem-backed Codex or Claude Code skill directory.
-
-From this source checkout:
-
-```sh
-npm ci
-npm test
-node ./bin/verify-github-npm-release.js --target codex --scope project
-```
-
-This installs the skill into `.agents/skills/verify-github-npm-release` in the current project.
-
-From npm:
+It never repairs a finding, installs or executes the published package, changes a dist-tag, creates a tag or release, pushes, or publishes.
 
 ```sh
 npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target codex
-npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target claude
-npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target both
 ```
 
-Start a new agent session after installation so the host refreshes its skill catalog.
+**[npm package](https://www.npmjs.com/package/verify-github-npm-release) · [source](https://github.com/montasim/skills/tree/main/skills/verify-github-npm-release) · [issues](https://github.com/montasim/skills/issues)**
 
-## Use
+## Use it when
 
-In Codex:
+- A release is claimed complete and needs independent evidence before handoff.
+- GitHub tag, release, npm version, dist-tag, and package executable might disagree.
+- CI must be tied to the released commit rather than a nearby successful run.
+- A catalog's repository, package, version, or install command must align with public artifacts.
+- A partially published release needs a precise pass, warning, fail, or blocked report.
 
-```text
-Use $verify-github-npm-release to audit version 1.2.3 of this project across GitHub and npm.
-```
+Use `publish-verified-github-release` to draft or change release notes. Use `release-agent-skill` when verification closes an authorized multi-stage shipment.
 
-In Claude Code:
+## Install and invoke
 
-```text
-/verify-github-npm-release Audit version 1.2.3 of this project across GitHub and npm.
-```
-
-The skill resolves an expected repository, package, version, Git tag, npm dist-tag, install command, and optional catalog before collecting evidence. Its bundled verifier can also produce machine-readable output:
+Node.js 18 or newer and Git are required for local checks. Online checks need npm registry access and GitHub access; private targets may require authentication.
 
 ```sh
-node skills/verify-github-npm-release/scripts/verify-release.mjs \
+npx --yes --package=verify-github-npm-release@latest verify-github-npm-release \
+  --target codex --scope project
+```
+
+The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` or an exact `--path` as needed.
+
+```text
+Use $verify-github-npm-release to verify owner/project package-name 1.2.3, tag package-name-v1.2.3, latest dist-tag, CI, and catalog.json. Do not execute or change the package.
+```
+
+```text
+/verify-github-npm-release Audit this claimed release and return a row for every check with observed and expected values.
+```
+
+## Release identity
+
+The audit resolves these values before evaluating state:
+
+1. Local project path
+2. GitHub repository in `owner/name` form
+3. npm package name
+4. Expected semantic version
+5. Expected Git tag
+6. Expected npm dist-tag
+7. Advertised install command
+8. Optional catalog path or public record
+
+When authoritative files disagree, the disagreement remains a finding instead of being silently resolved.
+
+## Run the deterministic verifier
+
+```sh
+node /absolute/skill/root/scripts/verify-release.mjs \
   --repo owner/repository \
   --package package-name \
   --version 1.2.3 \
+  --tag package-name-v1.2.3 \
+  --dist-tag latest \
   --install-command "npx --yes --package=package-name@1.2.3 executable" \
-  --json
+  --catalog /absolute/project/catalog.json
 ```
 
-## Capabilities
+Add `--offline` only for a local preflight; skipped network checks cannot produce a completed release audit. Every Git, GitHub, and npm subprocess has a bounded timeout.
 
-- Compare local and upstream commits with local and GitHub tags.
-- Verify a non-draft GitHub release and exact npm version.
-- Confirm a requested npm dist-tag resolves to the expected version.
-- Cross-check the advertised command against published executable metadata.
-- Require successful CI evidence when the repository defines workflows.
-- Check optional JSON catalog identifiers without modifying the catalog.
-- Bound subprocesses with timeouts and distinguish contradictions from blocked checks.
+## Critical checks
 
-## Installer options
-
-| Option | Behavior |
+| Check | Passing evidence |
 | --- | --- |
-| `--target codex\|claude\|both` | Required installation host |
-| `--scope user\|project` | User installation by default; project-local when requested |
-| `--path /absolute/skills/root` | Custom skills root for exactly one target |
-| `--dry-run` | Print destinations without writing |
-| `--force` | Atomically replace an existing directory installation |
-| `--help` | Show installer help |
-| `--version` | Print the package version |
+| Local and remote tag | Both dereference to the expected release commit |
+| GitHub release | Exists for the expected tag and is not an unintended draft or prerelease |
+| npm exact version | Public registry contains the requested immutable version |
+| npm dist-tag | Requested alias resolves to that exact version |
+| Install command | Names the exact package/version and a published executable |
+| Repository alignment | Current branch, upstream, and remote commit relationships are observable and consistent |
+| CI | A successful run belongs to the released commit when CI is configured |
+| Catalog | Repository, package, version, and command match when catalog verification is requested |
 
-User installations go to `~/.agents/skills` for Codex and `${CLAUDE_CONFIG_DIR:-~/.claude}/skills` for Claude Code. Project installations go to `.agents/skills` and `.claude/skills` in the current directory. The installer refuses to replace symlinks or non-directories, including with `--force`.
+An `@latest` command is conditional even when it currently passes because the alias can move. An immutable `package@version` command is stronger release proof.
 
-## How installation works
+## Result states and verdict
 
-The npm executable copies the portable `skills/verify-github-npm-release` directory into the selected host's skill root. Installation performs no release audit and contacts no remote service. GitHub and npm evidence is collected only when the installed skill is invoked.
+| State | Meaning |
+| --- | --- |
+| `pass` | Direct evidence matches the expected identity |
+| `warning` | Optional evidence is absent, ambiguous, skipped, or weaker than ideal |
+| `fail` | Direct evidence contradicts the expected identity |
+| `blocked` | Required tooling, credentials, network, identity, or a bounded command prevented the check |
+
+The final verdict is `verified`, `not verified`, or `blocked`. Every row includes observed value, expected value, and evidence source; suggested fixes are guidance only.
+
+## Read-only boundary
+
+Safe evidence commands include `git status`, `git rev-parse`, `git ls-remote`, `gh api`, `gh release view`, `gh run list`, and `npm view`. `npx`, package installation, lifecycle scripts, and app startup execute code and are deliberately excluded from this verifier's default contract.
+
+## Bundled resources and installer
+
+```text
+verify-github-npm-release/
+├── SKILL.md
+├── agents/openai.yaml
+└── scripts/
+    ├── release-checks.mjs
+    └── verify-release.mjs
+```
+
+Use `--scope user|project`, `--dry-run`, `--force`, `--migrate`, a provider list, or `--path`. Installation performs no audit and contacts no remote service.
+
+## Develop and verify
+
+```sh
+git clone https://github.com/montasim/skills.git
+cd skills
+npm ci
+npm test --workspace skills/verify-github-npm-release
+npm run pack:check --workspace skills/verify-github-npm-release
+```
 
 ## Limits and safety
 
-- The audit does not execute the published package or its lifecycle scripts.
-- Network, authentication, missing tooling, and timeouts can block conclusions.
-- A mutable install alias such as `@latest` is only conditionally valid even when it currently resolves correctly.
-- Catalog checks compare identifiers in valid JSON; they do not prove catalog presentation or deployment.
-- The skill never repairs, publishes, tags, pushes, or edits release state.
+- Network and authentication errors are not evidence that an artifact is absent.
+- Catalog checks validate identifiers, not deployed catalog presentation.
+- A dirty working tree is reported separately from the immutable released commit.
+- The skill never publishes, tags, pushes, installs, executes, repairs, or edits release state.
 
-## Development
+## Support, contribution, and license
 
-```sh
-npm ci
-npm test
-npm run pack:check
-```
+Use [GitHub Issues](https://github.com/montasim/skills/issues) for reproducible defects. Follow the repository [support](https://github.com/montasim/skills/blob/main/SUPPORT.md), [contribution](https://github.com/montasim/skills/blob/main/CONTRIBUTING.md), and [security](https://github.com/montasim/skills/blob/main/SECURITY.md) guidance.
 
-`npm test` runs the release evaluator, verifier regression tests, installer safety tests, and package-contract checks. `npm run pack:check` previews the files that would be published; only `bin/` and `skills/` are included alongside npm-required package metadata and documentation.
-
-The `prepublishOnly` gate runs both commands before npm publication.
-
-## Updating and removing
-
-Rerun the `@latest` installation command with `--force` to replace an older installation. To uninstall, remove only the `verify-github-npm-release` directory from the relevant user or project skill root listed above.
-
-## Contributing
-
-Read [CONTRIBUTING.md](CONTRIBUTING.md) for requirements, the local workflow, required checks, and pull-request guidance.
-
-## Support and security
-
-Read [SUPPORT.md](SUPPORT.md) and use [GitHub Issues](https://github.com/montasim/skills/issues) for reproducible bugs and focused requests. Report vulnerabilities privately according to [SECURITY.md](SECURITY.md), never through a public issue. The SupportKori link is funding, not technical support.
-
-## Project links
-
-- [npm package](https://www.npmjs.com/package/verify-github-npm-release)
-- [Source repository](https://github.com/montasim/skills/tree/main/skills/verify-github-npm-release)
-- [Issue tracker](https://github.com/montasim/skills/issues)
-- [Security policy](SECURITY.md)
-
-## Funding
-
-Optional support through [SupportKori](https://www.supportkori.com/montasim) helps maintain the verification workflows.
-
-## Author
-
-Built and maintained by [Montasim](https://github.com/montasim).
-
-## License
-
-Verify GitHub and npm Release is available under the [MIT License](LICENSE).
+Built and maintained by [Montasim](https://github.com/montasim). Optional [SupportKori funding](https://www.supportkori.com/montasim) supports verification maintenance. Licensed under the [MIT License](LICENSE).

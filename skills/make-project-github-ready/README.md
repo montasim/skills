@@ -1,133 +1,113 @@
 # Make Project GitHub Ready
 
-Install one portable skill for Codex, Claude Code, or both that audits and prepares professional GitHub repositories with explicit mutation boundaries.
+> Audit and prepare a professional GitHub repository while keeping local improvements separate from authorized remote mutations.
 
 [![npm version](https://img.shields.io/npm/v/make-project-github-ready.svg)](https://www.npmjs.com/package/make-project-github-ready)
 [![CI](https://github.com/montasim/skills/actions/workflows/ci.yml/badge.svg)](https://github.com/montasim/skills/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Support on SupportKori](https://img.shields.io/badge/Support_on-SupportKori-00B8B5)](https://www.supportkori.com/montasim)
 
-Make Project GitHub Ready inventories a local project, designs evidence-based repository metadata, makes authorized local readiness improvements, and applies remote GitHub changes only after explicit approval. It keeps local edits, repository creation, metadata changes, and pushes visibly separate.
-
-## Install
-
-Requires Node.js 18 or newer and a filesystem-backed Codex or Claude Code skill directory.
-
-From this source checkout:
-
-```sh
-npm ci
-npm test
-node ./bin/make-project-github-ready.js --target codex --scope project
-```
-
-This installs the skill into `.agents/skills/make-project-github-ready` in the current project. The npm package and executable retain their established `make-project-github-ready` names.
-
-From npm:
+Make Project GitHub Ready gives an AI coding agent a staged path from local repository evidence to a verified GitHub surface. It audits identity, Git state, community health, security guidance, CI, and package metadata; proposes a factual description, homepage, topics, visibility, and default branch; implements local repairs when requested; and changes GitHub only after the exact repository and actions are approved.
 
 ```sh
 npx --yes --package=make-project-github-ready@latest make-project-github-ready --target codex
-npx --yes --package=make-project-github-ready@latest make-project-github-ready --target claude
-npx --yes --package=make-project-github-ready@latest make-project-github-ready --target both
 ```
 
-Start a new agent session after installation so the host refreshes its skill catalog.
+**[npm package](https://www.npmjs.com/package/make-project-github-ready) · [source](https://github.com/montasim/skills/tree/main/skills/make-project-github-ready) · [issues](https://github.com/montasim/skills/issues)**
 
-## Use
+## Use it when
 
-In Codex:
+- A local project needs an evidence-backed GitHub readiness audit.
+- Repository metadata, topics, community files, security policy, or CI need preparation.
+- A new GitHub repository should be created and configured after an explicit visibility decision.
+- A push or metadata mutation must be verified through GitHub readback rather than assumed from CLI success.
 
-```text
-Use $make-project-github-ready to audit this project and prepare a safe GitHub repository setup plan.
-```
+Use `fix-project-metadata-mismatches` for repeated local names, versions, URLs, install commands, and compatibility claims. Use `release-agent-skill` when repository readiness is one stage of an Agent Skill release.
 
-In Claude Code:
+## Install and invoke
 
-```text
-/make-project-github-ready Audit this project and prepare a safe GitHub repository setup plan.
-```
-
-The bundled local auditor provides a bounded inventory before human review:
+Node.js 18 or newer is required for the installer and local repository auditor. Remote stages need authenticated GitHub access.
 
 ```sh
-node skills/make-project-github-ready/scripts/audit-github-project.mjs --path . --json
+npx --yes --package=make-project-github-ready@latest make-project-github-ready \
+  --target codex --scope project
 ```
 
-## Capabilities
+The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` or an exact `--path` as needed.
 
-- Inventory recognized manifests, community files, workflows, Git state, and obvious sensitive filenames.
-- Flag missing repository metadata, stale pre-publication wording, and selected CI text mismatches.
-- Propose a factual description, verified homepage, focused topics, visibility, and default branch.
-- Prepare local community, security, manifest, and CI changes when authorized.
-- Create or configure GitHub repositories only after explicit authorization.
-- Read back repository settings, branch SHAs, workflows, and community profile after changes.
-- Report partial remote success without attempting destructive compensation.
+```text
+Use $make-project-github-ready to audit this project and prepare the local repository files. Do not create or change anything on GitHub.
+```
 
-## Installer options
+```text
+/make-project-github-ready Create the approved public owner/project repository, apply the reviewed description and topics, and push main. Read every remote value back afterward.
+```
 
-| Option | Behavior |
-| --- | --- |
-| `--target codex\|claude\|both` | Required installation host |
-| `--scope user\|project` | User installation by default; project-local when requested |
-| `--path /absolute/skills/root` | Custom skills root for exactly one target |
-| `--dry-run` | Print destinations without writing |
-| `--force` | Atomically replace an existing directory installation |
-| `--help` | Show installer help |
-| `--version` | Print the package version |
+## Readiness stages
 
-User installations go to `~/.agents/skills` for Codex and `${CLAUDE_CONFIG_DIR:-~/.claude}/skills` for Claude Code. Project installations go to `.agents/skills` and `.claude/skills` in the current directory. The installer refuses to replace symlinks or non-directories, including with `--force`.
+| Stage | Typical evidence | Mutation boundary |
+| --- | --- | --- |
+| Local audit | Git state, manifests, ignore rules, community files, CI, obvious sensitive filenames | Read-only |
+| Metadata plan | Name availability, factual description, verified homepage, focused topics, visibility, default branch | Proposal only |
+| Local preparation | README/governance files, manifest URLs, CI using real commands | Requires a change request |
+| GitHub configuration | Repository creation, visibility, metadata, topics, default branch, settings | Requires exact remote authorization |
+| Verification | GitHub API readback, remote SHA, community profile, workflow state | Read-only after mutation |
 
-## How installation works
+The skill never treats a configured local remote as proof of GitHub ownership, visibility, or current settings.
 
-The npm executable copies the portable `skills/make-project-github-ready` directory into the selected host's skill root. Installation does not inspect a project, create a repository, change GitHub metadata, or push commits; those actions occur only when the installed skill is invoked with explicit authority.
+## Run the local auditor
+
+```sh
+node /absolute/skill/root/scripts/audit-github-project.mjs \
+  --path /absolute/path/to/project --json
+```
+
+The auditor inventories recognized files, selected manifest metadata, `npm ci` cues, literal CI Node coverage, obvious sensitive filenames, and stale pre-publication wording. It does not scan file contents or Git history for secrets, judge policy quality, prove workflow semantics, or contact GitHub. Manual review and a dedicated secret scanner remain necessary when public visibility is considered.
+
+## Metadata rules
+
+- Preserve the established project or package identity; check both GitHub and registry ownership before claiming availability.
+- Write one factual capability-led description, not a slogan or keyword list.
+- Use a homepage only when the deployed app, docs, or primary package page is verified.
+- Choose a focused set of accurate lowercase topics; exclude planned features and promotional terms.
+- Require an explicit visibility choice because public visibility exposes reachable history, not only current files.
+- Prefer the existing primary branch and never rewrite history or force-push as a side effect.
+
+## Remote verification
+
+After an authorized mutation, the skill reads back full repository name, visibility, description, homepage, topics, default branch, local and remote SHAs, community profile, workflow presence, and latest run state. A workflow is not reported green while it is still running, and partial success is reported without destructive compensation.
+
+## Bundled resources and installer
+
+```text
+make-project-github-ready/
+├── SKILL.md
+├── agents/openai.yaml
+├── references/metadata-and-topics.md
+└── scripts/audit-github-project.mjs
+```
+
+Use `--scope user|project`, `--dry-run`, `--force`, `--migrate`, a provider list, or `--path`. Installation copies the skill only; it does not inspect a project, create a repository, change settings, or push.
+
+## Develop and verify
+
+```sh
+git clone https://github.com/montasim/skills.git
+cd skills
+npm ci
+npm test --workspace skills/make-project-github-ready
+npm run pack:check --workspace skills/make-project-github-ready
+```
 
 ## Limits and safety
 
-- Filename checks do not prove that a repository or its history contains no secrets.
-- Workflow text checks do not prove CI semantics or runtime success.
-- A configured Git remote does not prove GitHub ownership, visibility, or repository settings.
-- The skill requires explicit authorization before repository creation, metadata mutations, visibility changes, branch changes, or pushes.
-- It never invents deployment URLs, security contacts, licenses, badges, or support channels.
+- Filename checks cannot prove a repository or its history is secret-free.
+- CI text checks cannot prove workflow correctness or successful execution.
+- Licenses, badges, deployment URLs, security contacts, and support channels are never invented.
+- Public visibility, ownership transfer, history rewrites, branch protection, and force pushes are never inferred from a general preparation request.
 
-## Development
+## Support, contribution, and license
 
-```sh
-npm ci
-npm test
-npm run pack:check
-```
+Use [GitHub Issues](https://github.com/montasim/skills/issues) for reproducible defects. Follow the repository [support](https://github.com/montasim/skills/blob/main/SUPPORT.md), [contribution](https://github.com/montasim/skills/blob/main/CONTRIBUTING.md), and [security](https://github.com/montasim/skills/blob/main/SECURITY.md) guidance.
 
-`npm test` runs auditor regressions, installer safety tests, and package-contract checks. `npm run pack:check` previews the files that would be published; only `bin/` and `skills/` are included alongside npm-required package metadata and documentation.
-
-The `prepublishOnly` gate runs both commands before npm publication.
-
-## Updating and removing
-
-Rerun the `@latest` installation command with `--force` to replace an older installation. The installer safely migrates an existing `make-project-github-ready` skill directory to `make-project-github-ready`. To uninstall, remove only the `make-project-github-ready` directory from the relevant user or project skill root listed above.
-
-## Contributing
-
-Read [CONTRIBUTING.md](CONTRIBUTING.md) for requirements, the local workflow, required checks, and pull-request guidance.
-
-## Support and security
-
-Read [SUPPORT.md](SUPPORT.md) and use [GitHub Issues](https://github.com/montasim/skills/issues) for reproducible bugs and focused requests. Report vulnerabilities privately according to [SECURITY.md](SECURITY.md), never through a public issue. The SupportKori link is funding, not technical support.
-
-## Project links
-
-- [npm package](https://www.npmjs.com/package/make-project-github-ready)
-- [Source repository](https://github.com/montasim/skills/tree/main/skills/make-project-github-ready)
-- [Issue tracker](https://github.com/montasim/skills/issues)
-- [Security policy](SECURITY.md)
-
-## Funding
-
-Optional support through [SupportKori](https://www.supportkori.com/montasim) helps maintain the repository-readiness workflows.
-
-## Author
-
-Built and maintained by [Montasim](https://github.com/montasim).
-
-## License
-
-Make Project GitHub Ready is available under the [MIT License](LICENSE).
+Built and maintained by [Montasim](https://github.com/montasim). Optional [SupportKori funding](https://www.supportkori.com/montasim) supports maintenance. Licensed under the [MIT License](LICENSE).

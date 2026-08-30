@@ -1,188 +1,128 @@
 # Publish Verified GitHub Release
 
+> Turn a verified change range into useful GitHub release notes, then create or edit only the explicitly authorized release.
+
 [![npm version](https://img.shields.io/npm/v/publish-verified-github-release.svg)](https://www.npmjs.com/package/publish-verified-github-release)
 [![CI](https://github.com/montasim/skills/actions/workflows/ci.yml/badge.svg)](https://github.com/montasim/skills/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Support on SupportKori](https://img.shields.io/badge/Support_on-SupportKori-00B8B5)](https://www.supportkori.com/montasim)
 
-Install a portable agent skill that gathers repository evidence, drafts polished GitHub release notes, and creates or edits a release only when the user explicitly authorizes that external action.
-
-The skill uses the open Agent Skills format and includes installer presets for OpenAI Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, Cursor, GitHub Copilot, and OpenCode. An exact-path mode supports any other agent that discovers `SKILL.md` directories. It separates local evidence from live GitHub or registry state, keeps claims tied to commits and verified behavior, and does not silently create tags, push commits, publish packages, or deploy applications.
-
-## Install
-
-### From this source checkout
-
-Requires Node.js 18 or newer. Git is required when the installed skill collects repository evidence.
-
-```sh
-npm ci
-npm test
-node ./bin/publish-verified-github-release.js --target codex --scope project
-```
-
-This installs the skill into `.agents/skills/publish-verified-github-release` in the current project.
-
-### From npm
-
-Codex:
+Publish Verified GitHub Release helps an AI coding agent write release notes from the target tag, comparison range, manifests, commits, documentation, and checks actually run. It keeps drafting separate from GitHub mutation and refuses to turn unverified package, compatibility, or test claims into release copy.
 
 ```sh
 npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target codex
 ```
 
-Claude Code:
+**[npm package](https://www.npmjs.com/package/publish-verified-github-release) · [source](https://github.com/montasim/skills/tree/main/skills/publish-verified-github-release) · [issues](https://github.com/montasim/skills/issues)**
+
+## Use it when
+
+- A version tag needs outcome-focused notes rather than a rewritten commit log.
+- Draft or existing notes must be checked against the actual release range.
+- A named GitHub release should be created or edited after explicit approval.
+- Installation, migration, breaking-change, or verification sections should appear only when evidence supports them.
+
+Use `verify-github-npm-release` for a read-only audit of an existing release. Use `release-agent-skill` when GitHub release creation is one stage of a complete Agent Skill shipment.
+
+## Install and invoke
+
+The installer and bundled evidence collector require Node.js 18 or newer. Git is required for repository evidence; authenticated GitHub access is needed only for an authorized remote mutation.
 
 ```sh
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target claude
+npx --yes --package=publish-verified-github-release@latest publish-verified-github-release \
+  --target codex --scope project
 ```
 
-Both:
+The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. `--target all` installs every preset; `--path /absolute/skills/root` supports another compatible host.
 
-```sh
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target both
-```
-
-Gemini CLI or Google Antigravity:
-
-```sh
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target gemini
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target antigravity
-```
-
-Antigravity CLI or Cursor:
-
-```sh
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target antigravity-cli
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target cursor
-```
-
-GitHub Copilot or OpenCode:
-
-```sh
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target copilot
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target opencode
-```
-
-Every supported provider, or a selected set:
-
-```sh
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target all
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target gemini,antigravity,copilot
-```
-
-Any other Agent Skills-compatible provider:
-
-```sh
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --path /exact/provider/skills/root
-```
-
-Reload or restart the relevant agent after installation so it discovers the skill. Invocation syntax varies by provider; agents can also select the skill automatically from its description.
-
-## What it does
-
-- Resolves the release repository, tag, comparison base, and mutation boundary
-- Collects commit, Git, manifest, changelog, and target-ref evidence
-- Turns verified changes into concise, user-focused release notes
-- Adds install, migration, verification, and link sections only when supported
-- Creates or edits a GitHub release after explicit authorization
-- Verifies the resulting URL, tag, target commit, and draft or prerelease state
-
-The bundled evidence collector reads package metadata from the requested Git ref and does not execute tests or query remote release and registry state. The agent performs those checks separately when relevant.
-
-## Installer options
+Draft only:
 
 ```text
---target <provider[,provider...]>  Provider preset(s), all, or legacy both
---scope <user|project>             Install scope; defaults to user
---path <directory>                 Exact custom skills root; provider optional
---dry-run                          Preview destinations without writing
---force                            Replace an existing installation
---help                             Show help
---version                          Show package version
+Use $publish-verified-github-release to draft notes for v1.4.0 from v1.3.2. Do not change GitHub.
 ```
 
-| Provider | User scope | Project scope |
-| --- | --- | --- |
-| Codex | `~/.agents/skills` | `.agents/skills` |
-| Claude Code | `${CLAUDE_CONFIG_DIR:-~/.claude}/skills` | `.claude/skills` |
-| Gemini CLI | `~/.gemini/skills` | `.gemini/skills` |
-| Google Antigravity | `~/.gemini/config/skills` | `.agents/skills` |
-| Antigravity CLI | `~/.gemini/antigravity-cli/skills` | `.agent/skills` |
-| Cursor | `~/.cursor/skills` | `.cursor/skills` |
-| GitHub Copilot | `~/.copilot/skills` | `.github/skills` |
-| OpenCode | `~/.config/opencode/skills` | `.opencode/skills` |
-
-`both` remains an alias for `codex,claude`. `all` installs every preset and de-duplicates shared destinations. `--path` may be used by itself, so a newly released or private provider does not need a hard-coded installer preset.
-
-The installer refuses duplicate installations unless `--force` is supplied, rejects unsafe symlink or non-directory destinations, and stages replacements before swapping them into place.
-
-## How installation works
-
-The npm executable copies the portable `skills/publish-verified-github-release` directory into the selected host's skill root. Installation does not inspect a project, contact GitHub, create a tag, or create a release; those actions occur only when the installed skill is later invoked with appropriate authority.
-
-## Examples
-
-Draft notes only:
+Authorized update:
 
 ```text
-Use $publish-verified-github-release to draft release notes for v1.2.0 from the verified changes since v1.1.0.
+/publish-verified-github-release Update the v1.4.0 GitHub release with evidence from the tag. Do not move or create tags.
 ```
 
-Update an existing release:
+## Release-note workflow
 
-```text
-Use /publish-verified-github-release to improve the v1.2.0 GitHub release notes. Do not change the tag.
-```
+1. Resolve repository, target tag, comparison base, release state, and mutation boundary.
+2. Collect evidence from the target ref so working-tree metadata cannot silently describe a different build.
+3. Cross-check commits, manifests, lockfiles, changelogs, documentation, checks, and relevant remote state.
+4. Draft a concise summary and user-value highlights; add breaking changes, installation, migration, verification, and links only when supported.
+5. If publication is authorized, verify GitHub identity, repository, tag target, flags, and package claims before mutation.
+6. Create or edit the named release and read it back to verify URL, tag, target commit, state, and rendered structure.
 
-## Requirements and limits
+The result names the comparison range, evidence used, uncertainty, validation performed, and external actions actually completed.
 
-- Node.js 18 or newer is required for the installer and bundled collector.
-- Git is required to collect local release evidence.
-- GitHub authentication and suitable repository permissions are required only for an authorized release mutation.
-- The target tag, comparison base, and repository must be unambiguous.
-- Package publication, deployment, pushing commits, and tag creation require separate authorization.
-- Test and compatibility claims are included only when actually verified.
-
-## Development
+## Collect target-ref evidence directly
 
 ```sh
+node /absolute/skill/root/scripts/collect-release-evidence.mjs /absolute/repository \
+  --tag v1.4.0 --base v1.3.2
+```
+
+The dependency-light collector reads package and Git evidence from the requested ref. It does not run tests, publish packages, query every registry, or create releases.
+
+## What strong notes contain
+
+| Section | Included when |
+| --- | --- |
+| Summary | The release purpose and audience are established |
+| Highlights | User-visible outcomes are supported by the verified range |
+| Breaking changes | A compatibility break and affected users are proven |
+| Install or upgrade | The exact command is valid for the target version |
+| Verification | The listed commands actually ran against the target code |
+| Links | Package, comparison, tag, or docs URLs resolve to canonical sources |
+
+Empty sections are omitted. Generic celebration, unsupported superlatives, contributor guesses, and exhaustive internal refactor lists are excluded.
+
+## Authorization boundaries
+
+| Request | Allowed behavior |
+| --- | --- |
+| “Draft release notes” | Inspect and draft; no GitHub mutation |
+| “Create this GitHub release” | Mutate only the resolved repository and named release |
+| “Edit the existing release” | Preserve the tag unless separately authorized |
+
+Package publication, tag creation, pushes, deployments, and changes to another repository remain separate actions.
+
+## Bundled resources and installer
+
+```text
+publish-verified-github-release/
+├── SKILL.md
+├── agents/openai.yaml
+├── references/release-note-standard.md
+└── scripts/collect-release-evidence.mjs
+```
+
+Use `--scope user|project`, `--dry-run`, `--force`, `--migrate`, a comma-separated `--target`, or `--path`. Installation copies the portable skill only; it does not inspect a repository or contact GitHub.
+
+## Develop and verify
+
+```sh
+git clone https://github.com/montasim/skills.git
+cd skills
 npm ci
-npm test
-npm run pack:check
+npm test --workspace skills/publish-verified-github-release
+npm run pack:check --workspace skills/publish-verified-github-release
 ```
 
-The published archive intentionally contains only the installer, the nested skill, this README, the license, and package metadata. Tests are excluded.
+Tests cover provider presets, exact-path installation, guarded replacement, dry runs, unsafe destinations, package structure, and collector behavior.
 
-`npm test` exercises native provider layouts, all-provider and selected-provider installs, generic paths, duplicate protection, forced replacement, dry-run behavior, unsafe destinations, and the package contract. `npm run pack:check` previews the npm archive, and `prepublishOnly` runs both checks before publication.
+## Limits and safety
 
-## Updating and removing
+- A missing or ambiguous tag, base, version, or repository blocks a trustworthy release narrative.
+- Test, compatibility, and package-publication results appear only when directly verified.
+- Existing tags are never silently moved.
+- Credentials are not written to notes, project files, or logs.
 
-Rerun the `@latest` installation command with `--force` to replace an older installation. To uninstall, remove only the `publish-verified-github-release` directory from the relevant user or project skill root listed above.
+## Support, contribution, and license
 
-## Contributing
+Use [GitHub Issues](https://github.com/montasim/skills/issues) for reproducible defects. Follow the repository [support](https://github.com/montasim/skills/blob/main/SUPPORT.md), [contribution](https://github.com/montasim/skills/blob/main/CONTRIBUTING.md), and [security](https://github.com/montasim/skills/blob/main/SECURITY.md) guidance.
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) for requirements, the local workflow, required checks, and pull-request guidance.
-
-## Support and security
-
-Read [SUPPORT.md](SUPPORT.md) and use [GitHub Issues](https://github.com/montasim/skills/issues) for reproducible bugs and focused requests. Report vulnerabilities privately according to [SECURITY.md](SECURITY.md), never through a public issue. The SupportKori link is funding, not technical support.
-
-## Project links
-
-- [npm package](https://www.npmjs.com/package/publish-verified-github-release)
-- [Source repository](https://github.com/montasim/skills/tree/main/skills/publish-verified-github-release)
-- [Issue tracker](https://github.com/montasim/skills/issues)
-- [Security policy](SECURITY.md)
-
-## Funding
-
-Optional support through [SupportKori](https://www.supportkori.com/montasim) helps maintain the release workflow and verification guidance.
-
-## Author
-
-Built and maintained by [Montasim](https://github.com/montasim).
-
-## License
-
-Publish Verified GitHub Release is available under the [MIT License](LICENSE).
+Built and maintained by [Montasim](https://github.com/montasim). Optional [SupportKori funding](https://www.supportkori.com/montasim) supports maintenance. Licensed under the [MIT License](LICENSE).

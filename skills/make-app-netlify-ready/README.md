@@ -1,129 +1,122 @@
 # Make App Netlify Ready
 
+> Establish and repair a reproducible Netlify build contract for static, SPA, hybrid, SSR, and monorepo applications—without deploying.
+
 [![npm version](https://img.shields.io/npm/v/make-app-netlify-ready.svg)](https://www.npmjs.com/package/make-app-netlify-ready)
 [![CI](https://github.com/montasim/skills/actions/workflows/ci.yml/badge.svg)](https://github.com/montasim/skills/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Support on SupportKori](https://img.shields.io/badge/Support_on-SupportKori-00B8B5)](https://www.supportkori.com/montasim)
 
-Install a portable agent skill that audits a web application's Netlify build contract, identifies framework-specific deployment risks, and prepares evidence-backed local configuration repairs.
+Make App Netlify Ready gives an AI coding agent a framework-aware way to diagnose build failures, missing deployed pages, incorrect publish paths, monorepo base-directory mistakes, SPA rewrites, and incomplete SSR output. It derives the contract from manifests, lockfiles, framework configuration, `netlify.toml`, adapters, and fresh artifacts instead of copying a provider preset blindly.
 
-It helps Codex and Claude Code distinguish static, SPA, hybrid, and SSR deployments before changing configuration, while keeping remote Netlify actions behind explicit authorization.
+Local preparation is the whole scope. Deployments, site linkage, dashboard settings, domains, and remote environment changes remain separate actions.
 
-## Install
-
-Requires Node.js 18 or newer. Python 3.11 or newer is required when the installed skill runs its deterministic TOML-aware Netlify auditor.
-
-### From this source checkout
-
-```bash
-npm ci
-npm test
-node ./bin/make-app-netlify-ready.js --target codex --scope project
-```
-
-This installs the skill into `.agents/skills/make-app-netlify-ready` in the current project.
-
-### From npm
-
-Codex, user scope:
-
-```bash
+```sh
 npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target codex
 ```
 
-Claude Code, user scope:
+**[npm package](https://www.npmjs.com/package/make-app-netlify-ready) · [source](https://github.com/montasim/skills/tree/main/skills/make-app-netlify-ready) · [issues](https://github.com/montasim/skills/issues)**
 
-```bash
-npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target claude
+## Use it when
+
+- Netlify reports that the base or publish directory does not exist.
+- A Vite SPA works at `/` but deep links return 404.
+- A client output folder is being mistaken for a complete SSR or hybrid deployment.
+- Next.js, Astro, SvelteKit, Nuxt, or TanStack Start needs a version-appropriate adapter contract.
+- A monorepo needs its repository root, app root, effective base, build command, and publish path resolved separately.
+
+Use `deploy-prebuilt-app-to-netlify` only after the application is locally ready and a draft or production manual upload is explicitly requested.
+
+## Install and invoke
+
+Node.js 18 or newer is required for the installer. Python 3 is required for the bundled TOML-aware auditor; the target app's own package manager and framework toolchain are required for complete verification.
+
+```sh
+npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready \
+  --target codex --scope project
 ```
 
-Install for both agents:
-
-```bash
-npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target both
-```
-
-Use `--scope project` to install into the current repository. Use `--path <skills-root>` with exactly one target to choose an explicit skills directory. Add `--dry-run` to inspect the destination or `--force` to atomically replace an existing copy.
-
-Start a new agent session after installation so the host refreshes its skill catalog.
-
-## Use
-
-In Codex:
+The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` or an exact `--path` as needed.
 
 ```text
-Use $make-app-netlify-ready to audit this app and prepare its Netlify configuration.
+Use $make-app-netlify-ready to diagnose this monorepo's Netlify base-directory error, implement the smallest local repair, and verify a production build. Do not deploy.
 ```
-
-In Claude Code:
 
 ```text
-/make-app-netlify-ready audit this app and prepare its Netlify configuration
+/make-app-netlify-ready Audit whether this app is static, SPA, hybrid, or SSR and report the effective build contract without editing.
 ```
 
-## Capabilities
+## Build contract
 
-- Detects the package manager, framework, runtime model, build command, and publish-directory contract.
-- Audits `netlify.toml`, output paths, routing assumptions, and version-sensitive adapter requirements.
-- Guides minimal configuration repairs and local build and route verification.
-- Keeps deployment, dashboard changes, environment updates, and other remote actions behind explicit authorization.
+The skill resolves these values explicitly:
 
-## How installation works
-
-The npm executable copies the portable `skills/make-app-netlify-ready` directory into the selected host's skill root. Installation does not inspect an application, install a framework adapter, change Netlify settings, or trigger a deployment. Those actions occur only when the installed skill is invoked and the user authorizes the relevant scope.
-
-## Limits
-
-The bundled audit is read-only and heuristic. It does not prove deployed runtime behavior, generated function correctness, output freshness, remote environment configuration, or domain readiness. The skill requires the project's own toolchain for complete build and route verification.
-
-## Installer options
-
-| Option | Meaning |
+| Field | Question answered |
 | --- | --- |
-| `--target codex\|claude\|both` | Required agent destination |
-| `--scope user\|project` | User scope by default; project scope uses the current directory |
-| `--path <skills-root>` | Exact skills root for one target |
-| `--dry-run` | Show resolved destinations without writing |
-| `--force` | Atomically replace an existing installation |
-| `--help` / `--version` | Print CLI information |
+| Package manager | Which lockfile and native commands are authoritative? |
+| App directory | Which workspace package is deployable? |
+| Effective base | From where does Netlify resolve commands and paths? |
+| Build command | Which repository command produces deploy artifacts? |
+| Publish directory | Which path, relative to the effective base, contains public output? |
+| Runtime model | Static, client-routed SPA, hybrid, or SSR? |
+| Adapter/plugin | Which maintained integration matches the installed framework version? |
+| Functions | Which generated functions or edge functions complete the runtime? |
+| Environment | Which variable names are required, without exposing their values? |
+| Routing | Which redirects or framework-managed rewrites own deep links? |
 
-## Development
+A successful compiler exit does not pass when the effective publish directory is absent, empty, or missing required runtime artifacts.
 
-```bash
-npm ci
-npm test
-npm run pack:check
+## Run the deterministic audit
+
+```sh
+python3 /absolute/skill/root/scripts/audit_netlify.py /absolute/app/root --json
 ```
 
-`npm test` exercises the installer, its safety boundaries, and the bundled Netlify auditor against a deterministic fixture. `npm run pack:check` previews the publish archive, and `prepublishOnly` runs both checks before publication.
+The auditor checks framework and configuration heuristics, path relationships, routing rules, and common contract mistakes. It does not prove output freshness, generated function correctness, remote environment values, live routing, or deployed behavior.
 
-## Updating and removing
+## Preparation workflow
 
-Rerun the `@latest` installation command with `--force` to replace an older installation. To uninstall, remove only the `make-app-netlify-ready` directory from the relevant user or project skill root.
+1. Inspect repository instructions and preserve unrelated working-tree changes.
+2. Locate the deployable app and separate repository root, workspace root, app root, and Netlify base.
+3. Read manifests, lockfiles, framework config, `netlify.toml`, redirects, functions, and existing host configuration.
+4. Run the auditor, classify the runtime, and consult the recorded framework pattern for the installed version.
+5. For implementation requests, make the smallest repository-native configuration or adapter repair.
+6. Run the application's own production build and inspect the actual output shape.
+7. Verify the root and a representative nested route using a runtime appropriate to static, SPA, or SSR output.
+8. Rerun the audit and report local evidence, remaining environment requirements, and the intentionally unperformed remote deployment.
 
-## Contributing
+An SPA catch-all is added only when client routing owns unknown routes. It is never used to hide SSR, hybrid, adapter, or publish-directory failures.
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) for requirements, the local workflow, required checks, and pull-request guidance.
+## Bundled resources and installer
 
-## Support and security
+```text
+make-app-netlify-ready/
+├── SKILL.md
+├── agents/openai.yaml
+├── references/framework-patterns.md
+└── scripts/audit_netlify.py
+```
 
-Read [SUPPORT.md](SUPPORT.md) and use [GitHub Issues](https://github.com/montasim/skills/issues) for reproducible bugs and focused requests. Report vulnerabilities privately according to [SECURITY.md](SECURITY.md), never through a public issue. The SupportKori link is funding, not technical support.
+Use `--scope user|project`, `--dry-run`, `--force`, `--migrate`, a provider list, or `--path`. Installation does not inspect an app, add an adapter, connect a site, or deploy.
 
-## Project links
+## Develop and verify
 
-- [npm package](https://www.npmjs.com/package/make-app-netlify-ready)
-- [Source repository](https://github.com/montasim/skills/tree/main/skills/make-app-netlify-ready)
-- [Issue tracker](https://github.com/montasim/skills/issues)
-- [Security policy](SECURITY.md)
+```sh
+git clone https://github.com/montasim/skills.git
+cd skills
+npm ci
+npm test --workspace skills/make-app-netlify-ready
+npm run pack:check --workspace skills/make-app-netlify-ready
+```
 
-## Funding
+## Limits and safety
 
-Optional support through [SupportKori](https://www.supportkori.com/montasim) helps maintain framework compatibility and deployment verification guidance.
+- Framework output and Netlify adapter behavior are version-sensitive; current official docs and fresh artifacts override stale defaults.
+- Secrets are never copied into `netlify.toml`, logs, commits, or reports.
+- A local success supports “deployment-ready,” not “deployed successfully.”
+- Site creation, linkage, settings, environment variables, domains, and deployment require separate authorization.
 
-## Author
+## Support, contribution, and license
 
-Built and maintained by [Montasim](https://github.com/montasim).
+Use [GitHub Issues](https://github.com/montasim/skills/issues) for reproducible defects. Follow the repository [support](https://github.com/montasim/skills/blob/main/SUPPORT.md), [contribution](https://github.com/montasim/skills/blob/main/CONTRIBUTING.md), and [security](https://github.com/montasim/skills/blob/main/SECURITY.md) guidance.
 
-## License
-
-Make App Netlify Ready is available under the [MIT License](LICENSE).
+Built and maintained by [Montasim](https://github.com/montasim). Optional [SupportKori funding](https://www.supportkori.com/montasim) supports framework compatibility work. Licensed under the [MIT License](LICENSE).

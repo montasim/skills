@@ -1,128 +1,141 @@
 # Release Agent Skill
 
-> Install one portable skill for Codex, Claude Code, or both that validates, packages, publishes, releases, and verifies Agent Skills.
+> Coordinate one Agent Skill from verified source through package publication, namespaced GitHub release, optional catalog sync, and independent consumer verification.
 
 [![npm version](https://img.shields.io/npm/v/release-agent-skill.svg)](https://www.npmjs.com/package/release-agent-skill)
 [![CI](https://github.com/montasim/skills/actions/workflows/ci.yml/badge.svg)](https://github.com/montasim/skills/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Support on SupportKori](https://img.shields.io/badge/Support_on-SupportKori-00B8B5)](https://www.supportkori.com/montasim)
 
-Release Agent Skill coordinates the release path from a standards-compliant `SKILL.md` to verified GitHub, npm, and optional catalog surfaces. It keeps preparation separate from external mutations and requires explicit authority for each publish, push, release, deployment, or catalog stage.
+Release Agent Skill gives an AI coding agent an explicit state machine for end-to-end Agent Skill shipment. It coordinates metadata, repository readiness, portable installer tests, archive inspection, npm publication, tags, release notes, GitHub releases, catalogs, and final readback while specialist skills own the details of their stage.
 
-## Install
-
-Requires Node.js 18 or newer.
-
-From this source checkout:
-
-```sh
-npm ci
-npm test
-node ./bin/release-agent-skill.js --target codex --scope project
-```
-
-This installs the skill into `.agents/skills/release-agent-skill` in the current project.
-
-From npm:
+The orchestrator never turns “prepare” into permission to publish. Every external channel remains separately authorized and a completed mutation is not called verified until provider or consumer evidence matches it.
 
 ```sh
 npx --yes --package=release-agent-skill@latest release-agent-skill --target codex
-npx --yes --package=release-agent-skill@latest release-agent-skill --target claude
-npx --yes --package=release-agent-skill@latest release-agent-skill --target both
 ```
 
-Restart the selected host or begin a new session after installation.
+**[npm package](https://www.npmjs.com/package/release-agent-skill) · [source](https://github.com/montasim/skills/tree/main/skills/release-agent-skill) · [issues](https://github.com/montasim/skills/issues)**
 
-## Invoke
+## Use it when
 
-In Codex:
+- One Agent Skill needs an end-to-end Git, GitHub, npm, release, and optional catalog shipment.
+- A partial release must resume without repeating immutable or already verified stages.
+- Host compatibility, package contents, release identity, and authorization must be tracked together.
+- A final answer must distinguish ready, authorized, completed, verified, and blocked stages.
 
-```text
-Use $release-agent-skill to prepare and verify this Agent Skill release without publishing yet.
-```
+Use a specialist directly for a single job: `fix-project-metadata-mismatches`, `make-project-github-ready`, `publish-verified-github-release`, `update-skillfolio-catalog`, or `verify-github-npm-release`.
 
-In Claude Code:
+## Install and invoke
 
-```text
-/release-agent-skill Prepare and verify this Agent Skill release without publishing yet.
-```
-
-## Workflow
-
-- Validate open Agent Skills structure and host portability
-- Synchronize version, package, install-command, and catalog metadata
-- Run project tests and inspect the exact npm archive
-- Check Git, npm, GitHub, CI, and optional catalog release gates
-- Draft evidence-based release notes
-- Execute only explicitly authorized external stages
-- Verify the release from a clean consumer perspective
-- Report completed and pending stages without overstating readiness
-
-The bundled structural preflight distinguishes local structural success from full release readiness. Network, CI, archive, test, and catalog gates remain explicit.
-
-## Installer options
-
-| Option | Purpose |
-| --- | --- |
-| `--target codex\|claude\|both` | Select the host; required |
-| `--scope user\|project` | Install globally for the user or inside the current project |
-| `--path <directory>` | Install into one exact custom skills root |
-| `--dry-run` | Print the installation plan without writing |
-| `--force` | Replace an existing regular skill directory |
-| `--help` | Show complete CLI help |
-
-The installer refuses unsafe symlink and non-directory destinations. Combined installation preflights both destinations and rolls back incomplete replacements when an installation fails.
-
-## How installation works
-
-The npm executable copies the portable `skills/release-agent-skill` directory into the selected host's skill root. Installation does not publish a package, create a repository or release, push a tag, deploy an application, or edit a catalog. Each external stage remains separately authorization-gated when the installed skill is later invoked.
-
-## Development
+Node.js 18 or newer is required for local validation. Publication may also require Git, authenticated GitHub access, npm authentication, and destination-specific tools.
 
 ```sh
-npm ci
-npm test
-npm run pack:check
+npx --yes --package=release-agent-skill@latest release-agent-skill \
+  --target codex --scope project
 ```
 
-The configured publish payload is limited to `bin/` and `skills/`; npm also includes required package metadata, this README, and the license. Tests and other local development files are excluded.
+The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` or an exact `--path` as needed.
 
-`npm test` exercises the package contract, installer targets, duplicate protection, forced replacement, dry-run behavior, rollback-related safety, and unsafe paths. `npm run pack:check` previews the publish archive, and `prepublishOnly` runs both checks before publication.
+Prepare only:
 
-## Safety boundaries
+```text
+Use $release-agent-skill to prepare package version 0.2.0, validate every installer target, inspect the archive, and draft release notes. Do not commit, push, publish, tag, or release.
+```
 
-- “Prepare” does not authorize commits, pushes, publication, releases, deployment, or catalog edits.
-- Existing npm versions are immutable; the skill never attempts to overwrite them.
-- Credentials and one-time passwords are never written into project files or logs.
-- Partial publication is reported precisely before any retry.
+End-to-end shipment:
 
-## Updating and removing
+```text
+/release-agent-skill Ship package-name 0.2.0 to npm and GitHub, update the local Skillfolio catalog, and verify every authorized stage.
+```
 
-Rerun the `@latest` installation command with `--force` to replace an older installation. To uninstall, remove only the `release-agent-skill` directory from the relevant user or project skill root.
+## Release state model
 
-## Contributing
+| State | Meaning |
+| --- | --- |
+| `pending` | Required but not yet assessed |
+| `ready` | Local evidence satisfies the stage gate |
+| `authorized` | The exact external mutation is approved |
+| `completed` | The action returned success but still needs independent readback |
+| `verified` | Registry, GitHub, CI, installer, or catalog evidence matches the release identity |
+| `blocked` | A prerequisite, permission, identity conflict, or failed check prevents progress |
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) for requirements, the local workflow, required checks, and pull-request guidance.
+Every requested stage receives one state. A later successful step never hides an earlier unverified or failed step.
 
-## Support and security
+## Gate sequence
 
-Read [SUPPORT.md](SUPPORT.md) and use [GitHub Issues](https://github.com/montasim/skills/issues) for reproducible bugs and focused requests. Report vulnerabilities privately according to [SECURITY.md](SECURITY.md), never through a public issue. The SupportKori link is funding, not technical support.
+1. **Skill contract:** directory/frontmatter identity, trigger description, workflow, resources, scripts, and output are structurally valid.
+2. **Host compatibility:** portable `SKILL.md` behavior is separated from host-specific presentation and every advertised install target is tested.
+3. **Repository state:** branch, remote, version, URLs, install commands, license, tests, and user changes agree.
+4. **Package state:** name/version are unused, the exact archive is safe, and a clean packed-artifact install works.
+5. **Release state:** immutable namespaced tag targets the reviewed commit and notes contain only verified claims.
+6. **Consumer verification:** npm exact version and dist-tag, clean invocation, GitHub release, CI, and authorized catalog surfaces match.
 
-## Project links
+Namespaced skill tags use:
 
-- [npm package](https://www.npmjs.com/package/release-agent-skill)
-- [Source repository](https://github.com/montasim/skills/tree/main/skills/release-agent-skill)
-- [Issue tracker](https://github.com/montasim/skills/issues)
-- [Security policy](SECURITY.md)
+```text
+<package-name>-v<package-version>
+```
 
-## Funding
+## Run the structural preflight
 
-Optional support through [SupportKori](https://www.supportkori.com/montasim) helps maintain release verification and compatibility guidance.
+```sh
+node /absolute/skill/root/scripts/preflight.mjs /absolute/project/root --json
+```
 
-## Author
+The preflight is an early structural gate. It does not query npm or GitHub, inspect the final archive, run project tests, check CI, or prove release readiness.
 
-Built and maintained by [Montasim](https://github.com/montasim).
+## Specialist routing
 
-## License
+| Stage | Specialist | Evidence expected |
+| --- | --- | --- |
+| Identity, version, URLs, install commands | `fix-project-metadata-mismatches` | Authorities and derived files agree |
+| GitHub/community readiness | `make-project-github-ready` | Local readiness plus authorized remote readback |
+| Release notes and GitHub release | `publish-verified-github-release` | Evidence-backed notes and verified release state |
+| Local Skillfolio synchronization | `update-skillfolio-catalog` | Authorities, projection, routes, and app checks agree |
+| Final release audit | `verify-github-npm-release` | Critical release checks return evidence-backed passes |
 
-Release Agent Skill is available under the [MIT License](LICENSE).
+The orchestrator directly owns stage order, authorization, package archive inspection, npm publication gating, partial-failure recovery, and final handoff.
+
+## Publication behavior
+
+- Existing npm versions are immutable; a collision blocks publication and requires a new version decision.
+- npm web authentication or OTP stays in the official flow and is never pasted into project files or logs.
+- A successful npm publish is immediately checked through public registry metadata and a clean consumer path.
+- Tags point to the reviewed release commit and are never silently moved.
+- Catalog deployment remains separate from a local catalog update.
+- If npm succeeds but a later stage fails, the immutable published artifact is reported before any retry.
+
+## Bundled resources and installer
+
+```text
+release-agent-skill/
+├── SKILL.md
+├── agents/openai.yaml
+├── references/release-gates.md
+└── scripts/preflight.mjs
+```
+
+Use `--scope user|project`, `--dry-run`, `--force`, `--migrate`, a provider list, or `--path`. Installation performs no release action.
+
+## Develop and verify
+
+```sh
+git clone https://github.com/montasim/skills.git
+cd skills
+npm ci
+npm test --workspace skills/release-agent-skill
+npm run pack:check --workspace skills/release-agent-skill
+```
+
+## Limits and safety
+
+- The orchestrator cannot replace missing registry ownership, GitHub permissions, or destination authentication.
+- It never weakens tests, deletes user changes, rewrites history, or bypasses registry safeguards to make a release pass.
+- Network propagation and external caches are reported as limitations rather than silently treated as success.
+
+## Support, contribution, and license
+
+Use [GitHub Issues](https://github.com/montasim/skills/issues) for reproducible defects. Follow the repository [support](https://github.com/montasim/skills/blob/main/SUPPORT.md), [contribution](https://github.com/montasim/skills/blob/main/CONTRIBUTING.md), and [security](https://github.com/montasim/skills/blob/main/SECURITY.md) guidance.
+
+Built and maintained by [Montasim](https://github.com/montasim). Optional [SupportKori funding](https://www.supportkori.com/montasim) supports release compatibility work. Licensed under the [MIT License](LICENSE).

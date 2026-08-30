@@ -1,128 +1,127 @@
 # Find UI Inconsistencies
 
-> Install one portable skill for Codex, Claude Code, or both that audits visual and interaction consistency across a web frontend.
+> Evidence-backed frontend consistency audits across routes, viewports, themes, components, and application states.
 
 [![npm version](https://img.shields.io/npm/v/find-ui-inconsistencies.svg)](https://www.npmjs.com/package/find-ui-inconsistencies)
 [![CI](https://github.com/montasim/skills/actions/workflows/ci.yml/badge.svg)](https://github.com/montasim/skills/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Support on SupportKori](https://img.shields.io/badge/Support_on-SupportKori-00B8B5)](https://www.supportkori.com/montasim)
 
-Find UI Inconsistencies gives coding agents an evidence-backed review workflow for typography, spacing, color, layout, shared components, responsive behavior, loading and empty states, motion, and visible accessibility states. It preserves intentional visual direction and separates systemic defects from subjective taste.
+Find UI Inconsistencies gives an AI coding agent a disciplined way to compare equivalent interface roles instead of producing a generic style critique. It traces repeated visual symptoms back to tokens, layout primitives, shared components, state geometry, or content rules; preserves intentional hierarchy; and separates current evidence from old screenshots and personal taste.
 
-The skill defaults to a read-only audit. It implements fixes only when the user explicitly asks.
-
-## Install
-
-Requires Node.js 18 or newer.
-
-From this source checkout:
-
-```sh
-npm ci
-npm test
-node ./bin/find-ui-inconsistencies.js --target codex --scope project
-```
-
-This installs the skill into `.agents/skills/find-ui-inconsistencies` in the current project.
-
-From npm:
+The default operation is a read-only audit. Source changes happen only when the request explicitly includes implementation.
 
 ```sh
 npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target codex
-npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target claude
-npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target both
 ```
 
-Restart the selected host or begin a new session after installation.
+**[npm package](https://www.npmjs.com/package/find-ui-inconsistencies) · [source](https://github.com/montasim/skills/tree/main/skills/find-ui-inconsistencies) · [issues](https://github.com/montasim/skills/issues)**
 
-## Invoke
+## Use it when
 
-In Codex:
+- Equivalent headings, controls, cards, or page shells drift between routes.
+- Mobile, tablet, and desktop layouts do not transition consistently.
+- Loading, empty, error, selected, disabled, focus, or hover states feel disconnected from the loaded UI.
+- A redesign needs cross-route verification against the actual design system.
+- Screenshots suggest inconsistencies, but their route, viewport, state, or revision must be established before acting.
 
-```text
-Use $find-ui-inconsistencies to audit this frontend across representative routes, states, and viewports.
-```
+Use a general accessibility audit for standards compliance beyond visible interface states. Use a product redesign skill when the goal is a new visual direction rather than consistency within the current one.
 
-In Claude Code:
+## Install and invoke
 
-```text
-/find-ui-inconsistencies Audit this frontend across representative routes, states, and viewports.
-```
-
-## What it evaluates
-
-- Typography roles, line height, density, and hierarchy
-- Color roles, contrast, borders, shadows, and emphasis
-- Containers, grids, spacing rhythm, alignment, and breakpoints
-- Shared buttons, inputs, cards, navigation, badges, tables, and dialogs
-- Loading skeletons compared with their loaded components
-- Empty, error, selected, disabled, focus, hover, and long-content states
-- Motion consistency and reduced-motion behavior
-- Screenshot provenance so older images are not reported as current defects
-
-## Installer options
-
-| Option | Purpose |
-| --- | --- |
-| `--target codex\|claude\|both` | Select the host; required |
-| `--scope user\|project` | Install globally for the user or inside the current project |
-| `--path <directory>` | Install into one exact custom skills root |
-| `--dry-run` | Print the installation plan without writing |
-| `--force` | Replace an existing regular skill directory |
-| `--help` | Show complete CLI help |
-
-The installer refuses unsafe symlink and non-directory destinations. Combined installation preflights both destinations and rolls back incomplete replacements when an installation fails.
-
-## How installation works
-
-The npm executable copies the portable `skills/find-ui-inconsistencies` directory into the selected host's skill root. Installation does not open an application, capture screenshots, audit a frontend, or modify source files. The installed skill defaults to a read-only audit when later invoked.
-
-## Development
+Node.js 18 or newer is required for the installer.
 
 ```sh
-npm ci
-npm test
-npm run pack:check
+# Project-local Codex installation
+npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies \
+  --target codex --scope project
+
+# Install for every supported preset
+npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies \
+  --target all
 ```
 
-The configured publish payload is limited to `bin/` and `skills/`; npm also includes required package metadata, this README, and the license. Tests and other local development files are excluded.
+The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--path /absolute/skills/root` for another filesystem-backed Agent Skills host. Restart the selected host or begin a new session after installation.
 
-`npm test` exercises the package contract, installer targets, duplicate protection, forced replacement, dry-run behavior, rollback-related safety, and unsafe paths. `npm run pack:check` previews the publish archive, and `prepublishOnly` runs both checks before publication.
+Representative prompts:
 
-## Limits
+```text
+Use $find-ui-inconsistencies to audit the dashboard, settings, and billing routes at mobile and desktop widths. Report only; do not edit.
+```
 
-- A complete responsive audit requires representative routes, viewports, themes, and application states.
-- Historical screenshots are labeled as such until confirmed against the current source or runtime.
-- Visual consistency does not mean replacing intentional hierarchy with uniform styling.
-- The skill does not commit, push, deploy, or mutate external design tools without explicit authorization.
+```text
+/find-ui-inconsistencies Compare loading, empty, error, and loaded card states, then implement the shared-component fixes.
+```
 
-## Updating and removing
+## Audit workflow
 
-Rerun the `@latest` installation command with `--force` to replace an older installation. To uninstall, remove only the `find-ui-inconsistencies` directory from the relevant user or project skill root.
+1. Resolve the routes, viewports, themes, states, and current design-system authorities.
+2. Establish screenshot provenance or capture fresh runtime evidence.
+3. Compare foundations before reporting component-level symptoms: typography, semantic color, spacing, radius, borders, shadows, and motion.
+4. Check page structure, equivalent components, asynchronous states, responsive behavior, and content rules.
+5. Record each material finding with its comparison point, user impact, root cause, smallest systemic repair, and severity.
+6. Order repairs from tokens and primitives through shared components to isolated exceptions.
+7. When implementation is authorized, run project checks and repeat the visual comparison at affected states and widths.
 
-## Contributing
+The result includes the overall assessment, prioritized findings, repair order, inspected coverage, verification, and any routes or states that could not be proven.
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) for requirements, the local workflow, required checks, and pull-request guidance.
+## Evidence model
 
-## Support and security
+| Layer | Examples | Why it matters |
+| --- | --- | --- |
+| Foundations | Type roles, spacing scale, semantic colors, motion tokens | One defect can explain many route-level symptoms |
+| Structure | Containers, grids, section rhythm, breakpoints | Prevents isolated fixes that leave the page shell inconsistent |
+| Components | Buttons, forms, cards, tables, navigation, dialogs | Compares controls serving the same purpose |
+| States | Skeletons, empty/error states, focus, disabled, selected | Keeps temporary UI aligned with the normal workflow |
+| Content | Terminology, casing, units, wrapping, truncation | Finds interaction friction that styling alone cannot repair |
 
-Read [SUPPORT.md](SUPPORT.md) and use [GitHub Issues](https://github.com/montasim/skills/issues) for reproducible bugs and focused requests. Report vulnerabilities privately according to [SECURITY.md](SECURITY.md), never through a public issue. The SupportKori link is funding, not technical support.
+Historical or unverified screenshots remain historical evidence until reproduced against the inspected source or runtime. Optional aesthetic suggestions are labeled separately from defects.
 
-## Project links
+## Bundled resources
 
-- [npm package](https://www.npmjs.com/package/find-ui-inconsistencies)
-- [Source repository](https://github.com/montasim/skills/tree/main/skills/find-ui-inconsistencies)
-- [Issue tracker](https://github.com/montasim/skills/issues)
-- [Security policy](SECURITY.md)
+```text
+find-ui-inconsistencies/
+├── SKILL.md
+├── agents/openai.yaml
+└── references/consistency-standard.md
+```
 
-## Funding
+The consistency standard defines the comparison matrix, screenshot-provenance rules, severity model, responsive checks, state checks, and completion gates. The installed skill does not take screenshots or modify a project during installation.
 
-Optional support through [SupportKori](https://www.supportkori.com/montasim) helps maintain the workflow and its verification guidance.
+## Installer safety and options
 
-## Author
+| Option | Behavior |
+| --- | --- |
+| `--target <preset[,preset...]>` | Select one or more hosts; `all`, `both`, and strict `auto` are supported |
+| `--scope user\|project` | Install in a user or repository-local skills root |
+| `--path <absolute-root>` | Use one exact custom skills root |
+| `--dry-run` | Show destinations and actions without writing |
+| `--force` | Replace an existing safe directory installation |
+| `--migrate` | Replace configured legacy skill directories |
 
-Built and maintained by [Montasim](https://github.com/montasim).
+The installer rejects symlink and non-directory replacements, preflights multi-target writes, and stages replacements before publishing them.
 
-## License
+## Develop and verify
 
-Find UI Inconsistencies is available under the [MIT License](LICENSE).
+```sh
+git clone https://github.com/montasim/skills.git
+cd skills
+npm ci
+npm test --workspace skills/find-ui-inconsistencies
+npm run pack:check --workspace skills/find-ui-inconsistencies
+```
+
+Package tests cover installer destinations, replacement guards, dry runs, unsafe paths, and archive contracts. The npm payload contains the installer and portable skill resources, not repository fixtures or local configuration.
+
+## Limits and safety
+
+- Completeness depends on representative routes, viewports, themes, and meaningful application states.
+- A compilation success does not replace visual reinspection.
+- Consistency does not mean flattening intentional hierarchy or replacing a product's visual direction.
+- The skill does not authenticate as another user, mutate production data, commit, push, deploy, or update external design tools without separate authorization.
+
+## Support, contribution, and license
+
+Use [GitHub Issues](https://github.com/montasim/skills/issues) for reproducible defects. Follow the repository [support](https://github.com/montasim/skills/blob/main/SUPPORT.md), [contribution](https://github.com/montasim/skills/blob/main/CONTRIBUTING.md), and [security](https://github.com/montasim/skills/blob/main/SECURITY.md) guidance. Optional [SupportKori funding](https://www.supportkori.com/montasim) supports maintenance but is not a technical-support channel.
+
+Built and maintained by [Montasim](https://github.com/montasim). Licensed under the [MIT License](LICENSE).

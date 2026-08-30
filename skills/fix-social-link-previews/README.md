@@ -1,171 +1,124 @@
 # Fix Social Link Previews
 
-> Install one portable skill for Codex, Claude Code, or both that audits, creates, repairs, and verifies large-image social previews for web apps and websites.
+> Audit and repair crawler-visible Open Graph and Twitter Card previews without confusing valid metadata with platform cache behavior.
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![npm version](https://img.shields.io/npm/v/fix-social-link-previews.svg)](https://www.npmjs.com/package/fix-social-link-previews)
 [![CI](https://github.com/montasim/skills/actions/workflows/ci.yml/badge.svg)](https://github.com/montasim/skills/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Support on SupportKori](https://img.shields.io/badge/Support_on-SupportKori-00B8B5)](https://www.supportkori.com/montasim)
 
-Fix Social Link Previews gives coding agents an evidence-based workflow for link-card reliability. It inspects crawler-visible HTML, validates Open Graph and Twitter Card metadata, follows the referenced image response, checks raster type and dimensions, repairs framework-native metadata, and creates a branded 1200×630 asset when one is missing.
-
-The skill does not simulate or control proprietary WhatsApp, Slack, Discord, LinkedIn, Facebook, or X layouts. It proves that a site is eligible for a large-image preview and separates implementation failures from stale platform caches.
-
-Version 0.3.0 catches WebP compatibility risks, declared-versus-served MIME mismatches, stale deployment origins, conflicting social images, and misleading cache-buster workflows. The package is released from the [central source](https://github.com/montasim/skills/tree/main/skills/fix-social-link-previews) under its namespaced Git tag.
-
-## What it handles
-
-- Raw server-response checks using a social-crawler user agent
-- Open Graph, Twitter Card, canonical, title, and description validation
-- Public image response, redirect, MIME type, size, and dimension checks
-- WebP compatibility warnings and declared-versus-served MIME checks
-- Canonical and Open Graph URL checks against the audited production route
-- Detection of metadata that exists only after client hydration
-- Framework-aware repairs without introducing a second SEO system
-- Branded, versioned PNG or JPEG preview assets
-- Cache diagnosis that treats query variants as temporary probes, not permanent share URLs
-- Human-readable and JSON checker output for agents and CI
-
-## Install
-
-### Requirements
-
-- Node.js 18 or newer
-- Codex, Claude Code, or both with filesystem-backed skills
-
-Run the package without a global install and choose one host:
+Fix Social Link Previews gives an AI coding agent a raw-response-first workflow for missing, small, stale, or inaccessible link cards. It verifies canonical, Open Graph, and Twitter metadata; follows the preview asset response; checks MIME type and dimensions; chooses the target framework's native metadata surface; and distinguishes implementation defects from a messaging platform's private rendering and cache.
 
 ```sh
-npx --yes fix-social-link-previews@latest --target codex
-npx --yes fix-social-link-previews@latest --target claude
+npx --yes --package=fix-social-link-previews@latest fix-social-link-previews --target codex
 ```
 
-Install for both hosts in one transaction:
+**[npm package](https://www.npmjs.com/package/fix-social-link-previews) · [source](https://github.com/montasim/skills/tree/main/skills/fix-social-link-previews) · [issues](https://github.com/montasim/skills/issues)**
+
+## Use it when
+
+- Shared URLs show no image, the wrong image, or a small card.
+- Metadata exists in the browser DOM but not in the server response seen by crawlers.
+- `og:image` redirects, requires authentication, serves HTML, or declares the wrong MIME type.
+- A site relies on SVG or WebP where broad messaging-crawler support is needed.
+- A clean implementation still shows an old card and cache behavior must be diagnosed safely.
+
+The skill does not promise an exact WhatsApp, Slack, Discord, LinkedIn, Facebook, or X layout. Those platforms control rendering, eligibility, cropping, truncation, and caching.
+
+## Install and invoke
+
+Node.js 18 or newer is required for the installer and deterministic checker.
 
 ```sh
-npx --yes fix-social-link-previews@latest --target both
+npx --yes --package=fix-social-link-previews@latest fix-social-link-previews \
+  --target codex --scope project
 ```
 
-Use `--scope project` for repository-local installation, `--path /absolute/skills/root` for one custom destination, `--dry-run` to inspect the plan, and `--force` to replace an existing installation.
-
-Restart each selected host or begin a new session after installation.
-
-## Use the skill
-
-Invoke it explicitly in Codex:
+The shared installer also supports Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` for every preset or `--path /absolute/skills/root` for another compatible host.
 
 ```text
-Use $fix-social-link-previews to audit this web app and create or repair its large-image social preview.
+Use $fix-social-link-previews to audit the deployed home page and repair its large-image preview. Verify the raw response and asset.
 ```
-
-For Claude Code:
 
 ```text
-/fix-social-link-previews Audit this site and fix its social preview if necessary.
+/fix-social-link-previews Check whether this valid implementation is hidden by a stale platform cache. Do not deploy.
 ```
 
-The agent will inspect the repository, run the deterministic checker, preserve a valid implementation, or make the smallest framework-native repair. It will run relevant project checks and report what remains controlled by the deployment or social platform.
+## What it verifies
+
+| Surface | Required evidence |
+| --- | --- |
+| Page | Title, description, canonical URL, coherent Open Graph fields, and `summary_large_image` Twitter metadata in raw HTML |
+| Image | Public HTTPS response, PNG or JPEG, matching MIME declaration, useful alt text, and large-card dimensions |
+| Routing | Canonical and `og:url` identify the audited route rather than an old deployment origin |
+| Framework | Metadata is emitted through the project's existing server, head, or prerender mechanism |
+| Cache diagnosis | The clean URL is valid before a query variant or official re-scrape tool is used as a diagnostic |
+
+The preferred broad-compatibility asset is a branded 1200×630 PNG or JPEG with critical content kept away from crop-prone edges.
 
 ## Run the checker directly
 
-Audit a deployed page:
-
 ```sh
-node skills/fix-social-link-previews/scripts/check-social-preview.mjs https://example.com/
-```
+# Deployed page
+node /absolute/skill/root/scripts/check-social-preview.mjs https://example.com/
 
-Audit built HTML and resolve relative assets against a production origin:
-
-```sh
-node skills/fix-social-link-previews/scripts/check-social-preview.mjs dist/index.html \
+# Built HTML with a production base for relative URLs
+node /absolute/skill/root/scripts/check-social-preview.mjs dist/index.html \
   --base-url https://example.com/
 ```
 
-Add `--json` for machine-readable output.
+Add `--json` for machine-readable evidence.
 
-| Exit code | Meaning                                                  |
-| --------- | -------------------------------------------------------- |
-| `0`       | No metadata or asset findings                            |
-| `1`       | Errors or warnings require review                        |
-| `2`       | Invalid invocation, unreadable input, or request failure |
+| Exit | Meaning |
+| --- | --- |
+| `0` | The deterministic audit is clean |
+| `1` | Metadata or asset findings require review |
+| `2` | Invocation, input, or request failure |
 
-The checker parses the raw response. It does not rely on browser hydration and does not reproduce a platform's private card-selection or cache behavior.
+The checker validates raw metadata and image responses. It does not reproduce proprietary platform caches or card-selection algorithms.
 
-## How it works
+## Repair workflow
 
-```text
-Repository or URL
-       |
-       v
-Crawler-visible metadata audit
-       |
-       +-- valid ----------> preserve and report
-       |
-       +-- incomplete -----> repair framework metadata
-       |
-       +-- missing --------> create branded raster + metadata
-                                  |
-                                  v
-                         build and re-audit
-```
+1. Detect framework, router, rendering model, public asset path, SEO authority, and verified production origin.
+2. Inspect raw server or built HTML before trusting a hydrated browser DOM.
+3. Preserve a clean implementation; otherwise repair incomplete, conflicting, client-only, or stale metadata.
+4. Create a versioned branded raster only from verified project identity and visual assets.
+5. Integrate through the incumbent framework mechanism rather than adding a second SEO system.
+6. Run project checks, inspect built output, rerun the checker, and verify deployed URLs only when deployment is in scope.
+7. If implementation passes but a platform remains stale, use its official debugger or a temporary query variant without changing the canonical URL.
 
-The installed package contains one shared behavior contract for Codex and Claude Code:
+## Bundled resources
 
 ```text
-skills/fix-social-link-previews/
+fix-social-link-previews/
 ├── SKILL.md
 ├── agents/openai.yaml
 ├── references/
 │   ├── framework-patterns.md
 │   └── social-preview-standard.md
-└── scripts/
-    └── check-social-preview.mjs
+└── scripts/check-social-preview.mjs
 ```
 
-## Development
+The framework reference covers static HTML, Vite, TanStack Start, Next.js, React Router, Astro, SvelteKit, Nuxt, server frameworks, and deployment asset paths while deferring to installed versions and current official documentation.
+
+## Installer, development, and safety
+
+Use `--scope user|project`, `--dry-run`, `--force`, `--migrate`, a provider list, or an exact `--path`. Installation copies the skill; it does not audit a site or change metadata.
 
 ```sh
-git clone https://github.com/montasim/skills.git montasim-skills
-cd montasim-skills
+git clone https://github.com/montasim/skills.git
+cd skills
 npm ci
 npm test --workspace skills/fix-social-link-previews
 npm run pack:check --workspace skills/fix-social-link-previews
 ```
 
-| Command              | Purpose                                            |
-| -------------------- | -------------------------------------------------- |
-| `npm test`           | Run checker, installer, and package-contract tests |
-| `npm run pack:check` | Preview the exact npm archive contents             |
+- Protected pages and expiring image signatures are not reliable crawler targets.
+- WebP is recognized but reported as an interoperability risk; SVG-only social images are not accepted as broad-compatible proof.
+- The skill does not deploy, commit, push, publish, invalidate caches, or use authenticated preview debuggers without explicit authorization.
 
-GitHub Actions runs both commands for pushes to `main` and pull requests.
+## Support, contribution, and license
 
-## Limits and safety
+For public bug reports, include the sanitized URL, relevant response headers, Node.js version, expected result, and actual result—never cookies, credentials, private deployments, or signed asset URLs. Use [GitHub Issues](https://github.com/montasim/skills/issues), and follow the repository [support](https://github.com/montasim/skills/blob/main/SUPPORT.md), [contribution](https://github.com/montasim/skills/blob/main/CONTRIBUTING.md), and [security](https://github.com/montasim/skills/blob/main/SECURITY.md) guidance.
 
-- A valid implementation can still display an old card until a platform cache expires or is refreshed.
-- Card layout, cropping, text truncation, and large-image eligibility remain platform-controlled.
-- Protected deployments and expiring image URLs are not reliable crawler targets.
-- The checker recognizes WebP but flags it as a cross-platform compatibility risk; use PNG or JPEG for dependable messaging previews.
-- Framework guidance follows the target project's installed version and conventions rather than hard-coding one SEO library.
-- The skill does not deploy, commit, push, publish, or use authenticated cache debuggers without explicit authorization.
-
-## Support and security
-
-Use [GitHub Issues](https://github.com/montasim/skills/issues) for reproducible checker, installer, or framework-routing defects. Include the sanitized target URL, relevant response headers, Node.js version, expected result, and actual result. Never post private deployment URLs, credentials, cookies, or signed asset URLs.
-
-Report vulnerabilities privately according to [SECURITY.md](SECURITY.md).
-
-## Contributing
-
-Focused issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) for the required checks and evidence expectations.
-
-## Funding
-
-Optional support through [SupportKori](https://www.supportkori.com/montasim) helps maintain crawler compatibility research, framework guidance, and the verification suite.
-
-## Author
-
-Built and maintained by [Montasim](https://github.com/montasim).
-
-## License
-
-Fix Social Link Previews is available under the [MIT License](LICENSE).
+Built and maintained by [Montasim](https://github.com/montasim). Optional [SupportKori funding](https://www.supportkori.com/montasim) supports compatibility research. Licensed under the [MIT License](LICENSE).

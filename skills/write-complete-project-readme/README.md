@@ -1,388 +1,182 @@
 # Write Complete Project README
 
-> Install one portable skill for Codex, Claude Code, or both that creates or regenerates a software project's root `README.md` from verified repository evidence.
+> Create or regenerate one software project's root `README.md` from verified repository evidence and a full-document quality gate.
 
+[![npm version](https://img.shields.io/npm/v/write-complete-project-readme.svg)](https://www.npmjs.com/package/write-complete-project-readme)
 [![CI](https://github.com/montasim/skills/actions/workflows/ci.yml/badge.svg)](https://github.com/montasim/skills/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Support on SupportKori](https://img.shields.io/badge/Support_on-SupportKori-00B8B5)](https://www.supportkori.com/montasim)
 
-Write Complete Project README gives coding agents a project-type-aware workflow for producing a complete README without turning guessed metadata or publisher defaults into project facts. The same `SKILL.md`, quality references, and deterministic checker are installed for both supported hosts. The workflow inspects manifests, code, public interfaces, tests, CI, release and deployment files, and repository-native governance metadata; then it writes one artifact only: the target repository's root `README.md`.
+Write Complete Project README gives an AI coding agent an evidence-first documentation workflow for applications, packages, CLIs, APIs, services, containers, templates, monorepos, research projects, Agent Skills, and hybrids. It reads the project rather than filling a generic template, identifies the primary reader's fastest path to value, and verifies the whole document—not just badges, installation, or one newly added section.
+
+The skill writes exactly one artifact: `<project-root>/README.md`. It does not create licenses, funding files, screenshots, social previews, governance files, topics, releases, or nested READMEs.
 
 ```sh
 npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target codex
 ```
 
-Restart the selected host after installation, then invoke the skill with that host's syntax:
+**[npm package](https://www.npmjs.com/package/write-complete-project-readme) · [source](https://github.com/montasim/skills/tree/main/skills/write-complete-project-readme) · [issues](https://github.com/montasim/skills/issues)**
 
-| Host | Invocation |
-| --- | --- |
-| Codex | `$write-complete-project-readme` |
-| Claude Code | `/write-complete-project-readme` |
+## Use it when
 
-## Why this skill exists
+- A project needs a complete root README created from code and repository evidence.
+- A boilerplate or generic README needs major information-architecture repair.
+- Setup, primary usage, architecture, limits, security, support, and license facts must agree.
+- A package, CLI, service, app, or monorepo needs documentation adapted to its actual public surface.
+- A partial README patch would leave important reader paths missing.
 
-README generators often optimize for a visible template: a hero, badge row, feature list, and install command. Those elements can still leave readers without a verified first-use path, realistic examples, important limitations, or accurate support and license information.
+Do not use it for audit-only reports, organization/profile READMEs, nested documentation indexes, translations, badge-only edits, or non-README assets.
 
-Write Complete Project README instead treats documentation as an evidence and reader-flow problem. It routes applications, packages, CLIs, APIs, containers, templates, monorepos, research projects, AI skills, and hybrids through a shared progression:
+## Install and invoke
 
-1. **Orient:** explain the project, audience, job, and value.
-2. **Evaluate:** show verified capabilities, proof, and adoption constraints.
-3. **Activate:** provide prerequisites, setup, the first useful action, and a supported success signal.
-4. **Use:** document the primary workflow or public interface.
-5. **Trust:** disclose material status, compatibility, security, privacy, data, accuracy, and operational limits.
-6. **Participate:** expose verified support, contribution, security, funding, authorship, and license paths.
+Node.js 18 or newer is required for the dependency-free installer and deterministic checker. This package retains a mature custom installer for Codex and Claude Code because it supports conservative auto-detection and transactional migration from previous Codex skill roots.
 
-The skill uses a sanitized Ramadan Clock README as a mandatory depth benchmark. That specimen establishes the expected reader confidence; an explicit evidence boundary prevents its technologies, links, identities, commands, or headings from leaking into another project.
+```sh
+# Explicit user installation
+npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target codex
 
-## Scope
+# Project-local installation for both supported hosts
+npx --yes --package=write-complete-project-readme@latest write-complete-project-readme \
+  --target both --scope project
+
+# Preview destinations without writing
+npx --yes --package=write-complete-project-readme@latest write-complete-project-readme \
+  --target both --dry-run
+```
+
+Restart the selected host or begin a new session after installation.
+
+```text
+Use $write-complete-project-readme to regenerate this project's root README from verified repository evidence. Lead with the CLI workflow and preserve verified migration warnings.
+```
+
+```text
+/write-complete-project-readme Create a complete root README for this application. Do not change any other file.
+```
+
+Natural-language discovery uses the shared `SKILL.md` description; `$write-complete-project-readme` and `/write-complete-project-readme` select it explicitly.
+
+## Output contract
 
 | The skill does | The skill does not |
 | --- | --- |
-| Create or intelligently regenerate `<project-root>/README.md` | Produce audit-only reports |
-| Preserve useful existing facts after verifying them | Create profile, organization, nested, or translated READMEs |
-| Adapt depth and order to the dominant project type | Generate separate banners, screenshots, diagram files, badge assets, or social previews |
-| Use repository-native configuration and metadata | Create licenses, funding files, governance files, topics, or releases |
-| Mark relevant unresolved optional fields visibly | Guess author, funding, support, demo, compatibility, or license values |
-| Run deterministic Markdown hygiene checks | Claim that syntax checks prove factual accuracy |
+| Resolve and write the Git worktree root `README.md` | Write nested, translated, profile, or organization READMEs |
+| Verify and preserve useful existing project knowledge | Preserve stale structure or unsupported claims |
+| Adapt depth and order to the dominant project type | Copy a universal heading template |
+| Derive commands, examples, links, and limits from evidence | Guess demos, authors, funding, support, compatibility, or license terms |
+| Link verified existing media and governance paths | Create images, banners, diagrams as files, licenses, or governance assets |
+| Run deterministic Markdown hygiene checks | Claim syntax validation proves factual accuracy |
 
-The local installer supports Codex and Claude Code. Claude.ai and Anthropic API integrations do not read a local Claude Code skills directory; those surfaces require separate skill uploads.
+After writing, the skill confirms that no other project file changed.
 
-## Install
+## Evidence precedence
 
-### Requirements
+Every claim follows this order:
 
-- Node.js 18 or newer for the dependency-free installer and checker
-- Codex, Claude Code, or both, with filesystem-backed skill support
+1. Current request and repository instructions
+2. Authoritative manifests, lockfiles, runtime declarations, and standard project files
+3. Code, public interfaces, routes, tests, CI, releases, deployment, and operations config
+4. External endpoints actually verified during the task
+5. The existing README after its facts survive stronger evidence
+6. A clearly qualified inference
+7. A visible configuration-required marker for a relevant unresolved optional value
 
-Install the current stable release for the host you want to use:
+The skill never uses its own publisher identity, funding link, installation path, global Git configuration, or benchmark content as evidence about another project. Safe templates such as `.env.example` may be inspected; real secret files are not opened or quoted.
 
-```sh
-npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target codex
-npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target claude
-```
+## Reader workflow
 
-Install for both local hosts in one transaction:
+The README is designed so a reader can:
 
-```sh
-npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target both
-```
+1. **Orient:** understand the project, audience, problem, outcome, and next action.
+2. **Evaluate:** see current capabilities, strongest proof, and adoption constraints.
+3. **Activate:** follow verified prerequisites, installation/configuration, first action, and a supported success signal.
+4. **Use:** perform the primary workflow or exercise the public interface.
+5. **Trust:** understand compatibility, status, safety, privacy, data, accuracy, operational, and license limits.
+6. **Participate:** find verified support, security, contribution, funding, authorship, and conduct paths when they exist.
 
-The equivalent `pnpx` form accepts the same installer options:
+Project type changes the reading order and examples, not the completeness bar. The bundled sanitized Ramadan Clock specimen is used only as a depth benchmark for substantial applications, hybrids, and major information-architecture repairs; none of its facts are target-project evidence.
 
-```sh
-pnpx write-complete-project-readme@latest --target codex
-```
+## Configuration-required markers
 
-Restart each selected host or begin a new session after installation so its skill catalog refreshes.
-
-[`latest`](https://docs.npmjs.com/cli/dist-tag/) identifies the stable npm release. It avoids hard-coding a release number while still resolving an immutable published package version.
-
-To install from the current checkout instead of npm, clone the monorepo and use its local installer with an explicit destination:
-
-```sh
-git clone https://github.com/montasim/skills.git montasim-skills
-node montasim-skills/scripts/install-local.mjs write-complete-project-readme \
-  --path "$HOME/.agents/skills"
-```
-
-The checkout form follows the repository's moving default branch. Prefer `@latest` for normal installation and the checkout form for local development.
-
-### Destinations and scope
-
-`--scope` accepts `user` or `project` and defaults to `user`. The installer appends `write-complete-project-readme` to the selected skills root:
-
-| Target | Scope | Skills root | Installed directory |
-| --- | --- | --- | --- |
-| Codex | `user` | `~/.agents/skills` | `~/.agents/skills/write-complete-project-readme` |
-| Codex | `project` | `<repo>/.agents/skills` | `<repo>/.agents/skills/write-complete-project-readme` |
-| Claude Code | `user` | `${CLAUDE_CONFIG_DIR:-~/.claude}/skills` | `${CLAUDE_CONFIG_DIR:-~/.claude}/skills/write-complete-project-readme` |
-| Claude Code | `project` | `<repo>/.claude/skills` | `<repo>/.claude/skills/write-complete-project-readme` |
-
-For project scope, `<repo>` is the Git worktree root when available and the current directory otherwise. For example:
-
-```sh
-npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target codex --scope project
-npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target both --scope project
-```
-
-### Automatic target detection
-
-`--target` accepts `auto`, `codex`, `claude`, or `both` and defaults to `auto`. With no explicit target, the installer proceeds only when it detects exactly one supported host:
-
-```sh
-npx --yes --package=write-complete-project-readme@latest write-complete-project-readme
-```
-
-Detection checks environment variables, known agent directories, and the executable names on `PATH`. It never runs an agent command. In particular:
-
-- Codex signals include `CODEX_HOME`, `.agents` or `.codex` directories, and a `codex` executable.
-- Claude Code signals include `CLAUDE_CONFIG_DIR`, `.claude` directories, and a `claude` executable.
-- Exactly one detected host selects that target.
-- No detected hosts or both detected hosts cause a refusal with instructions to choose `--target codex`, `--target claude`, or `--target both`.
-- An explicit `--target` always wins over detection.
-
-Detection chooses an installation destination; it is not caller identity, authentication, or proof that the command was launched from a particular agent. Use an explicit target in automation and whenever the intended destination matters.
-
-### Preview or customize the destination
-
-Preview the full plan without writing:
-
-```sh
-npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target both --dry-run
-```
-
-`--path` selects one exact custom skills root; the installer still creates its `write-complete-project-readme` child:
-
-```sh
-npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target claude --path "$PWD/.agent-skills"
-```
-
-Because a custom path already fixes one root, `--path` is incompatible with `--target both` and with any explicit `--scope`, including an explicit `--scope user`.
-
-### Update an existing installation
-
-The installer preserves every existing `write-complete-project-readme` destination unless replacement is explicit:
-
-```sh
-npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target codex --force
-```
-
-`--force` replaces the complete current skill directory; it does not preserve manual edits inside that directory. The packaged skill is staged before the current installation moves. Symlinks and non-directory targets are rejected, as are paths that overlap the packaged source or another selected target.
-
-### Migrate previous Codex-root installations
-
-Migration discovery never causes an implicit move or deletion. Previous Codex-root installations are changed only with `--migrate`:
-
-- With a standard Codex destination, migration recognizes `write-complete-project-readme` beneath previous user roots `$CODEX_HOME/skills` and `~/.codex/skills`, or beneath `<repo>/.codex/skills` when project scope is selected.
-- Claude Code has no retired-name migration path; its current destination is replaced only with `--force`.
-- An explicit `--path` is isolated and does not scan standard or previous roots.
-
-A normal install refuses before writing when it finds a recognized legacy installation, even if `--force` is present. Preview migration sources, backups, and destinations first:
-
-> [!WARNING]
-> Migration replaces recognized previous-root directories with a fresh packaged skill. It does not merge or retain custom files from the moved directory after a successful transaction. Back up intentional local changes before continuing.
-
-```sh
-npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target codex --migrate --dry-run
-```
-
-Then migrate:
-
-```sh
-npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target codex --migrate
-```
-
-If a current destination also exists, authorize its replacement as part of the migration:
-
-```sh
-npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target codex --force --migrate
-```
-
-With `--target both --migrate`, Codex may migrate a previous-root installation while Claude Code receives a fresh install. A recognized Codex installation must exist or `--migrate` refuses.
-
-Install and migration operations stage all selected targets and back up every affected directory before publishing. A `both` operation is one logical transaction: if either host fails to install, the installer attempts to remove newly published copies and restore every moved destination and legacy directory across both hosts. If rollback cannot complete, it reports the transaction locations that need manual recovery; successful cleanup removes the temporary backups.
-
-## Use
-
-After the host refreshes its skill catalog, `SKILL.md`'s description is the shared discovery and trigger contract. In either Codex or Claude Code, a matching natural-language request can activate the skill automatically:
-
-```text
-Create or regenerate this project's root README.md from verified repository evidence.
-```
-
-Installer `--target auto` and skill activation are separate mechanisms: the installer uses local signals only to select one destination, while the host uses the installed skill description to match a request.
-
-Use the host-specific invocation when you want to select the skill deterministically. For Codex:
-
-```text
-Use $write-complete-project-readme to create or regenerate this project's root README.md from verified repository evidence.
-```
-
-For Claude Code:
-
-```text
-/write-complete-project-readme Create or regenerate this project's root README.md from verified repository evidence.
-```
-
-Add project-specific direction in the same request when useful:
-
-```text
-Lead with the CLI workflow, preserve the existing migration warnings, and use only facts verified in this repository.
-```
-
-Both hosts load the same behavior contract and bundled resources. The skill resolves the Git worktree root when available, otherwise uses the current directory. It reads the existing root README and relevant evidence, classifies the dominant user-facing artifact, builds a verified/inferred/unknown fact inventory, drafts the full reader journey, validates it, and confirms that no other project file changed.
-
-Audit-only requests, a badge-only patch, and non-project README files are intentionally outside the skill's contract.
-
-## Project configuration and publisher separation
-
-The skill is independent and zero-config by default. Other users do not edit this package or inherit its author's support and funding values. Each generated README is configured by its target repository:
-
-| Precedence | Source | Examples |
-| --- | --- | --- |
-| 1 | Current prompt and applicable repository instructions | Audience, emphasis, verified maintainer-provided links |
-| 2 | Standard manifests and workspace metadata | npm `funding`, `bugs`, `homepage`, `author`; Python project URLs; package exports and runtime requirements |
-| 3 | Repository-native files | `.github/FUNDING.yml`, `SUPPORT.md`, `SECURITY.md`, `CONTRIBUTING.md`, `AUTHORS*`, `LICENSE*` |
-| 4 | Code and operations evidence | CLI help, public APIs, tests, workflows, releases, deployment and safe configuration templates |
-| 5 | Existing root README | Only facts that survive verification against stronger evidence |
-
-The installed skill contains no publisher identity, SupportKori URL, live application URL, or personal repository link. This package's own `package.json` and README may identify its maintainer and funding channel, but the skill explicitly forbids using those values as target-project evidence.
-
-There is no proprietary skill configuration file, installation-directory settings file, or user-global author/funding profile. This keeps the skill portable and makes project configuration reviewable through conventions collaborators already maintain.
-
-When a relevant optional value cannot be established safely, the generated draft uses an adjacent, machine-checkable pair such as:
+When a relevant optional value cannot be established safely, the draft uses an adjacent machine-checkable marker instead of a guess:
 
 ```markdown
 > **Configuration required:** Add the project's verified funding URL.
 <!-- write-complete-project-readme:configure funding -->
 ```
 
-The skill reports every remaining marker in its final handoff. A document containing one is a configuration-required draft, and the checker exits with status `1` until the maintainer supplies evidence or removes the no-longer-relevant field.
+A README containing a marker is a configuration-required draft, not a finished document. Missing license permission is handled directly: the README states that reuse rights have not been granted rather than inventing a license or marker.
 
-## Deterministic README checker
-
-The bundled checker performs read-only, offline validation of the exact root `README.md`:
+## Run the deterministic checker
 
 ```sh
-# Codex user installation
-node ~/.agents/skills/write-complete-project-readme/scripts/check-readme.mjs .
-
-# Claude Code user installation
-node "${CLAUDE_CONFIG_DIR:-$HOME/.claude}/skills/write-complete-project-readme/scripts/check-readme.mjs" .
+node /absolute/skill/root/scripts/check-readme.mjs /absolute/project/root
 ```
 
-For project scope, use the corresponding `.agents/skills` or `.claude/skills` path beneath the project root. Use the exact custom root supplied with `--path` when applicable. Add `--json` for machine-readable diagnostics.
+Add `--json` for machine-readable diagnostics.
 
-It checks:
+The checker verifies marker pairing and syntax, narrowly defined template placeholders, balanced code fences, duplicate normalized headings, relative links and images with exact filename case, and non-empty image alt text.
 
-- configuration-required marker pairing and field syntax;
-- narrowly defined legacy/template placeholders;
-- balanced backtick and tilde code fences;
-- duplicate normalized ATX headings outside code fences;
-- relative inline-link and image targets with exact filename case;
-- empty image alternative text.
-
-External URLs, email links, anchors, query strings, fragments, and links inside fenced code are not fetched or treated as local targets.
-
-| Exit code | Meaning |
+| Exit | Meaning |
 | --- | --- |
 | `0` | Deterministic checks passed |
 | `1` | Validation findings or configuration-required markers remain |
 | `2` | Invalid invocation or internal failure |
 
-The checker does not determine whether prose claims are true. The skill separately checks commands, versions, public surfaces, links, deployment claims, limitations, and license statements against repository evidence.
+External links, prose truth, accessibility beyond empty image alt text, and the quality of setup or examples still require evidence review.
 
-## What gets installed
+## Installer behavior
+
+| Option | Behavior |
+| --- | --- |
+| `--target auto\|codex\|claude\|both` | Select destination; strict `auto` succeeds only when exactly one host is detected |
+| `--scope user\|project` | Select the standard user or repository-local root |
+| `--path <absolute-root>` | Use one custom skills root; incompatible with `both` and explicit `--scope` |
+| `--dry-run` | Report destinations, migration sources, and actions without writing |
+| `--force` | Replace an existing current installation |
+| `--migrate` | Transactionally replace recognized previous Codex-root installations |
+
+Auto-detection inspects environment variables, known directories, and executable names without running an agent command. It selects a destination; it does not prove caller identity. Migration is explicit, stages all selected targets, and attempts cross-target rollback if any publication step fails.
+
+## Bundled resources
 
 ```text
 write-complete-project-readme/
 ├── SKILL.md
-├── agents/
-│   └── openai.yaml
+├── agents/openai.yaml
 ├── references/
 │   ├── quality-standard.md
 │   └── ramadan-clock-standard.md
-└── scripts/
-    └── check-readme.mjs
+└── scripts/check-readme.mjs
 ```
 
-The npm package adds only the dependency-free installer. It performs no network requests, analytics, or telemetry after the package has been retrieved.
+The installed skill performs no analytics or telemetry. Claude.ai and Anthropic API surfaces do not read a local Claude Code skills directory and require their own upload mechanism.
 
-`SKILL.md`, the references, and the checker form one portable behavior contract shared by both hosts. `agents/openai.yaml` supplies Codex UI metadata; it is not a second skill definition and is not required for Claude Code behavior.
-
-## CLI reference
-
-| Option | Behavior |
-| --- | --- |
-| `--target auto|codex|claude|both` | Select the host; defaults to strict `auto` detection |
-| `--scope user|project` | Select a standard user or repository-local root; defaults to `user` |
-| `--path <directory>` | Use one exact custom skills root; incompatible with `both` or an explicit `--scope` |
-| `--force` | Replace an existing current destination; does not authorize legacy migration |
-| `--migrate` | Transactionally move recognized legacy names and Codex legacy-root installations |
-| `--dry-run` | Report all selected targets, paths, backups, and actions without writing |
-| `--help`, `-h` | Show command help |
-| `--version`, `-v` | Print the package version |
-
-## Development
-
-Clone and verify the package:
+## Develop, package, and release
 
 ```sh
-git clone https://github.com/montasim/skills.git montasim-skills
-cd montasim-skills
+git clone https://github.com/montasim/skills.git
+cd skills
 npm ci
 npm test --workspace skills/write-complete-project-readme
 npm run pack:check --workspace skills/write-complete-project-readme
 ```
 
-| Command | Purpose |
-| --- | --- |
-| `npm test` | Run cross-agent installer, scope, migration, rollback, checker, portability, and package-contract tests |
-| `npm run pack:check` | Preview the exact files included in the npm archive |
+Tests cover Codex and Claude destinations, auto-detection, scopes, custom paths, migration, rollback, checker behavior, portability, and package contents. Releases use the monorepo's namespaced tag form:
 
-When Codex's `skill-creator` utilities are installed, also validate the bundled skill:
-
-```sh
-python3 ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/write-complete-project-readme
+```text
+write-complete-project-readme-v<version>
 ```
 
-GitHub Actions runs the npm test and package checks on pushes to `main` and pull requests using both the minimum supported Node.js 18 and current Node.js 24.
+## Limits and safety
 
-### Automated releases
+- Incomplete repository evidence can require maintainer input or a visible configuration marker.
+- A deterministic clean result does not prove commands, links, status, or prose claims are true.
+- The skill does not perform deployments, releases, external writes, or adjacent repository cleanup merely to document them.
+- Existing screenshots, badges, demos, and external links appear only when their identity and destination are verified.
 
-Stable releases are tag-driven. Prepare a release by updating `package.json` and `package-lock.json` together, running the checks above, and merging the version change into `main`. Then create and push the matching tag:
+## Support, contribution, and license
 
-```sh
-npm version patch --no-git-tag-version
-npm test
-npm run pack:check
-```
+For reproducible issues, include host, installer options, Node.js version, operating system, expected result, and sanitized output. Use [GitHub Issues](https://github.com/montasim/skills/issues), and follow the repository [support](https://github.com/montasim/skills/blob/main/SUPPORT.md), [contribution](https://github.com/montasim/skills/blob/main/CONTRIBUTING.md), and [security](https://github.com/montasim/skills/blob/main/SECURITY.md) guidance. Never publish private repository content, tokens, secret values, or sensitive paths.
 
-Use `minor`, `major`, or an explicit stable version instead of `patch` when appropriate. After the version change is reviewed and merged into `main`:
-
-```sh
-git tag vX.Y.Z
-git push origin vX.Y.Z
-```
-
-The [publish workflow](.github/workflows/publish.yml) accepts stable `vX.Y.Z` tags only. It verifies that the manifest and lockfile versions match the tag and that the tagged commit belongs to `main`; reruns the tests and package inspection on Node.js 24; publishes to npm through a workflow-specific trusted publisher with provenance; smoke-tests the documented Codex, Claude Code, both-target, and `pnpx` installation paths; and creates the GitHub Release only after those checks pass.
-
-The npm trusted publisher is bound to `montasim/write-complete-project-readme` and the `publish.yml` workflow. The workflow uses short-lived OpenID Connect credentials and does not require an `NPM_TOKEN` repository secret.
-
-## Status and limitations
-
-- The current stable installer supports both Codex and Claude Code.
-- The npm `latest` channel resolves the current stable release; the GitHub default-branch form is a source-based fallback.
-- The installer configures local filesystem skill roots for Codex and Claude Code. Claude.ai and Anthropic API use require separate skill uploads.
-- Natural-language discovery on both hosts comes from the shared `SKILL.md` description; `$write-complete-project-readme` and `/write-complete-project-readme` are the deterministic explicit forms.
-- Automatic detection is a destination-selection heuristic, not caller identity. Machines with zero or two detected hosts require an explicit target.
-- `CODEX_HOME/skills`, `~/.codex/skills`, and project `.codex/skills` are legacy migration sources, not current Codex destinations.
-- Multi-target installation is transactional with attempted cross-target rollback, but an interrupted or failed rollback can leave reported transaction directories requiring manual recovery.
-- The skill writes only the root project README. It deliberately does not fulfill audit-only or repository-marketing requests.
-- Repository evidence can be incomplete or stale. Blocking unknowns may require maintainer input; relevant non-blocking optional values remain visible as configuration-required markers.
-- Deterministic checks find structural defects, not factual truth, prose quality, accessibility beyond empty image alt text, or remote-link health.
-- External verification depends on the network and permissions available to the running agent session.
-
-## Support and security
-
-Read [SUPPORT.md](SUPPORT.md) before opening an issue. Report reproducible detection, target, scope, installation, migration, checker, or skill behavior through [GitHub Issues](https://github.com/montasim/skills/issues). Include the selected host, command options, Node.js version, operating system, expected result, and sanitized actual output.
-
-Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md). Never post tokens, private repository content, secret values, or sensitive filesystem paths in a public issue.
-
-## Contributing
-
-Focused issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the verification workflow and submission expectations.
-
-## Funding
-
-Optional support through [SupportKori](https://www.supportkori.com/montasim) helps maintain the installer, test matrix, project-type guidance, and compatibility work. This funding link belongs to this package only; it is intentionally excluded from the installed skill's target-project evidence.
-
-Bug reports, documentation improvements, tests, and code contributions are equally valuable ways to help.
-
-## Author
-
-Built and maintained by [Montasim](https://github.com/montasim).
-
-## License
-
-Write Complete Project README is available under the [MIT License](LICENSE).
+Built and maintained by [Montasim](https://github.com/montasim). Optional [SupportKori funding](https://www.supportkori.com/montasim) supports installer, checker, and project-type guidance. Licensed under the [MIT License](LICENSE).
