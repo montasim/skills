@@ -1,0 +1,4 @@
+interface:
+  display_name: "Publish Verified GitHub Release"
+  short_description: "Draft evidence-based GitHub releases"
+  default_prompt: "Use $publish-verified-github-release to draft polished release notes from verified project evidence."

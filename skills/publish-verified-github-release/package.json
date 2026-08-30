@@ -1,0 +1,57 @@
+{
+  "name": "publish-verified-github-release",
+  "version": "0.2.0",
+  "description": "Install a portable, cross-provider skill for evidence-based GitHub releases.",
+  "type": "module",
+  "bin": {
+    "publish-verified-github-release": "bin/publish-verified-github-release.js"
+  },
+  "files": [
+    "bin/",
+    "skills/"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run",
+    "prepublishOnly": "npm test && npm run pack:check",
+    "pretest": "node ../../scripts/stage-package-skill.mjs stage publish-verified-github-release test",
+    "posttest": "node ../../scripts/stage-package-skill.mjs clean publish-verified-github-release test",
+    "prepack": "node ../../scripts/stage-package-skill.mjs stage publish-verified-github-release pack",
+    "postpack": "node ../../scripts/stage-package-skill.mjs clean publish-verified-github-release pack"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "agent-skill",
+    "ai-agent",
+    "claude-code",
+    "codex",
+    "cursor",
+    "gemini-cli",
+    "google-antigravity",
+    "github-copilot",
+    "opencode",
+    "github",
+    "github-release",
+    "release-automation",
+    "release-notes",
+    "semantic-versioning",
+    "skill"
+  ],
+  "author": "Montasim",
+  "license": "MIT",
+  "homepage": "https://github.com/montasim/skills/tree/main/skills/publish-verified-github-release#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montasim/skills.git",
+    "directory": "skills/publish-verified-github-release"
+  },
+  "bugs": {
+    "url": "https://github.com/montasim/skills/issues"
+  },
+  "funding": "https://www.supportkori.com/montasim",
+  "publishConfig": {
+    "access": "public"
+  }
+}
