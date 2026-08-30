@@ -5,7 +5,11 @@ import { renderToString } from "react-dom/server"
 import { act, cleanup, render } from "@testing-library/react"
 import { afterEach, describe, expect, it, vi } from "vitest"
 
-import { SUPPORTKORI_WIDGET_SRC, SupportKoriWidget } from "./supportkori-widget"
+import {
+  SUPPORTKORI_MOUNT_DELAY_MS,
+  SUPPORTKORI_WIDGET_SRC,
+  SupportKoriWidget,
+} from "./supportkori-widget"
 
 afterEach(() => {
   cleanup()
@@ -31,7 +35,12 @@ describe("SupportKori widget", () => {
       </StrictMode>
     )
 
-    act(() => vi.runAllTimers())
+    expect(document.querySelector("#skillfolio-supportkori")).toBeNull()
+
+    act(() => vi.advanceTimersByTime(SUPPORTKORI_MOUNT_DELAY_MS - 1))
+    expect(document.querySelector("#skillfolio-supportkori")).toBeNull()
+
+    act(() => vi.advanceTimersByTime(1))
 
     const scripts = document.querySelectorAll("#skillfolio-supportkori")
     expect(scripts).toHaveLength(1)

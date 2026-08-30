@@ -4,6 +4,7 @@ const SCRIPT_ID = "skillfolio-supportkori"
 const PANEL_ID = "skillfolio-supportkori-panel"
 const OWNER_ATTRIBUTE = "data-skillfolio-supportkori"
 const ENHANCED_ATTRIBUTE = "data-skillfolio-supportkori-enhanced"
+export const SUPPORTKORI_MOUNT_DELAY_MS = 1000
 export const SUPPORTKORI_WIDGET_SRC = "https://www.supportkori.com/widget.js"
 const PROVIDER_ARTIFACT_SELECTOR = ".sk-widget-btn, .sk-widget-iframe-container"
 
@@ -71,8 +72,9 @@ export function SupportKoriWidget() {
   useEffect(() => {
     let observer: MutationObserver | undefined
     let ownsIntegration = false
+    let mountTimer: number | undefined
 
-    const mountTimer = window.setTimeout(() => {
+    const mountIntegration = () => {
       if (document.getElementById(SCRIPT_ID)) return
 
       document
@@ -99,10 +101,25 @@ export function SupportKoriWidget() {
 
       ownsIntegration = true
       document.body.appendChild(script)
-    }, 0)
+    }
+
+    const scheduleMount = () => {
+      if (mountTimer !== undefined) return
+      mountTimer = window.setTimeout(
+        mountIntegration,
+        SUPPORTKORI_MOUNT_DELAY_MS
+      )
+    }
+
+    if (document.readyState === "complete") {
+      scheduleMount()
+    } else {
+      window.addEventListener("load", scheduleMount, { once: true })
+    }
 
     return () => {
-      window.clearTimeout(mountTimer)
+      window.removeEventListener("load", scheduleMount)
+      if (mountTimer !== undefined) window.clearTimeout(mountTimer)
       observer?.disconnect()
 
       if (!ownsIntegration) return
