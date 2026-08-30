@@ -12,7 +12,7 @@ This repository is the canonical source and release workspace for twelve indepen
 The private npm workspace is named `montasim-skills`; it is an orchestration surface and is never published as a combined package.
 
 > [!NOTE]
-> All twelve skill packages are prepared for their first public npm release. `integrate-supportkori-widget` is intentionally published as `UNLICENSED`; public availability does not create an open-source license grant.
+> All twelve skill packages are publicly available on npm and have matching namespaced GitHub releases. `integrate-supportkori-widget` is intentionally published as `UNLICENSED`; public availability does not create an open-source license grant.
 
 **[Browse Skillfolio](https://skillfoliox.netlify.app) · [Choose a skill](#skill-catalog) · [Contribute](CONTRIBUTING.md) · [Report an issue](https://github.com/montasim/skills/issues)**
 
@@ -141,9 +141,9 @@ Every npm package remains independently versioned. Release tags use the collisio
 <package-name>-v<package-version>
 ```
 
-For example, `fix-social-link-previews-v0.4.0` resolves only the `fix-social-link-previews` workspace. The release workflow validates the tag, tests and packs that workspace, publishes it through npm trusted publishing, verifies registry propagation, smoke-tests the installed CLI, and then creates a GitHub release.
+For example, `fix-social-link-previews-v0.4.0` resolves only the `fix-social-link-previews` workspace. The release workflow validates the tag, tests and packs that workspace, publishes a missing version through npm trusted publishing, verifies registry propagation, smoke-tests the installed CLI, and creates a GitHub release when one does not already exist. Re-running a released tag verifies the existing npm package and release without publishing a duplicate version.
 
-The first publication of a new package requires authenticated npm ownership. Future releases can use npm trusted publishing after each package is connected to `montasim/skills` and `.github/workflows/publish.yml`.
+The initial twelve versions were published with authenticated npm ownership and independently verified against their GitHub tags. Future releases can use npm trusted publishing after each package is connected to `montasim/skills` and `.github/workflows/publish.yml`.
 
 ## Migration status and limitations
 

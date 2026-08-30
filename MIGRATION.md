@@ -39,13 +39,19 @@ The application does not own managed release facts. `scripts/generate-skillfolio
 - `integrate-supportkori-widget` is publicly packaged as `UNLICENSED`. Its availability does not grant open-source reuse rights.
 - Host support is recorded as documented format support, installer-path testing, and live runtime verification. Format documentation alone is not a runtime claim.
 
-## Remaining remote cutover
+## Remote cutover status
 
-1. Create the public `montasim/skills` GitHub repository, push `main`, and verify every central source link.
-2. Publish each new npm package under its independent version, starting with a low-risk package and publishing `write-complete-project-readme` last because its installer has the broadest migration surface.
-3. Create one namespaced Git tag and GitHub release per package and verify the tag, registry version, install command, and release target.
-4. Configure npm trusted publishing for future releases through `montasim/skills` and `.github/workflows/publish.yml`.
-5. Reconnect the existing Netlify site with base directory `apps/skillfolio`, then verify routes, crawler files, and social previews.
-6. Move Skillfolio support and source links only after the deployment cutover succeeds.
+Completed on 2026-08-30:
 
-No package is published, tagged, pushed, or deployed merely by completing this local migration.
+1. Created the public `montasim/skills` GitHub repository, pushed `main`, and verified every central source link.
+2. Published all twelve independently versioned packages to npm, including the public `update-skillfolio-catalog` package.
+3. Created one namespaced Git tag and GitHub release per package. Every tag, registry version, dist-tag, install command, release target, and catalog identity passed the read-only release verifier.
+4. Ran the tag-triggered release workflow for every package; all twelve runs completed successfully.
+
+Remaining operational cutover:
+
+1. Configure npm trusted publishing for future releases through `montasim/skills` and `.github/workflows/publish.yml`.
+2. Reconnect the existing Netlify site with base directory `apps/skillfolio`, then verify routes, crawler files, and social previews.
+3. Move Skillfolio support and source links only after the deployment cutover succeeds.
+
+Editing this migration record does not publish, tag, push, deploy, or change any remote service.
