@@ -4,6 +4,7 @@ const SCRIPT_ID = "skillfolio-supportkori"
 const PANEL_ID = "skillfolio-supportkori-panel"
 const OWNER_ATTRIBUTE = "data-skillfolio-supportkori"
 const ENHANCED_ATTRIBUTE = "data-skillfolio-supportkori-enhanced"
+const HYDRATION_POLL_MS = 50
 export const SUPPORTKORI_MOUNT_DELAY_MS = 1000
 export const SUPPORTKORI_WIDGET_SRC = "https://www.supportkori.com/widget.js"
 const PROVIDER_ARTIFACT_SELECTOR = ".sk-widget-btn, .sk-widget-iframe-container"
@@ -72,6 +73,7 @@ export function SupportKoriWidget() {
   useEffect(() => {
     let observer: MutationObserver | undefined
     let ownsIntegration = false
+    let hydrationPollTimer: number | undefined
     let mountTimer: number | undefined
 
     const mountIntegration = () => {
@@ -111,14 +113,29 @@ export function SupportKoriWidget() {
       )
     }
 
-    if (document.readyState === "complete") {
+    const waitForHydration = () => {
+      if (Object.hasOwn(window, "$_TSR")) {
+        hydrationPollTimer = window.setTimeout(
+          waitForHydration,
+          HYDRATION_POLL_MS
+        )
+        return
+      }
+
       scheduleMount()
+    }
+
+    if (document.readyState === "complete") {
+      waitForHydration()
     } else {
-      window.addEventListener("load", scheduleMount, { once: true })
+      window.addEventListener("load", waitForHydration, { once: true })
     }
 
     return () => {
-      window.removeEventListener("load", scheduleMount)
+      window.removeEventListener("load", waitForHydration)
+      if (hydrationPollTimer !== undefined) {
+        window.clearTimeout(hydrationPollTimer)
+      }
       if (mountTimer !== undefined) window.clearTimeout(mountTimer)
       observer?.disconnect()
 

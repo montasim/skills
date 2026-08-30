@@ -14,6 +14,7 @@ import {
 afterEach(() => {
   cleanup()
   vi.useRealTimers()
+  Reflect.deleteProperty(window, "$_TSR")
   document
     .querySelectorAll(
       "#skillfolio-supportkori, .sk-widget-btn, .sk-widget-iframe-container"
@@ -62,6 +63,24 @@ describe("SupportKori widget", () => {
 
     view.unmount()
     expect(document.querySelector("#skillfolio-supportkori")).toBeNull()
+  })
+
+  it("waits for the TanStack stream hydration barrier", () => {
+    vi.useFakeTimers()
+    Object.defineProperty(window, "$_TSR", {
+      configurable: true,
+      value: {},
+    })
+
+    render(<SupportKoriWidget />)
+    act(() => vi.advanceTimersByTime(SUPPORTKORI_MOUNT_DELAY_MS))
+
+    expect(document.querySelector("#skillfolio-supportkori")).toBeNull()
+
+    Reflect.deleteProperty(window, "$_TSR")
+    act(() => vi.runAllTimers())
+
+    expect(document.querySelectorAll("#skillfolio-supportkori")).toHaveLength(1)
   })
 
   it("makes the provider trigger keyboard accessible", async () => {
