@@ -1,0 +1,4 @@
+interface:
+  display_name: "Make Project GitHub Ready"
+  short_description: "Audit and prepare professional GitHub repositories"
+  default_prompt: "Use $make-project-github-ready to audit this project and prepare a safe GitHub repository setup plan."
