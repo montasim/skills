@@ -1,0 +1,4 @@
+interface:
+  display_name: "Make App Netlify Ready"
+  short_description: "Audit and prepare reliable Netlify deployments"
+  default_prompt: "Use $make-app-netlify-ready to audit this app and prepare a verified Netlify configuration."

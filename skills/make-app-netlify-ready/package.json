@@ -1,0 +1,49 @@
+{
+  "name": "make-app-netlify-ready",
+  "version": "0.1.0",
+  "description": "Install a portable Codex and Claude skill for auditing and preparing Netlify deployments.",
+  "type": "module",
+  "bin": {
+    "make-app-netlify-ready": "bin/make-app-netlify-ready.js"
+  },
+  "files": [
+    "bin/",
+    "skills/"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run",
+    "prepublishOnly": "npm test && npm run pack:check",
+    "pretest": "node ../../scripts/stage-package-skill.mjs stage make-app-netlify-ready test",
+    "posttest": "node ../../scripts/stage-package-skill.mjs clean make-app-netlify-ready test",
+    "prepack": "node ../../scripts/stage-package-skill.mjs stage make-app-netlify-ready pack",
+    "postpack": "node ../../scripts/stage-package-skill.mjs clean make-app-netlify-ready pack"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "agent-skill",
+    "codex",
+    "claude-code",
+    "netlify",
+    "deployment",
+    "ssr",
+    "spa"
+  ],
+  "author": "Montasim",
+  "license": "MIT",
+  "homepage": "https://github.com/montasim/skills/tree/main/skills/make-app-netlify-ready#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montasim/skills.git",
+    "directory": "skills/make-app-netlify-ready"
+  },
+  "bugs": {
+    "url": "https://github.com/montasim/skills/issues"
+  },
+  "funding": "https://www.supportkori.com/montasim",
+  "publishConfig": {
+    "access": "public"
+  }
+}
