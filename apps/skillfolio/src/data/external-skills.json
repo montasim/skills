@@ -1,0 +1,16 @@
+[
+  {
+    "name": "contractguard",
+    "version": "0.1.0",
+    "repository": "https://github.com/montasim/contractguard",
+    "branch": "main",
+    "installCommand": "npx skills add montasim/contractguard --skill contractguard"
+  },
+  {
+    "name": "docs-watch",
+    "version": "0.1.1",
+    "repository": "https://github.com/montasim/DocsWatch",
+    "branch": "main",
+    "installCommand": "npx skills add montasim/DocsWatch --skill docs-watch -g -y"
+  }
+]

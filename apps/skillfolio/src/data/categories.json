@@ -1,0 +1,30 @@
+[
+  {
+    "name": "API Quality",
+    "definition": "Protects API contracts and integration compatibility."
+  },
+  {
+    "name": "Deployment",
+    "definition": "Prepares applications for reliable hosting and runtime delivery."
+  },
+  {
+    "name": "Documentation",
+    "definition": "Creates and keeps project documentation accurate and usable."
+  },
+  {
+    "name": "Frontend Quality",
+    "definition": "Reviews the consistency and usability of visible web interfaces."
+  },
+  {
+    "name": "Release Engineering",
+    "definition": "Creates, ships, and verifies versioned software releases."
+  },
+  {
+    "name": "Repository Management",
+    "definition": "Maintains repository identity, metadata, community health, and operational readiness."
+  },
+  {
+    "name": "Web Visibility",
+    "definition": "Improves how websites appear to crawlers and on sharing surfaces."
+  }
+]

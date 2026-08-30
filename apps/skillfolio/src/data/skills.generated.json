@@ -1,0 +1,765 @@
+[
+  {
+    "slug": "write-complete-project-readme",
+    "name": "Write Complete Project README",
+    "mark": "WR",
+    "category": "Documentation",
+    "status": "Stable",
+    "version": "0.4.0",
+    "featured": true,
+    "summary": "Installs one portable skill for Codex, Claude Code, or both that creates complete project READMEs from verified repository evidence.",
+    "description": "An evidence-driven, project-type-aware skill for Codex and Claude Code that creates or regenerates a software project's root README with portable installation and deterministic validation.",
+    "repository": "https://github.com/montasim/skills",
+    "branch": "main",
+    "sourceDirectory": "skills/write-complete-project-readme",
+    "installCommand": "npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target codex",
+    "compatibility": [
+      "OpenAI Codex",
+      "Claude Code",
+      "Gemini CLI",
+      "Google Antigravity",
+      "Antigravity CLI",
+      "ZCode",
+      "Cursor",
+      "GitHub Copilot",
+      "OpenCode"
+    ],
+    "hostEvidence": {
+      "auditedOn": "2026-08-30",
+      "format": "Agent Skills structure validated",
+      "documentedHosts": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "installerTested": [
+        "OpenAI Codex",
+        "Claude Code"
+      ],
+      "runtimeVerified": [
+        "OpenAI Codex"
+      ]
+    },
+    "uses": [
+      "Evidence-driven README creation",
+      "Codex and Claude Code installation",
+      "Deterministic README validation"
+    ]
+  },
+  {
+    "slug": "fix-social-link-previews",
+    "name": "Fix Social Link Previews",
+    "mark": "SP",
+    "category": "Web Visibility",
+    "status": "Stable",
+    "version": "0.3.0",
+    "featured": false,
+    "summary": "Audits, creates, repairs, and verifies large-image social previews for web apps and websites.",
+    "description": "An evidence-based skill for Codex and Claude Code that validates crawler-visible Open Graph and Twitter Card metadata, repairs framework-native metadata, and creates branded 1200×630 preview assets when needed.",
+    "repository": "https://github.com/montasim/skills",
+    "branch": "main",
+    "sourceDirectory": "skills/fix-social-link-previews",
+    "installCommand": "npx --yes --package=fix-social-link-previews@latest fix-social-link-previews --target codex",
+    "compatibility": [
+      "OpenAI Codex",
+      "Claude Code",
+      "Gemini CLI",
+      "Google Antigravity",
+      "Antigravity CLI",
+      "ZCode",
+      "Cursor",
+      "GitHub Copilot",
+      "OpenCode"
+    ],
+    "hostEvidence": {
+      "auditedOn": "2026-08-30",
+      "format": "Agent Skills structure validated",
+      "documentedHosts": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "installerTested": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "runtimeVerified": [
+        "OpenAI Codex"
+      ]
+    },
+    "uses": [
+      "Open Graph and Twitter Card audits",
+      "Branded 1200×630 preview creation",
+      "Crawler-visible metadata verification"
+    ]
+  },
+  {
+    "slug": "fix-project-metadata-mismatches",
+    "name": "Fix Project Metadata Mismatches",
+    "mark": "SM",
+    "category": "Repository Management",
+    "status": "Stable",
+    "version": "0.1.0",
+    "featured": false,
+    "summary": "Audits and optionally synchronizes project identity and release metadata across authoritative local files.",
+    "description": "An evidence-first maintenance skill for Codex and Claude Code that detects metadata drift across manifests, lockfiles, documentation, deployment configuration, and catalogs, then aligns local files only when requested.",
+    "repository": "https://github.com/montasim/skills",
+    "branch": "main",
+    "sourceDirectory": "skills/fix-project-metadata-mismatches",
+    "installCommand": "npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target codex",
+    "compatibility": [
+      "OpenAI Codex",
+      "Claude Code",
+      "Gemini CLI",
+      "Google Antigravity",
+      "Antigravity CLI",
+      "ZCode",
+      "Cursor",
+      "GitHub Copilot",
+      "OpenCode"
+    ],
+    "hostEvidence": {
+      "auditedOn": "2026-08-30",
+      "format": "Agent Skills structure validated",
+      "documentedHosts": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "installerTested": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "runtimeVerified": [
+        "OpenAI Codex"
+      ]
+    },
+    "uses": [
+      "Project metadata drift audits",
+      "Manifest and documentation synchronization",
+      "Release identity verification"
+    ]
+  },
+  {
+    "slug": "publish-verified-github-release",
+    "name": "Publish Verified GitHub Release",
+    "mark": "GR",
+    "category": "Release Engineering",
+    "status": "Stable",
+    "version": "0.2.0",
+    "featured": false,
+    "summary": "Turns verified repository evidence into trustworthy GitHub release notes and authorized releases.",
+    "description": "A cross-provider release-writing skill that gathers Git history, manifests, changelogs, and validation evidence, drafts user-focused notes, and changes GitHub release state only with explicit authorization.",
+    "repository": "https://github.com/montasim/skills",
+    "branch": "main",
+    "sourceDirectory": "skills/publish-verified-github-release",
+    "installCommand": "npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target codex",
+    "compatibility": [
+      "OpenAI Codex",
+      "Claude Code",
+      "Gemini CLI",
+      "Google Antigravity",
+      "Antigravity CLI",
+      "ZCode",
+      "Cursor",
+      "GitHub Copilot",
+      "OpenCode"
+    ],
+    "hostEvidence": {
+      "auditedOn": "2026-08-30",
+      "format": "Agent Skills structure validated",
+      "documentedHosts": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "installerTested": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "runtimeVerified": [
+        "OpenAI Codex"
+      ]
+    },
+    "uses": [
+      "Evidence-based release notes",
+      "GitHub release creation and editing",
+      "Tag and release verification"
+    ]
+  },
+  {
+    "slug": "update-skillfolio-catalog",
+    "name": "Update Skillfolio Catalog",
+    "mark": "SC",
+    "category": "Repository Management",
+    "status": "Stable",
+    "version": "0.1.0",
+    "featured": false,
+    "summary": "Adds or updates one verified Agent Skill in an explicitly identified local Skillfolio catalog.",
+    "description": "A catalog-maintenance skill that resolves public package and repository evidence, updates the correct local authorities, regenerates derived data, and verifies the target Skillfolio application without implicitly deploying it.",
+    "repository": "https://github.com/montasim/skills",
+    "branch": "main",
+    "sourceDirectory": "skills/update-skillfolio-catalog",
+    "installCommand": "npx --yes --package=update-skillfolio-catalog@latest update-skillfolio-catalog --target codex",
+    "compatibility": [
+      "OpenAI Codex",
+      "Claude Code",
+      "Gemini CLI",
+      "Google Antigravity",
+      "Antigravity CLI",
+      "ZCode",
+      "Cursor",
+      "GitHub Copilot",
+      "OpenCode"
+    ],
+    "hostEvidence": {
+      "auditedOn": "2026-08-30",
+      "format": "Agent Skills structure validated",
+      "documentedHosts": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "installerTested": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "runtimeVerified": [
+        "OpenAI Codex"
+      ]
+    },
+    "uses": [
+      "Verified Skillfolio catalog updates",
+      "Generated catalog synchronization",
+      "Local catalog and application validation"
+    ]
+  },
+  {
+    "slug": "contractguard",
+    "name": "ContractGuard",
+    "mark": "CG",
+    "category": "API Quality",
+    "status": "Stable",
+    "version": "0.1.0",
+    "featured": false,
+    "summary": "Detects frontend-breaking changes between OpenAPI response contracts before deployment.",
+    "description": "A directional OpenAPI compatibility skill and CLI that classifies response schema, example, and authentication changes as safe, risky, or breaking for JavaScript, schema-validator, and strict-decoder consumers.",
+    "repository": "https://github.com/montasim/contractguard",
+    "branch": "main",
+    "installCommand": "npx skills add montasim/contractguard --skill contractguard",
+    "compatibility": [
+      "OpenAI Codex",
+      "Claude Code",
+      "Gemini CLI",
+      "Google Antigravity",
+      "Cursor",
+      "GitHub Copilot",
+      "OpenCode"
+    ],
+    "uses": [
+      "Frontend API compatibility reviews",
+      "OpenAPI response and authentication diffs",
+      "CI compatibility gates"
+    ]
+  },
+  {
+    "slug": "docs-watch",
+    "name": "DocsWatch",
+    "mark": "DW",
+    "category": "Documentation",
+    "status": "Stable",
+    "version": "0.1.1",
+    "featured": false,
+    "summary": "Detects verifiable documentation drift in TypeScript repositories.",
+    "description": "A deterministic documentation-consistency skill that checks example environment variables, documented package scripts, local Markdown file references, and internal anchors with evidence-backed diagnostics.",
+    "repository": "https://github.com/montasim/DocsWatch",
+    "branch": "main",
+    "installCommand": "npx skills add montasim/DocsWatch --skill docs-watch -g -y",
+    "compatibility": [
+      "OpenAI Codex"
+    ],
+    "uses": [
+      "Environment-variable documentation checks",
+      "Package-script documentation checks",
+      "Markdown file and anchor validation"
+    ]
+  },
+  {
+    "slug": "verify-github-npm-release",
+    "name": "Verify GitHub and npm Release",
+    "mark": "VR",
+    "category": "Release Engineering",
+    "status": "Stable",
+    "version": "0.1.0",
+    "featured": false,
+    "summary": "Performs a read-only audit across GitHub releases, npm packages, tags, CI, and install commands.",
+    "description": "A release-verification skill for Codex and Claude Code that compares local Git state, GitHub tags and releases, npm versions and dist-tags, CI evidence, advertised commands, and optional catalog records without changing release state.",
+    "repository": "https://github.com/montasim/skills",
+    "branch": "main",
+    "sourceDirectory": "skills/verify-github-npm-release",
+    "installCommand": "npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target codex",
+    "compatibility": [
+      "OpenAI Codex",
+      "Claude Code",
+      "Gemini CLI",
+      "Google Antigravity",
+      "Antigravity CLI",
+      "ZCode",
+      "Cursor",
+      "GitHub Copilot",
+      "OpenCode"
+    ],
+    "hostEvidence": {
+      "auditedOn": "2026-08-30",
+      "format": "Agent Skills structure validated",
+      "documentedHosts": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "installerTested": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "runtimeVerified": [
+        "OpenAI Codex"
+      ]
+    },
+    "uses": [
+      "GitHub and npm release audits",
+      "Install command verification",
+      "CI and catalog alignment checks"
+    ]
+  },
+  {
+    "slug": "make-project-github-ready",
+    "name": "Make Project GitHub Ready",
+    "mark": "GH",
+    "category": "Repository Management",
+    "status": "Stable",
+    "version": "0.1.0",
+    "featured": false,
+    "summary": "Audits and prepares professional GitHub repositories with explicit local and remote mutation stages.",
+    "description": "A repository-readiness skill for Codex and Claude Code that evaluates identity, metadata, topics, community health, security guidance, CI, and Git state before applying authorized local or GitHub changes.",
+    "repository": "https://github.com/montasim/skills",
+    "branch": "main",
+    "sourceDirectory": "skills/make-project-github-ready",
+    "installCommand": "npx --yes --package=make-project-github-ready@latest make-project-github-ready --target codex",
+    "compatibility": [
+      "OpenAI Codex",
+      "Claude Code",
+      "Gemini CLI",
+      "Google Antigravity",
+      "Antigravity CLI",
+      "ZCode",
+      "Cursor",
+      "GitHub Copilot",
+      "OpenCode"
+    ],
+    "hostEvidence": {
+      "auditedOn": "2026-08-30",
+      "format": "Agent Skills structure validated",
+      "documentedHosts": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "installerTested": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "runtimeVerified": [
+        "OpenAI Codex"
+      ]
+    },
+    "uses": [
+      "GitHub repository readiness audits",
+      "Repository metadata and topic preparation",
+      "Community and CI setup"
+    ]
+  },
+  {
+    "slug": "make-app-netlify-ready",
+    "name": "Make App Netlify Ready",
+    "mark": "ND",
+    "category": "Deployment",
+    "status": "Stable",
+    "version": "0.1.0",
+    "featured": false,
+    "summary": "Audits and prepares reliable Netlify build contracts for static, SPA, SSR, and hybrid web apps.",
+    "description": "A deployment-readiness skill for Codex and Claude Code that detects framework and runtime behavior, validates Netlify configuration and output paths, and prepares evidence-backed local repairs without implicitly deploying.",
+    "repository": "https://github.com/montasim/skills",
+    "branch": "main",
+    "sourceDirectory": "skills/make-app-netlify-ready",
+    "installCommand": "npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target codex",
+    "compatibility": [
+      "OpenAI Codex",
+      "Claude Code",
+      "Gemini CLI",
+      "Google Antigravity",
+      "Antigravity CLI",
+      "ZCode",
+      "Cursor",
+      "GitHub Copilot",
+      "OpenCode"
+    ],
+    "hostEvidence": {
+      "auditedOn": "2026-08-30",
+      "format": "Agent Skills structure validated",
+      "documentedHosts": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "installerTested": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "runtimeVerified": [
+        "OpenAI Codex"
+      ]
+    },
+    "uses": [
+      "Netlify build contract audits",
+      "SPA, SSR, and hybrid routing checks",
+      "Publish directory and adapter verification"
+    ]
+  },
+  {
+    "slug": "find-ui-inconsistencies",
+    "name": "Find UI Inconsistencies",
+    "mark": "UI",
+    "category": "Frontend Quality",
+    "status": "Stable",
+    "version": "0.1.0",
+    "featured": false,
+    "summary": "Audits visual and interaction consistency across frontend routes, states, themes, and viewports.",
+    "description": "A frontend-review skill for Codex and Claude Code that evaluates typography, spacing, color, layout, shared UI, responsive behavior, skeletons, motion, and visible accessibility states while preserving intentional design direction.",
+    "repository": "https://github.com/montasim/skills",
+    "branch": "main",
+    "sourceDirectory": "skills/find-ui-inconsistencies",
+    "installCommand": "npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target codex",
+    "compatibility": [
+      "OpenAI Codex",
+      "Claude Code",
+      "Gemini CLI",
+      "Google Antigravity",
+      "Antigravity CLI",
+      "ZCode",
+      "Cursor",
+      "GitHub Copilot",
+      "OpenCode"
+    ],
+    "hostEvidence": {
+      "auditedOn": "2026-08-30",
+      "format": "Agent Skills structure validated",
+      "documentedHosts": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "installerTested": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "runtimeVerified": [
+        "OpenAI Codex"
+      ]
+    },
+    "uses": [
+      "Cross-route frontend consistency audits",
+      "Loading and interaction state reviews",
+      "Responsive and accessibility-visible checks"
+    ]
+  },
+  {
+    "slug": "deploy-prebuilt-app-to-netlify",
+    "name": "Deploy Prebuilt App to Netlify",
+    "mark": "DP",
+    "category": "Deployment",
+    "status": "Stable",
+    "version": "0.1.0",
+    "featured": false,
+    "summary": "Deploys a verified local build artifact to Netlify without asking Netlify to rebuild the source project.",
+    "description": "A deployment skill that validates local output, blocks unsafe artifact trees, chooses the appropriate Netlify CLI flow, performs only explicitly authorized remote mutations, and verifies the deployed result.",
+    "repository": "https://github.com/montasim/skills",
+    "branch": "main",
+    "sourceDirectory": "skills/deploy-prebuilt-app-to-netlify",
+    "installCommand": "npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target codex",
+    "compatibility": [
+      "OpenAI Codex",
+      "Claude Code",
+      "Gemini CLI",
+      "Google Antigravity",
+      "Antigravity CLI",
+      "ZCode",
+      "Cursor",
+      "GitHub Copilot",
+      "OpenCode"
+    ],
+    "hostEvidence": {
+      "auditedOn": "2026-08-30",
+      "format": "Agent Skills structure validated",
+      "documentedHosts": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "installerTested": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "runtimeVerified": [
+        "OpenAI Codex"
+      ]
+    },
+    "uses": [
+      "Prebuilt Netlify deployments",
+      "Publish-directory safety checks",
+      "Post-deployment verification"
+    ]
+  },
+  {
+    "slug": "integrate-supportkori-widget",
+    "name": "Integrate SupportKori Widget",
+    "mark": "SK",
+    "category": "Frontend Quality",
+    "status": "Stable",
+    "version": "0.1.0",
+    "featured": false,
+    "summary": "Audits or integrates one theme-consistent SupportKori trigger across website and browser-extension surfaces.",
+    "description": "A SupportKori-specific frontend skill that checks lifecycle mounting, CSP and extension constraints, native visual treatment, embedded-panel behavior, and runtime evidence while preserving authorization boundaries.",
+    "repository": "https://github.com/montasim/skills",
+    "branch": "main",
+    "sourceDirectory": "skills/integrate-supportkori-widget",
+    "installCommand": "npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target codex",
+    "compatibility": [
+      "OpenAI Codex",
+      "Claude Code",
+      "Gemini CLI",
+      "Google Antigravity",
+      "Antigravity CLI",
+      "ZCode",
+      "Cursor",
+      "GitHub Copilot",
+      "OpenCode"
+    ],
+    "hostEvidence": {
+      "auditedOn": "2026-08-30",
+      "format": "Agent Skills structure validated",
+      "documentedHosts": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "installerTested": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "runtimeVerified": [
+        "OpenAI Codex"
+      ]
+    },
+    "uses": [
+      "SupportKori integration audits",
+      "Theme-consistent widget implementation",
+      "Website and extension runtime verification"
+    ]
+  },
+  {
+    "slug": "release-agent-skill",
+    "name": "Release Agent Skill",
+    "mark": "AS",
+    "category": "Release Engineering",
+    "status": "Stable",
+    "version": "0.1.0",
+    "featured": false,
+    "summary": "Coordinates validation, packaging, publication, release, and consumer verification for Agent Skills.",
+    "description": "An end-to-end release skill for Codex and Claude Code that validates portable Agent Skills, synchronizes release metadata, inspects npm archives, executes explicitly authorized publication stages, and verifies public artifacts.",
+    "repository": "https://github.com/montasim/skills",
+    "branch": "main",
+    "sourceDirectory": "skills/release-agent-skill",
+    "installCommand": "npx --yes --package=release-agent-skill@latest release-agent-skill --target codex",
+    "compatibility": [
+      "OpenAI Codex",
+      "Claude Code",
+      "Gemini CLI",
+      "Google Antigravity",
+      "Antigravity CLI",
+      "ZCode",
+      "Cursor",
+      "GitHub Copilot",
+      "OpenCode"
+    ],
+    "hostEvidence": {
+      "auditedOn": "2026-08-30",
+      "format": "Agent Skills structure validated",
+      "documentedHosts": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "installerTested": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "runtimeVerified": [
+        "OpenAI Codex"
+      ]
+    },
+    "uses": [
+      "Agent Skill release orchestration",
+      "npm and GitHub publication gates",
+      "Consumer-side release verification"
+    ]
+  }
+]

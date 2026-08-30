@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A personal library of practical AI agent skills." />
+  <title>Skillfolio — Montasim's Skill Library</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: '#F4F6F0', ink: '#17203B', cobalt: '#2545E5',
+            orange: '#F2683A', mist: '#DDE3F5', lime: '#C9EF72'
+          },
+          fontFamily: {
+            display: ['Space Grotesk', 'sans-serif'],
+            body: ['Manrope', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace']
+          },
+          boxShadow: { card: '6px 6px 0 #17203B' }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body { background-image: linear-gradient(rgba(23,32,59,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(23,32,59,.055) 1px, transparent 1px); background-size: 28px 28px; }
+    .skill-card { transition: transform 180ms ease, box-shadow 180ms ease; }
+    .skill-card:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0 #17203B; }
+    .chip[aria-pressed="true"] { background: #17203B; color: #F4F6F0; }
+    .marquee-track { animation: slide 24s linear infinite; width: max-content; }
+    .copy-flash { animation: flash .6s ease; }
+    .hero-surface { background: #FBFBF8; }
+    .snapshot-card { box-shadow: 0 2px 0 rgba(23,32,59,.08), 0 18px 50px rgba(23,32,59,.07); }
+    .hero-enter { animation: hero-in .55s cubic-bezier(.2,.8,.2,1) both; }
+    .snapshot-enter { animation: hero-in .55s .12s cubic-bezier(.2,.8,.2,1) both; }
+    @keyframes slide { to { transform: translateX(-50%); } }
+    @keyframes flash { 50% { background:#C9EF72; color:#17203B; } }
+    @keyframes hero-in { from { opacity: 0; transform: translateY(14px); } }
+    @media (prefers-reduced-motion: reduce) { .marquee-track, .hero-enter, .snapshot-enter { animation: none; } .skill-card { transition: none; } }
+  </style>
+</head>
+<body class="min-h-screen bg-paper text-ink font-body selection:bg-lime selection:text-ink">
+  <header class="border-b-2 border-ink bg-paper/95 sticky top-0 z-30 backdrop-blur">
+    <nav class="mx-auto max-w-[1440px] h-16 px-5 lg:px-10 flex items-center justify-between" aria-label="Primary navigation">
+      <a href="index.html" class="flex items-center gap-3 font-display font-bold text-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cobalt">
+        <span class="grid place-items-center w-8 h-8 bg-cobalt text-white rounded-full text-sm">S</span>
+        SKILLFOLIO
+      </a>
+      <div class="hidden sm:flex items-center gap-7 text-sm font-semibold">
+        <a href="#library" class="hover:text-cobalt">Library</a>
+        <a href="#principles" class="hover:text-cobalt">Principles</a>
+        <a href="https://github.com/montasim/Skillfoliox" class="inline-flex items-center gap-2 border-2 border-ink px-4 py-2 hover:bg-ink hover:text-white transition-colors">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+      <button id="menuButton" class="sm:hidden border-2 border-ink w-10 h-10" aria-label="Open menu" aria-expanded="false">☰</button>
+    </nav>
+    <div id="mobileMenu" class="hidden sm:hidden border-t-2 border-ink p-5 bg-paper">
+      <a href="#library" class="block py-2 font-semibold">Library</a>
+      <a href="#principles" class="block py-2 font-semibold">Principles</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-surface border-b-2 border-ink/10">
+      <div class="mx-auto max-w-[1440px] px-5 lg:px-10 py-12 sm:py-16 lg:py-20">
+        <div class="grid lg:grid-cols-[1.12fr_.88fr] gap-12 lg:gap-16 xl:gap-24 items-stretch">
+          <div class="hero-enter flex flex-col justify-center">
+            <p class="font-mono text-[11px] uppercase tracking-[.2em] text-cobalt mb-5">Montasim's agent skill library / 2026</p>
+            <h1 class="font-display font-semibold text-[clamp(4rem,7.5vw,7.5rem)] leading-[.82] tracking-[-.07em] max-w-[850px]">
+              Small files.<br><span class="text-cobalt">Serious leverage.</span>
+            </h1>
+            <p class="mt-8 text-lg lg:text-xl leading-relaxed max-w-xl">A field-tested collection of skills that teach AI agents how to do one job exceptionally well.</p>
+            <a href="#library" class="mt-7 inline-flex self-start items-center gap-4 font-display font-bold text-sm uppercase tracking-wider group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cobalt">
+              Explore the shelf
+              <span class="grid place-items-center rounded-full bg-orange text-white w-11 h-11 group-hover:translate-y-1 transition-transform" aria-hidden="true">↓</span>
+            </a>
+          </div>
+
+          <aside class="snapshot-enter snapshot-card rounded-2xl border border-ink/15 bg-white p-6 sm:p-7 lg:p-8 flex flex-col" aria-label="Library snapshot">
+            <div class="flex items-start justify-between gap-5">
+              <div>
+                <p class="inline-flex items-center gap-2 rounded-full border border-orange/30 bg-orange/5 px-4 py-2 font-mono text-[10px] uppercase tracking-[.18em] text-orange"><span class="w-2 h-2 rounded-full bg-orange"></span> Quick stats</p>
+                <h2 class="font-display text-2xl font-medium mt-4">Library snapshot</h2>
+              </div>
+              <span class="rounded-full bg-ink text-white px-4 py-2 font-mono text-[10px] font-medium tracking-widest">2026</span>
+            </div>
+
+            <dl class="grid grid-cols-2 gap-3 mt-7">
+              <div class="rounded-xl border border-ink/10 bg-paper/60 p-4 sm:p-5">
+                <dt class="font-mono text-[9px] uppercase tracking-[.17em] text-ink/50">Skills published</dt>
+                <dd class="font-display text-3xl font-semibold mt-2">06</dd>
+              </div>
+              <div class="rounded-xl border border-ink/10 bg-paper/60 p-4 sm:p-5">
+                <dt class="font-mono text-[9px] uppercase tracking-[.17em] text-ink/50">Disciplines</dt>
+                <dd class="font-display text-3xl font-semibold mt-2">04</dd>
+              </div>
+              <div class="rounded-xl border border-ink/10 bg-paper/60 p-4 sm:p-5">
+                <dt class="font-mono text-[9px] uppercase tracking-[.17em] text-ink/50">Stable releases</dt>
+                <dd class="font-display text-3xl font-semibold mt-2">03</dd>
+              </div>
+              <div class="rounded-xl border border-ink/10 bg-paper/60 p-4 sm:p-5">
+                <dt class="font-mono text-[9px] uppercase tracking-[.17em] text-ink/50">Status</dt>
+                <dd class="font-display text-2xl sm:text-3xl font-semibold mt-2">Growing</dd>
+              </div>
+            </dl>
+
+            <a href="skill.html?skill=write-complete-project-readme" class="group mt-6 rounded-xl border border-ink/10 p-4 flex items-center justify-between gap-4 hover:border-cobalt hover:bg-mist/30 transition-colors">
+              <span><span class="block font-mono text-[9px] uppercase tracking-[.16em] text-cobalt">Featured now</span><span class="block font-semibold mt-1">Write Complete Project README</span></span>
+              <span class="grid place-items-center shrink-0 w-10 h-10 rounded-full bg-lime border border-ink group-hover:translate-x-1 transition-transform" aria-hidden="true">→</span>
+            </a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="overflow-hidden border-y-2 border-ink bg-lime py-3" aria-hidden="true">
+      <div class="marquee-track flex font-mono text-xs font-medium uppercase tracking-widest">
+        <span class="px-5">Plan deliberately</span><span>◆</span><span class="px-5">Verify the evidence</span><span>◆</span><span class="px-5">Ship reusable judgment</span><span>◆</span><span class="px-5">Plan deliberately</span><span>◆</span><span class="px-5">Verify the evidence</span><span>◆</span><span class="px-5">Ship reusable judgment</span><span>◆</span>
+      </div>
+    </div>
+
+    <section id="library" class="mx-auto max-w-[1440px] px-5 lg:px-10 py-16 lg:py-24">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-7 mb-10">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[.18em] text-cobalt mb-3">The working shelf</p>
+          <h2 class="font-display text-4xl sm:text-5xl font-semibold tracking-tight">Choose a capability.</h2>
+        </div>
+        <label class="relative block w-full lg:w-80">
+          <span class="sr-only">Search skills</span>
+          <input id="searchInput" type="search" placeholder="Search the shelf..." class="w-full border-2 border-ink bg-white px-4 py-3 pr-11 font-mono text-sm placeholder:text-ink/45 focus:outline-none focus:ring-4 focus:ring-mist" />
+          <span class="absolute right-4 top-1/2 -translate-y-1/2" aria-hidden="true">⌕</span>
+        </label>
+      </div>
+
+      <div class="flex flex-wrap gap-2 mb-10" id="filters" aria-label="Filter skills">
+        <button class="chip border-2 border-ink px-4 py-2 text-sm font-semibold" data-filter="All" aria-pressed="true">All <span class="opacity-60 ml-1">6</span></button>
+        <button class="chip border-2 border-ink px-4 py-2 text-sm font-semibold bg-white" data-filter="Writing" aria-pressed="false">Writing</button>
+        <button class="chip border-2 border-ink px-4 py-2 text-sm font-semibold bg-white" data-filter="Design" aria-pressed="false">Design</button>
+        <button class="chip border-2 border-ink px-4 py-2 text-sm font-semibold bg-white" data-filter="Strategy" aria-pressed="false">Strategy</button>
+        <button class="chip border-2 border-ink px-4 py-2 text-sm font-semibold bg-white" data-filter="Workflow" aria-pressed="false">Workflow</button>
+      </div>
+
+      <div id="skillGrid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6" aria-live="polite"></div>
+      <div id="emptyState" class="hidden border-2 border-dashed border-ink p-10 text-center bg-white">
+        <p class="font-display text-2xl font-semibold">Nothing on this shelf yet.</p>
+        <p class="mt-2 text-ink/65">Try another keyword or clear the filter.</p>
+        <button id="clearSearch" class="mt-5 underline underline-offset-4 font-semibold">Clear search</button>
+      </div>
+    </section>
+
+    <section id="principles" class="bg-ink text-paper border-y-2 border-ink">
+      <div class="mx-auto max-w-[1440px] grid lg:grid-cols-[.75fr_1.25fr]">
+        <div class="p-8 lg:p-14 border-b-2 lg:border-b-0 lg:border-r-2 border-paper/25">
+          <p class="font-mono text-xs text-lime uppercase tracking-[.18em]">What makes the cut</p>
+          <h2 class="font-display text-4xl sm:text-5xl font-semibold tracking-tight mt-5">Built from work,<br>not theory.</h2>
+        </div>
+        <div class="grid sm:grid-cols-3">
+          <article class="p-8 lg:p-10 border-b sm:border-b-0 sm:border-r border-paper/25">
+            <span class="font-mono text-orange">01</span><h3 class="font-display text-xl font-semibold mt-8">Specific</h3><p class="mt-3 text-paper/65 leading-relaxed text-sm">One clear job, with boundaries that keep the agent focused.</p>
+          </article>
+          <article class="p-8 lg:p-10 border-b sm:border-b-0 sm:border-r border-paper/25">
+            <span class="font-mono text-orange">02</span><h3 class="font-display text-xl font-semibold mt-8">Tested</h3><p class="mt-3 text-paper/65 leading-relaxed text-sm">Shaped by real repositories, edge cases, and revision.</p>
+          </article>
+          <article class="p-8 lg:p-10">
+            <span class="font-mono text-orange">03</span><h3 class="font-display text-xl font-semibold mt-8">Portable</h3><p class="mt-3 text-paper/65 leading-relaxed text-sm">Useful across projects without losing its point of view.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mx-auto max-w-[1440px] px-5 lg:px-10 py-10 flex flex-col sm:flex-row gap-4 justify-between text-sm">
+    <p class="font-display font-bold">SKILLFOLIO © 2026</p>
+    <p class="text-ink/60">Made in Dhaka · Kept in plain text</p>
+  </footer>
+
+  <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 translate-y-24 opacity-0 bg-ink text-white px-5 py-3 font-mono text-xs transition-all duration-300 z-50" role="status">Command copied</div>
+  <script src="app.js"></script>
+</body>
+</html>
