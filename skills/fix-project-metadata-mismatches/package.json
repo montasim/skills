@@ -1,0 +1,52 @@
+{
+  "name": "fix-project-metadata-mismatches",
+  "version": "0.1.0",
+  "description": "Install a portable skill that audits and synchronizes project metadata.",
+  "type": "module",
+  "bin": {
+    "fix-project-metadata-mismatches": "bin/fix-project-metadata-mismatches.js"
+  },
+  "files": [
+    "bin/",
+    "skills/"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run",
+    "prepublishOnly": "npm test && npm run pack:check",
+    "pretest": "node ../../scripts/stage-package-skill.mjs stage fix-project-metadata-mismatches test",
+    "posttest": "node ../../scripts/stage-package-skill.mjs clean fix-project-metadata-mismatches test",
+    "prepack": "node ../../scripts/stage-package-skill.mjs stage fix-project-metadata-mismatches pack",
+    "postpack": "node ../../scripts/stage-package-skill.mjs clean fix-project-metadata-mismatches pack"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "agent-skill",
+    "ai-agent",
+    "claude-code",
+    "codex",
+    "metadata",
+    "metadata-audit",
+    "package-json",
+    "project-maintenance",
+    "release-automation",
+    "skill"
+  ],
+  "author": "Montasim",
+  "license": "MIT",
+  "homepage": "https://github.com/montasim/skills/tree/main/skills/fix-project-metadata-mismatches#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montasim/skills.git",
+    "directory": "skills/fix-project-metadata-mismatches"
+  },
+  "bugs": {
+    "url": "https://github.com/montasim/skills/issues"
+  },
+  "funding": "https://www.supportkori.com/montasim",
+  "publishConfig": {
+    "access": "public"
+  }
+}

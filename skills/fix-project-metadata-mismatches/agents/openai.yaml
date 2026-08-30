@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fix Project Metadata Mismatches"
+  short_description: "Audit and synchronize project metadata"
+  default_prompt: "Use $fix-project-metadata-mismatches to audit this project for metadata drift and propose safe fixes."
