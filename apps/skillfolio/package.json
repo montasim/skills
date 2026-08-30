@@ -20,7 +20,11 @@
   "homepage": "https://skillfoliox.netlify.app",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/montasim/Skillfoliox.git"
+    "url": "git+https://github.com/montasim/skills.git",
+    "directory": "apps/skillfolio"
+  },
+  "bugs": {
+    "url": "https://github.com/montasim/skills/issues"
   },
   "type": "module",
   "scripts": {

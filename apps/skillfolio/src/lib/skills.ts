@@ -10,6 +10,8 @@ export type Skill = {
   featured: boolean
   summary: string
   description: string
+  package?: string
+  packageUrl?: string
   repository: string
   repositoryOwner: string
   repositoryName: string
@@ -37,6 +39,7 @@ type CatalogEntry = Omit<
   Skill,
   | "repositoryOwner"
   | "repositoryName"
+  | "packageUrl"
   | "readmeUrl"
   | "readmeSourceUrl"
   | "rawContentBaseUrl"
@@ -77,6 +80,7 @@ const allowedFields = new Set<string>([
   "featured",
   "compatibility",
   "uses",
+  "package",
   "sourceDirectory",
   "hostEvidence",
 ])
@@ -221,9 +225,19 @@ function parseEntry(value: unknown, index: number): Skill {
   if (!/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(parsed.version)) {
     fail(index, "version must use semantic versioning")
   }
+  if (
+    entry.package !== undefined &&
+    (typeof entry.package !== "string" ||
+      !/^(?:@[a-z0-9][a-z0-9._-]*\/)?[a-z0-9][a-z0-9._-]*$/.test(entry.package))
+  ) {
+    fail(index, "package must be a valid npm package name")
+  }
 
   return Object.freeze({
     ...parsed,
+    ...(typeof entry.package === "string"
+      ? { packageUrl: `https://www.npmjs.com/package/${entry.package}` }
+      : {}),
     ...repositoryFacts(
       parsed.repository,
       parsed.branch,
@@ -270,7 +284,13 @@ export function createSkillCatalog(value: unknown): SkillCatalog {
             category === "All" || skill.category === category
           const matchesQuery =
             !term ||
-            [skill.name, skill.summary, skill.category, skill.description]
+            [
+              skill.name,
+              skill.package ?? "",
+              skill.summary,
+              skill.category,
+              skill.description,
+            ]
               .join(" ")
               .toLowerCase()
               .includes(term)

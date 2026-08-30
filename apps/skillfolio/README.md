@@ -3,12 +3,12 @@
 > A searchable portfolio for discovering, evaluating, and installing reusable skills for AI coding agents.
 
 [![Skillfolio live status](https://img.shields.io/website?url=https%3A%2F%2Fskillfoliox.netlify.app&up_message=online&down_message=offline&label=Skillfolio)](https://skillfoliox.netlify.app)
-[![GitHub last commit](https://img.shields.io/github/last-commit/montasim/Skillfoliox?label=legacy%20source)](https://github.com/montasim/Skillfoliox/commits/main)
+[![GitHub last commit](https://img.shields.io/github/last-commit/montasim/skills?label=source)](https://github.com/montasim/skills/commits/main)
 [![Support on SupportKori](https://img.shields.io/badge/Support_on-SupportKori-00B8B5)](https://www.supportkori.com/montasim)
 
-Skillfolio gives developers one place to browse Montasim's reusable agent skills, understand what each skill does, inspect its source documentation, and copy a verified install command. The application now lives in the `apps/skillfolio` directory of the skills monorepo, while the existing deployment and public issue history remain connected to the standalone Skillfoliox repository during migration.
+Skillfolio gives developers one place to browse Montasim's reusable agent skills, understand what each skill does, inspect its source documentation, and copy a verified install command. The application lives in the `apps/skillfolio` directory of the skills monorepo, which now provides both the deployed source and public issue tracker.
 
-**[Open Skillfolio](https://skillfoliox.netlify.app) · [Explore Write Complete Project README](https://skillfoliox.netlify.app/skills/write-complete-project-readme) · [Report an issue](https://github.com/montasim/Skillfoliox/issues)**
+**[Open Skillfolio](https://skillfoliox.netlify.app) · [Explore Write Complete Project README](https://skillfoliox.netlify.app/skills/write-complete-project-readme) · [Report an issue](https://github.com/montasim/skills/issues)**
 
 [![Skillfolio — Small files. Serious leverage.](public/og-image.png)](https://skillfoliox.netlify.app)
 
@@ -19,7 +19,7 @@ Agent skills are small instruction packages, but evaluating them often requires 
 - Search and filter a curated library from one responsive interface.
 - Compare purpose, category, status, version, compatibility evidence, and common uses.
 - Read each public source README without leaving its detail page.
-- Copy the install command derived from the skill's distribution facts.
+- Open each managed skill's canonical npm package and copy the install command derived from its distribution facts.
 - Open the exact source directory whenever deeper verification is needed.
 
 Skillfolio is a deliberately reviewed portfolio, not an automatically indexed marketplace. Managed release facts come from the monorepo inventory; presentation copy remains owned by the application.
@@ -33,11 +33,12 @@ Skillfolio is a deliberately reviewed portfolio, not an automatically indexed ma
 - Relative README links and images resolved against a repository and optional monorepo subdirectory
 - Loading skeletons, retry states, and direct-source fallbacks
 - Copy-to-clipboard install commands
+- Direct npm package links for every managed skill
 - Responsive navigation and reduced-motion-aware animation
 - Canonical metadata, Open Graph and Twitter cards, JSON-LD, sitemap, robots file, favicon, web app manifest, and install icons
 - Netlify-compatible TanStack Start server-side rendering
 
-The checked-in runtime catalog is generated, so the library shown by a local build always reflects the current source files. The public site continues to reflect the standalone repository until the Netlify source is deliberately switched.
+The checked-in runtime catalog is generated, so both local builds and Netlify builds from the central repository reflect the current source files.
 
 ## Using the live application
 
@@ -176,7 +177,7 @@ The root command `npm run validate` also checks that the committed runtime catal
 
 ## Deployment
 
-The existing site is deployed at [skillfoliox.netlify.app](https://skillfoliox.netlify.app). During migration it remains connected to the standalone Skillfoliox repository.
+The site is deployed at [skillfoliox.netlify.app](https://skillfoliox.netlify.app) from the `main` branch of [`montasim/skills`](https://github.com/montasim/skills).
 
 Netlify configuration is intentionally split so both monorepo builds and app-local development resolve paths correctly:
 
@@ -188,7 +189,7 @@ Netlify configuration is intentionally split so both monorepo builds and app-loc
 
 The build writes the server handler to `.netlify/v1/functions/server.mjs`. `.netlify`, `dist`, and dependencies are generated artifacts and remain untracked.
 
-Switching the live Netlify source is a separate remote migration. After that authorized cutover, verify the homepage, representative skill routes, `/robots.txt`, `/sitemap.xml`, SSR behavior, source links, and social preview before retiring the standalone repository.
+Every push to the connected `main` branch can trigger a Netlify production build. After deployment-affecting changes, verify the homepage, representative skill routes, `/robots.txt`, `/sitemap.xml`, SSR behavior, source links, and social preview.
 
 ## Project structure
 
@@ -217,7 +218,7 @@ The catalog generator and Netlify configuration live at the monorepo root becaus
 ## Status and limitations
 
 - The catalog is curated and generated locally; it does not poll GitHub or npm automatically.
-- The deployed site will not use this monorepo source until the Netlify connection is changed explicitly.
+- The deployed site uses this monorepo as its Git source; uncommitted local changes do not reach Netlify.
 - README rendering depends on public GitHub and `raw.githubusercontent.com` availability.
 - Private repositories are unsupported because there is no authentication flow.
 - Search and category filtering run in the browser against bundled JSON.
@@ -226,7 +227,7 @@ The catalog generator and Netlify configuration live at the monorepo root becaus
 
 ## Support and security
 
-Until the repository migration is complete, use [Skillfoliox GitHub Issues](https://github.com/montasim/Skillfoliox/issues) for reproducible bugs and focused feature requests. Include the affected URL, browser, expected behavior, and sanitized actual behavior.
+Use the central [skills GitHub Issues](https://github.com/montasim/skills/issues) for reproducible bugs and focused feature requests. Include the affected URL, browser, expected behavior, and sanitized actual behavior.
 
 Do not post credentials, private repository URLs, tokens, or other sensitive details in a public issue. Follow the monorepo's root `SECURITY.md` disclosure guidance.
 

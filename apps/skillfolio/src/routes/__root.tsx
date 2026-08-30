@@ -2,6 +2,7 @@ import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
 
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import { SupportKoriWidget } from "@/components/supportkori-widget"
 import appCss from "../styles.css?url"
 
 export const Route = createRootRoute({
@@ -71,13 +72,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <SiteHeader />
         {children}
         <SiteFooter />
-        <script
-          src="https://www.supportkori.com/widget.js"
-          data-id="montasim"
-          data-message="Support"
-          data-color="#c04a16"
-          data-position="right"
-        ></script>
+        <SupportKoriWidget />
         <Scripts />
       </body>
     </html>

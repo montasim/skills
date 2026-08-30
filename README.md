@@ -37,7 +37,7 @@ The private npm workspace is named `montasim-skills`; it is an orchestration sur
 
 ## Skillfolio application
 
-[Skillfolio](https://skillfoliox.netlify.app) is the public catalog interface for the collection. Its source lives in [`apps/skillfolio`](apps/skillfolio), while the currently deployed site and public issue tracker remain connected to the standalone [`montasim/Skillfoliox`](https://github.com/montasim/Skillfoliox) repository during migration.
+[Skillfolio](https://skillfoliox.netlify.app) is the public catalog interface for the collection. Its deployed source lives in [`apps/skillfolio`](apps/skillfolio), and its public issue tracker is the central [`montasim/skills`](https://github.com/montasim/skills/issues) repository.
 
 The application catalog is generated from four sources:
 
@@ -148,14 +148,14 @@ The initial twelve versions were published with authenticated npm ownership and 
 ## Migration status and limitations
 
 - Historical standalone repositories, tags, releases, issues, and npm artifacts remain external records and are not release targets for the renamed workspaces.
-- The Skillfolio live site and public issue history remain attached to `montasim/Skillfoliox` until the Netlify source is deliberately switched.
+- The Skillfolio live site builds from `apps/skillfolio` on the central repository's `main` branch. The imported standalone repository remains a provenance and historical-issue record, not a deployment source.
 - Package metadata points to the central `montasim/skills` repository and is verified as part of each release.
 - Historical repositories should be archived only after a release from the monorepo installs and verifies successfully.
 - `integrate-supportkori-widget` and Skillfolio remain unlicensed. The SupportKori package is public but does not grant open-source reuse rights; the other eleven skills are MIT-licensed.
 - Skillfolio's Netlify development dependency graph has one upstream `extract-zip` advisory whose named patched version is not yet published on npm. It does not enter any skill package; see [SECURITY.md](SECURITY.md#known-development-dependency-advisory).
 - The repository deliberately uses normal directories rather than symlinked skill directories so local validation and packaging agree.
 
-See [MIGRATION.md](MIGRATION.md) for the remaining remote cutover and [LICENSING.md](LICENSING.md) for per-skill licensing.
+See [MIGRATION.md](MIGRATION.md) for the remaining operational follow-up and [LICENSING.md](LICENSING.md) for per-skill licensing.
 
 ## Support, security, and contributing
 

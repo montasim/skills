@@ -77,7 +77,8 @@ function ReadySkillDetail({ skill }: { skill: Skill }) {
           <CardHeader className="p-6 pb-0">
             <div className="flex items-center justify-between gap-4">
               <CardTitle className="flex items-center gap-2 font-mono text-meta tracking-widest uppercase">
-                <PackageCheckIcon className="size-4" /> Install from GitHub
+                <PackageCheckIcon className="size-4" />{" "}
+                {skill.packageUrl ? "Install from npm" : "Install skill"}
               </CardTitle>
               <Badge
                 variant="outline"
@@ -120,11 +121,38 @@ function ReadySkillDetail({ skill }: { skill: Skill }) {
               <dt className="text-ink/55">Document</dt>
               <dd className="font-mono text-xs">README.md</dd>
             </div>
+            {skill.package && skill.packageUrl ? (
+              <div className="flex justify-between gap-4 py-4">
+                <dt className="text-ink/55">Package</dt>
+                <dd className="min-w-0 text-right font-mono text-xs">
+                  <a
+                    href={skill.packageUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="break-all underline decoration-ink/25 underline-offset-4 hover:text-brand"
+                  >
+                    {skill.package}
+                  </a>
+                </dd>
+              </div>
+            ) : null}
           </dl>
+          {skill.packageUrl ? (
+            <Button
+              asChild
+              variant="outline"
+              className="mt-5 h-11 w-full justify-between rounded-none border-2 border-ink bg-white hover:bg-ink hover:text-white"
+            >
+              <a href={skill.packageUrl} target="_blank" rel="noreferrer">
+                <PackageCheckIcon /> View on npm
+                <ExternalLinkIcon className="size-3" />
+              </a>
+            </Button>
+          ) : null}
           <Button
             asChild
             variant="outline"
-            className="mt-5 h-11 w-full justify-between rounded-none border-2 border-ink bg-white hover:bg-ink hover:text-white"
+            className={`${skill.packageUrl ? "mt-3" : "mt-5"} h-11 w-full justify-between rounded-none border-2 border-ink bg-white hover:bg-ink hover:text-white`}
           >
             <a href={skill.repository} target="_blank" rel="noreferrer">
               <GithubLogoIcon /> View on GitHub

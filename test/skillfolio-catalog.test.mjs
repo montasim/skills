@@ -19,6 +19,7 @@ test("Skillfolio derives managed release facts from the root catalog", () => {
   );
 
   assert.equal(readme.version, "0.4.0");
+  assert.equal(readme.package, "write-complete-project-readme");
   assert.equal(
     readme.installCommand,
     "npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target codex",
@@ -91,4 +92,32 @@ test("Netlify separates repository base selection from app-local build settings"
   assert.doesNotMatch(applicationConfig, /base\s*=/);
   assert.match(applicationConfig, /command\s*=\s*"pnpm run build"/);
   assert.match(applicationConfig, /publish\s*=\s*"dist\/client"/);
+});
+
+test("Skillfolio project links target the central repository", () => {
+  const applicationPackage = JSON.parse(
+    readFileSync(
+      new URL("../apps/skillfolio/package.json", import.meta.url),
+      "utf8",
+    ),
+  );
+  const siteHeader = readFileSync(
+    new URL(
+      "../apps/skillfolio/src/components/site-header.tsx",
+      import.meta.url,
+    ),
+    "utf8",
+  );
+
+  assert.deepEqual(applicationPackage.repository, {
+    type: "git",
+    url: "git+https://github.com/montasim/skills.git",
+    directory: "apps/skillfolio",
+  });
+  assert.equal(
+    applicationPackage.bugs.url,
+    "https://github.com/montasim/skills/issues",
+  );
+  assert.match(siteHeader, /https:\/\/github\.com\/montasim\/skills/);
+  assert.doesNotMatch(siteHeader, /montasim\/Skillfoliox/);
 });

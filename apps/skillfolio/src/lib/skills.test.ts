@@ -13,6 +13,7 @@ function entry(overrides: Record<string, unknown> = {}) {
     featured: true,
     summary: "A focused example for catalog tests.",
     description: "A longer example used to exercise catalog discovery.",
+    package: "example-skill",
     repository: "https://github.com/example/example-skill",
     branch: "main",
     installCommand: "npx example-skill",
@@ -28,6 +29,7 @@ describe("Skill catalog", () => {
     const skill = catalog.featured()
 
     expect(skill.repositoryOwner).toBe("example")
+    expect(skill.packageUrl).toBe("https://www.npmjs.com/package/example-skill")
     expect(skill.readmeUrl).toBe(
       "https://raw.githubusercontent.com/example/example-skill/main/README.md"
     )
@@ -132,6 +134,12 @@ describe("Skill catalog", () => {
     expect(() =>
       createSkillCatalog([entry({ sourceDirectory: "../private" })])
     ).toThrow("normalized relative repository path")
+  })
+
+  it("rejects malformed npm package identities", () => {
+    expect(() =>
+      createSkillCatalog([entry({ package: "Invalid Package" })])
+    ).toThrow("valid npm package name")
   })
 
   it("rejects duplicated derived facts", () => {

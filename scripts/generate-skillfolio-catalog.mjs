@@ -45,6 +45,7 @@ function managedFacts(entry, evidenceProfiles) {
     );
   }
   return {
+    package: entry.package,
     version: entry.version,
     repository,
     branch: entry.branch || "main",
@@ -133,6 +134,7 @@ export function buildSkillfolioCatalog(root = repositoryRoot) {
       featured: entry.featured,
       summary: entry.summary,
       description: entry.description,
+      ...(facts.package ? { package: facts.package } : {}),
       repository: facts.repository,
       branch: facts.branch,
       ...(facts.sourceDirectory

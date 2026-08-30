@@ -18,6 +18,7 @@ import {
   FileDocIcon,
   GithubLogoIcon,
   LayersIcon,
+  PackageCheckIcon,
   SearchIcon,
   SearchXIcon,
   ShieldCheckIcon,
@@ -265,11 +266,16 @@ function App() {
                       className="h-auto p-0 text-ink/65 hover:text-brand"
                     >
                       <a
-                        href={skill.repository}
+                        href={skill.packageUrl ?? skill.repository}
                         target="_blank"
                         rel="noreferrer"
                       >
-                        <GithubLogoIcon /> GitHub source
+                        {skill.packageUrl ? (
+                          <PackageCheckIcon />
+                        ) : (
+                          <GithubLogoIcon />
+                        )}
+                        {skill.packageUrl ? "npm package" : "GitHub source"}
                       </a>
                     </Button>
                   </div>

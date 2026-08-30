@@ -5,3 +5,6 @@ node_modules/
 # Created only during npm test/pack lifecycle hooks.
 skills/*/skills/
 skills/*/.monorepo-stage-owners.json
+
+# Local Netlify folder
+.netlify

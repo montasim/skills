@@ -47,11 +47,11 @@ Completed on 2026-08-30:
 2. Published all twelve independently versioned packages to npm, including the public `update-skillfolio-catalog` package.
 3. Created one namespaced Git tag and GitHub release per package. Every tag, registry version, dist-tag, install command, release target, and catalog identity passed the read-only release verifier.
 4. Ran the tag-triggered release workflow for every package; all twelve runs completed successfully.
+5. Reconnected the existing `skillfoliox` Netlify project to `montasim/skills`, retained `apps/skillfolio` as its base directory, and verified a successful production build from central `main` commit `348569abc77dacc5442dbeab208566a8ccf3a97f`.
+6. Moved Skillfolio source and support links to the central repository, exposed each managed skill's npm package in the catalog, and repaired the SupportKori integration so its script mounts after hydration.
 
 Remaining operational cutover:
 
 1. Configure npm trusted publishing for future releases through `montasim/skills` and `.github/workflows/publish.yml`.
-2. Reconnect the existing Netlify site with base directory `apps/skillfolio`, then verify routes, crawler files, and social previews.
-3. Move Skillfolio support and source links only after the deployment cutover succeeds.
 
 Editing this migration record does not publish, tag, push, deploy, or change any remote service.

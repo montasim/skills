@@ -50,7 +50,7 @@ export function SiteHeader() {
             className="rounded-none border-2 border-ink bg-transparent hover:bg-ink hover:text-white"
           >
             <a
-              href="https://github.com/montasim/Skillfoliox"
+              href="https://github.com/montasim/skills"
               target="_blank"
               rel="noreferrer"
             >

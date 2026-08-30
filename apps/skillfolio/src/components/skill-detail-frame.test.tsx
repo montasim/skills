@@ -43,6 +43,10 @@ describe("Skill-detail frame", () => {
     render(<SkillDetailFrame state={{ status: "ready", skill }} />)
 
     expect(screen.getByRole("heading", { name: skill.name })).toBeTruthy()
+    expect(screen.getByText("Install from npm")).toBeTruthy()
+    expect(
+      screen.getByRole("link", { name: /View on npm/ }).getAttribute("href")
+    ).toBe(skill.packageUrl)
     expect(
       screen.getByRole("link", { name: /View source/ }).getAttribute("href")
     ).toBe(skill.readmeSourceUrl)
