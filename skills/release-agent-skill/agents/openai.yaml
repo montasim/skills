@@ -1,0 +1,4 @@
+interface:
+  display_name: "Release Agent Skill"
+  short_description: "Validate and ship a portable agent skill"
+  default_prompt: "Use $release-agent-skill to coordinate the authorized validation, publication, release, catalog, and verification stages for this Agent Skill."

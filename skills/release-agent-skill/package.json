@@ -1,0 +1,50 @@
+{
+  "name": "release-agent-skill",
+  "version": "0.1.0",
+  "description": "Install a portable skill that validates, packages, publishes, releases, and verifies Agent Skills.",
+  "type": "module",
+  "bin": {
+    "release-agent-skill": "bin/release-agent-skill.js"
+  },
+  "files": [
+    "bin/",
+    "skills/"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run",
+    "prepublishOnly": "npm test && npm run pack:check",
+    "pretest": "node ../../scripts/stage-package-skill.mjs stage release-agent-skill test",
+    "posttest": "node ../../scripts/stage-package-skill.mjs clean release-agent-skill test",
+    "prepack": "node ../../scripts/stage-package-skill.mjs stage release-agent-skill pack",
+    "postpack": "node ../../scripts/stage-package-skill.mjs clean release-agent-skill pack"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "agent-skill",
+    "codex",
+    "claude-code",
+    "npm-publish",
+    "github-release",
+    "release-automation",
+    "skill-validation",
+    "developer-tools"
+  ],
+  "author": "Montasim",
+  "license": "MIT",
+  "homepage": "https://github.com/montasim/skills/tree/main/skills/release-agent-skill#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montasim/skills.git",
+    "directory": "skills/release-agent-skill"
+  },
+  "bugs": {
+    "url": "https://github.com/montasim/skills/issues"
+  },
+  "funding": "https://www.supportkori.com/montasim",
+  "publishConfig": {
+    "access": "public"
+  }
+}
