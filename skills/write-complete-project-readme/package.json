@@ -1,0 +1,52 @@
+{
+  "name": "write-complete-project-readme",
+  "version": "0.4.0",
+  "description": "Install an evidence-based project README skill for Codex and Claude Code.",
+  "type": "module",
+  "bin": {
+    "write-complete-project-readme": "bin/write-complete-project-readme.js"
+  },
+  "files": [
+    "bin/",
+    "skills/"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run",
+    "prepublishOnly": "npm test && npm run pack:check",
+    "pretest": "node ../../scripts/stage-package-skill.mjs stage write-complete-project-readme test",
+    "posttest": "node ../../scripts/stage-package-skill.mjs clean write-complete-project-readme test",
+    "prepack": "node ../../scripts/stage-package-skill.mjs stage write-complete-project-readme pack",
+    "postpack": "node ../../scripts/stage-package-skill.mjs clean write-complete-project-readme pack"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "codex",
+    "claude-code",
+    "agent-skill",
+    "ai-agent",
+    "readme",
+    "readme-generator",
+    "project-readme",
+    "documentation",
+    "npx"
+  ],
+  "author": "Montasim",
+  "license": "MIT",
+  "funding": "https://www.supportkori.com/montasim",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montasim/skills.git",
+    "directory": "skills/write-complete-project-readme"
+  },
+  "bugs": {
+    "url": "https://github.com/montasim/skills/issues"
+  },
+  "homepage": "https://github.com/montasim/skills/tree/main/skills/write-complete-project-readme#readme",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
