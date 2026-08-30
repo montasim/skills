@@ -1,0 +1,4 @@
+interface:
+  display_name: "Find UI Inconsistencies"
+  short_description: "Audit visual systems across frontend routes"
+  default_prompt: "Use $find-ui-inconsistencies to audit this frontend for typography, spacing, color, component, responsive, and loading-state inconsistencies."

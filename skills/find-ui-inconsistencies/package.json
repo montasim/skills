@@ -1,0 +1,51 @@
+{
+  "name": "find-ui-inconsistencies",
+  "version": "0.1.0",
+  "description": "Install a portable skill that audits frontend visual and interaction consistency.",
+  "type": "module",
+  "bin": {
+    "find-ui-inconsistencies": "bin/find-ui-inconsistencies.js"
+  },
+  "files": [
+    "bin/",
+    "skills/"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run",
+    "prepublishOnly": "npm test && npm run pack:check",
+    "pretest": "node ../../scripts/stage-package-skill.mjs stage find-ui-inconsistencies test",
+    "posttest": "node ../../scripts/stage-package-skill.mjs clean find-ui-inconsistencies test",
+    "prepack": "node ../../scripts/stage-package-skill.mjs stage find-ui-inconsistencies pack",
+    "postpack": "node ../../scripts/stage-package-skill.mjs clean find-ui-inconsistencies pack"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "agent-skill",
+    "codex",
+    "claude-code",
+    "frontend-audit",
+    "design-system",
+    "ui-consistency",
+    "accessibility",
+    "responsive-design",
+    "developer-tools"
+  ],
+  "author": "Montasim",
+  "license": "MIT",
+  "homepage": "https://github.com/montasim/skills/tree/main/skills/find-ui-inconsistencies#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montasim/skills.git",
+    "directory": "skills/find-ui-inconsistencies"
+  },
+  "bugs": {
+    "url": "https://github.com/montasim/skills/issues"
+  },
+  "funding": "https://www.supportkori.com/montasim",
+  "publishConfig": {
+    "access": "public"
+  }
+}
