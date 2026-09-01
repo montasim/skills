@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0", "manifest_status": "draft",
+  "source": { "web_root": ".", "revision": "working-tree" },
+  "target": { "android_root": "android" },
+  "discovery": { "status": "in-progress", "evidence": [{ "kind": "source", "provenance": "observed", "location": "src", "detail": "Initial inspection." }], "exclusions": [] },
+  "limitations": [],
+  "capabilities": [{
+    "id": "account.export", "name": "Export account", "area": "Account",
+    "source_evidence": [{ "kind": "runtime", "provenance": "observed", "location": "/account/export", "detail": "Observed export workflow." }],
+    "expected_behavior": "A user can export account data.", "states": ["ready", "preparing", "downloaded", "error"], "dependencies": [],
+    "android": { "disposition": "deferred", "rationale": "The first Android release excludes export.", "implementation_locations": [] },
+    "verification": { "requirements": [], "evidence": [] },
+    "status": "closed", "blockers": [], "owner": "product"
+  }]
+}

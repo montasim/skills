@@ -1,6 +1,7 @@
 {
   "schemaVersion": 1,
   "packages": {
+    "build-android-app-from-web": { "errorStatus": 1 },
     "find-ui-inconsistencies": { "errorStatus": 1 },
     "publish-verified-github-release": { "errorStatus": 2 },
     "deploy-prebuilt-app-to-netlify": { "errorStatus": 1 },

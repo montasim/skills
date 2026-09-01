@@ -1,0 +1,50 @@
+{
+  "name": "build-android-app-from-web",
+  "version": "0.1.0",
+  "description": "Install a portable skill that builds Android applications with verified parity to existing web applications.",
+  "type": "module",
+  "bin": {
+    "build-android-app-from-web": "bin/build-android-app-from-web.js"
+  },
+  "files": [
+    "bin/",
+    "skills/"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run",
+    "prepublishOnly": "npm test && npm run pack:check",
+    "pretest": "node ../../scripts/stage-package-skill.mjs stage build-android-app-from-web test",
+    "posttest": "node ../../scripts/stage-package-skill.mjs clean build-android-app-from-web test",
+    "prepack": "node ../../scripts/stage-package-skill.mjs stage build-android-app-from-web pack",
+    "postpack": "node ../../scripts/stage-package-skill.mjs clean build-android-app-from-web pack"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "agent-skill",
+    "android",
+    "web-to-android",
+    "feature-parity",
+    "jetpack-compose",
+    "mobile-development",
+    "application-migration",
+    "developer-tools"
+  ],
+  "author": "Montasim",
+  "license": "MIT",
+  "homepage": "https://github.com/montasim/skills/tree/main/skills/build-android-app-from-web#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montasim/skills.git",
+    "directory": "skills/build-android-app-from-web"
+  },
+  "bugs": {
+    "url": "https://github.com/montasim/skills/issues"
+  },
+  "funding": "https://www.supportkori.com/montasim",
+  "publishConfig": {
+    "access": "public"
+  }
+}

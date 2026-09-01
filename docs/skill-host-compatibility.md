@@ -1,15 +1,15 @@
 # Agent Skill host compatibility
 
-Audit date: 2026-08-30
+Audit date: 2026-09-01
 
-This matrix separates the portable `SKILL.md` contract from model providers, installation UX, and runtime verification. All twelve canonical skills use the open Agent Skills structure and keep OpenAI presentation metadata in optional `agents/openai.yaml` files.
+This matrix separates the portable `SKILL.md` contract from model providers, installation UX, and runtime verification. All thirteen canonical skills use the open Agent Skills structure and keep OpenAI presentation metadata in optional `agents/openai.yaml` files.
 
 ## Host matrix
 
 | Host | Official skill contract | Documented discovery | Repository evidence | Status |
 | --- | --- | --- | --- | --- |
-| OpenAI Codex | Open Agent Skills plus optional `agents/openai.yaml` | Repository and user `.agents/skills` locations; explicit and implicit activation | All 12 skills passed structural validation, local smoke installation, and one isolated Codex CLI discovery probe | Runtime verified for discovery |
-| Claude Code | Open Agent Skills plus Claude-only extensions | Project `.claude/skills`; user `~/.claude/skills`; explicit `/skill-name` and automatic use | All 12 packaged installers use the shared Claude layout; all 12 portable payloads smoke-install; live probe was blocked before execution by the external-provider data boundary | Format and installer verified; runtime unverified |
+| OpenAI Codex | Open Agent Skills plus optional `agents/openai.yaml` | Repository and user `.agents/skills` locations; explicit and implicit activation | All 13 skills passed structural validation and local smoke installation; the new web-to-Android skill also passed an independent Codex forward test | Runtime verified for discovery and guided execution |
+| Claude Code | Open Agent Skills plus Claude-only extensions | Project `.claude/skills`; user `~/.claude/skills`; explicit `/skill-name` and automatic use | All 13 packaged installers use the shared Claude layout; all 13 portable payloads smoke-install; live probe was blocked before execution by the external-provider data boundary | Format and installer verified; runtime unverified |
 | Gemini CLI | Open Agent Skills | `.gemini/skills` and `.agents/skills` aliases at user/workspace scopes; activation requires consent | All generated installers expose the shared Gemini target; target paths are contract-tested | Installer path verified; host runtime unverified |
 | Google Antigravity IDE | Open Agent Skills | Workspace `.agents/skills`; global `~/.gemini/config/skills`; legacy workspace `.agent/skills` remains supported | All generated installers expose the shared Antigravity target; target paths are contract-tested | Installer path verified; host runtime unverified |
 | Antigravity CLI | Skills and plugins | Current global skill location `~/.gemini/antigravity-cli/skills` | All generated installers expose the shared Antigravity CLI target; target paths are contract-tested | Installer path verified; host runtime unverified |
@@ -25,17 +25,17 @@ Primary sources: [Agent Skills specification](https://agentskills.io/specificati
 - Installed Codex CLI: `0.150.1`.
 - Installed Claude Code CLI: `2.1.181`.
 - Gemini CLI, Antigravity, and ZCode were not installed.
-- An isolated Git repository containing all 12 skills under `.agents/skills` was opened by Codex with user configuration disabled. Codex reported all 12 project skill names without reading files or executing a workflow.
+- Two independent Codex forward tests exercised `build-android-app-from-web` against an existing web-only product and a separate web-plus-Android product, producing structurally valid parity manifests without modifying either target.
 - The matching Claude Code probe was not executed. The approval boundary rejected it because even skill metadata could be transmitted to an external provider. This is a blocked check, not evidence of incompatibility.
 
 ## Distribution coverage
 
 | Skill group | First-class installer targets | Other documented hosts |
 | --- | --- | --- |
-| Eleven shared-installer packages | Codex, Claude Code, Gemini CLI, Antigravity IDE, Antigravity CLI, ZCode, Cursor, GitHub Copilot, OpenCode | Named targets use one generated runtime; ZCode intentionally has no project-scoped destination |
+| Twelve shared-installer packages | Codex, Claude Code, Gemini CLI, Antigravity IDE, Antigravity CLI, ZCode, Cursor, GitHub Copilot, OpenCode | Named targets use one generated runtime; ZCode intentionally has no project-scoped destination |
 | `write-complete-project-readme` | Codex and Claude Code, plus exact custom paths | Its mature compatibility installer retains conservative host detection and previous Codex-root migration |
 
-Format compatibility is a repository-wide property. Named one-command targets are shared by eleven packages; the README package remains the documented compatibility exception.
+Format compatibility is a repository-wide property. Named one-command targets are shared by twelve packages; the README package remains the documented compatibility exception.
 
 ## Per-skill runtime requirements
 
@@ -43,6 +43,7 @@ These are skill execution requirements, not host-format restrictions.
 
 | Skill | Material prerequisites |
 | --- | --- |
+| `build-android-app-from-web` | Web application source and runtime evidence; Android/JDK toolchain for implementation; emulator or device access for runtime proof; Python 3 for parity-manifest validation |
 | `find-ui-inconsistencies` | Repository or screenshots; browser/runtime access for full visual proof |
 | `publish-verified-github-release` | Node.js for the collector; Git; GitHub/network access only for remote evidence or mutation |
 | `deploy-prebuilt-app-to-netlify` | Project build runtime, Netlify CLI, authenticated site linkage, network access |
@@ -62,7 +63,7 @@ The canonical frontmatter intentionally omits `compatibility` because it is not 
 
 1. Descriptions are compressed to the repository's 250-character discovery budget and front-load their primary boundary.
 2. Shared descriptions route by outcome instead of naming the caller provider.
-3. Eleven public npm workspaces use the generated installer runtime and target registry. `write-complete-project-readme` remains an explicit compatibility exception because its transactional installer also handles earlier Codex installation roots.
+3. Twelve public npm workspaces use the generated installer runtime and target registry. `write-complete-project-readme` remains an explicit compatibility exception because its transactional installer also handles earlier Codex installation roots.
 4. Installer-path tests cover Codex, Claude Code, Gemini CLI, Antigravity IDE, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. ZCode project scope remains unsupported because no documented project root was established.
 5. Provider-independent routing, frontmatter, resource, and installer tests protect the shared contract.
 6. `agents/openai.yaml` remains optional OpenAI presentation metadata and is not required by portable behavior.

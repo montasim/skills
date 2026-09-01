@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0", "manifest_status": "complete",
+  "source": { "web_root": ".", "revision": "source-revision" },
+  "target": { "android_root": "android" },
+  "discovery": { "status": "complete", "evidence": [{ "kind": "runtime", "provenance": "observed", "location": "http://localhost", "detail": "All scoped workflows exercised." }], "exclusions": [] },
+  "limitations": [],
+  "capabilities": [{
+    "id": "search.query", "name": "Search", "area": "Discovery",
+    "source_evidence": [{ "kind": "runtime", "provenance": "observed", "location": "/search", "detail": "Observed query results." }],
+    "expected_behavior": "A query returns matching results.", "states": ["ready", "loading", "results", "empty", "error"], "dependencies": [],
+    "android": { "disposition": "native-parity", "rationale": "Retain search behavior.", "implementation_locations": ["android/SearchScreen.kt"] },
+    "verification": { "requirements": ["Queries produce expected results"], "evidence": [] },
+    "status": "implemented", "blockers": [], "owner": "search"
+  }]
+}

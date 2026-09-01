@@ -28,7 +28,7 @@ _Avoid_: Works everywhere, universally compatible
 The single primary problem domain a Skill helps a user solve. Categories follow outcomes rather than providers, file formats, implementation technologies, or vague maintenance activity.
 _Avoid_: Tag, platform, feature list
 
-Canonical categories are API Quality, Deployment, Documentation, Frontend Quality, Release Engineering, Repository Management, and Web Visibility.
+Canonical categories are API Quality, Deployment, Documentation, Frontend Quality, Mobile Development, Release Engineering, Repository Management, and Web Visibility.
 
 **External skill facts**:
 Source and installation facts for a Skill maintained outside this monorepo.

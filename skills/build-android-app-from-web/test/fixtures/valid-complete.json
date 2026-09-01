@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "manifest_status": "complete",
+  "source": { "web_root": ".", "revision": "example-source-revision" },
+  "target": { "android_root": "android" },
+  "discovery": {
+    "status": "complete",
+    "evidence": [
+      { "kind": "source", "provenance": "observed", "location": "src", "detail": "Inspected routes, state transitions, and data boundaries." },
+      { "kind": "runtime", "provenance": "observed", "location": "http://localhost:3000", "detail": "Exercised reachable workflows and observable failure states." }
+    ],
+    "exclusions": []
+  },
+  "limitations": [],
+  "capabilities": [
+    {
+      "id": "account.session.restore",
+      "name": "Restore session",
+      "area": "Account",
+      "source_evidence": [
+        { "kind": "source", "provenance": "observed", "location": "src/session", "detail": "Session state is restored before protected routes render." }
+      ],
+      "expected_behavior": "A valid saved session restores signed-in state and an invalid session returns to sign-in.",
+      "states": ["loading", "signed-in", "signed-out", "error"],
+      "dependencies": [],
+      "android": {
+        "disposition": "native-parity",
+        "rationale": "Android retains the same session outcomes with native storage and lifecycle handling.",
+        "implementation_locations": ["android/app/src/main/java/example/account/SessionRepository.kt"]
+      },
+      "verification": {
+        "requirements": ["Valid and invalid saved sessions produce their expected destinations"],
+        "evidence": [
+          { "kind": "test", "provenance": "observed", "location": "android/app/src/test/java/example/account/SessionRepositoryTest.kt", "detail": "Covers valid, expired, and corrupt saved sessions.", "outcome": "pass" }
+        ]
+      },
+      "status": "verified",
+      "blockers": [],
+      "owner": "android-account"
+    },
+    {
+      "id": "account.profile.update",
+      "name": "Update profile",
+      "area": "Account",
+      "source_evidence": [
+        { "kind": "runtime", "provenance": "observed", "location": "/account/profile", "detail": "Observed validation, saving, success, and server-error behavior." }
+      ],
+      "expected_behavior": "A signed-in user can validate and persist profile changes.",
+      "states": ["loading", "ready", "validation-error", "saving", "saved", "server-error"],
+      "dependencies": ["account.session.restore"],
+      "android": {
+        "disposition": "native-adaptation",
+        "rationale": "The product outcome is preserved with Android navigation and form conventions.",
+        "adaptation": "Use a Compose form with Android back handling and retained draft state.",
+        "implementation_locations": ["android/app/src/main/java/example/account/ProfileScreen.kt"]
+      },
+      "verification": {
+        "requirements": ["Updates persist after process recreation", "Validation and server failures are distinguishable"],
+        "evidence": [
+          { "kind": "runtime", "provenance": "observed", "location": "device-run/profile-2026-09-01", "detail": "Exercised success and error paths on an Android device.", "outcome": "pass" }
+        ]
+      },
+      "status": "verified",
+      "blockers": [],
+      "owner": "android-account"
+    },
+    {
+      "id": "browser.install-prompt",
+      "name": "Browser install prompt",
+      "area": "Installation",
+      "source_evidence": [
+        { "kind": "source", "provenance": "observed", "location": "src/install", "detail": "Offers browser-specific progressive web app installation." }
+      ],
+      "expected_behavior": "Eligible browsers can request installation of the web application.",
+      "states": ["unavailable", "eligible", "accepted", "dismissed"],
+      "dependencies": [],
+      "android": {
+        "disposition": "not-applicable",
+        "rationale": "The Android application is distributed as an installed package.",
+        "justification": "Browser-managed progressive web app installation has no in-app Android equivalent in this release scope.",
+        "implementation_locations": []
+      },
+      "verification": { "requirements": [], "evidence": [] },
+      "status": "closed",
+      "blockers": [],
+      "owner": "product"
+    }
+  ]
+}

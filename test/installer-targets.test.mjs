@@ -42,5 +42,5 @@ test("checked-in package installers match the shared runtime", () => {
     encoding: "utf8",
   });
   assert.equal(result.status, 0, result.stderr);
-  assert.match(result.stdout, /Validated 11 shared package installers/);
+  assert.match(result.stdout, /Validated 12 shared package installers/);
 });

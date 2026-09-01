@@ -51,6 +51,35 @@
       "runtimeVerified": [
         "OpenAI Codex"
       ]
+    },
+    "web-to-android-2026-09-01": {
+      "auditedOn": "2026-09-01",
+      "format": "Agent Skills structure validated",
+      "documentedHosts": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "installerTested": [
+        "OpenAI Codex",
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
+      ],
+      "runtimeVerified": [
+        "OpenAI Codex"
+      ]
     }
   },
   "applications": [
@@ -65,6 +94,18 @@
     }
   ],
   "skills": [
+    {
+      "name": "build-android-app-from-web",
+      "description": "Build or audit an Android application from an existing web application with evidence-backed feature traceability and verified platform adaptation.",
+      "distribution": "npm",
+      "package": "build-android-app-from-web",
+      "version": "0.1.0",
+      "license": "MIT",
+      "evidenceProfile": "web-to-android-2026-09-01",
+      "sourceCommit": null,
+      "repository": "https://github.com/montasim/skills",
+      "sourceDirectory": "skills/build-android-app-from-web"
+    },
     {
       "name": "find-ui-inconsistencies",
       "description": "Find visual and interaction inconsistencies across frontend routes, states, themes, and viewports.",

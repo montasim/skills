@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "manifest_status": "draft",
+  "source": { "web_root": ".", "revision": "working-tree" },
+  "target": {
+    "android_root": "android",
+    "variants": [
+      { "id": "handheld", "description": "Phone and tablet" },
+      { "id": "tv", "description": "Android TV" }
+    ]
+  },
+  "discovery": {
+    "status": "complete",
+    "evidence": [{ "kind": "source", "provenance": "observed", "location": "src", "detail": "Inspected target-specific behavior." }],
+    "exclusions": []
+  },
+  "limitations": [],
+  "capabilities": [
+    {
+      "id": "media.subtitle.import",
+      "name": "Import local subtitle",
+      "area": "Playback",
+      "priority": "urgent",
+      "source_evidence": [{ "kind": "runtime", "provenance": "observed", "location": "/watch/1", "detail": "Observed local subtitle import." }],
+      "expected_behavior": "A viewer can attach a local subtitle file during playback.",
+      "states": ["ready", "picking", "attached", "error"],
+      "dependencies": [],
+      "android": {
+        "disposition": "native-adaptation",
+        "target_variants": ["automotive"],
+        "rationale": "Use Android document selection.",
+        "adaptation": "Use the platform document picker.",
+        "implementation_locations": []
+      },
+      "verification": { "requirements": ["Supported subtitle files attach"], "evidence": [] },
+      "status": "planned",
+      "blockers": [],
+      "owner": "playback"
+    }
+  ]
+}

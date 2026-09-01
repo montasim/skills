@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0", "manifest_status": "draft",
+  "source": { "web_root": ".", "revision": "working-tree" },
+  "target": { "android_root": "android" },
+  "discovery": { "status": "in-progress", "evidence": [{ "kind": "source", "provenance": "observed", "location": "src", "detail": "Initial inspection." }], "exclusions": [] },
+  "limitations": [],
+  "capabilities": [{
+    "id": "account.profile.update", "name": "Update profile", "area": "Account",
+    "source_evidence": [{ "kind": "source", "provenance": "observed", "location": "src/profile", "detail": "Profile form." }],
+    "expected_behavior": "A signed-in user can update a profile.", "states": ["ready", "saving", "saved", "error"],
+    "dependencies": ["account.session.restore"],
+    "android": { "disposition": "native-parity", "rationale": "Retain profile behavior.", "implementation_locations": [] },
+    "verification": { "requirements": ["Updates persist"], "evidence": [] },
+    "status": "planned", "blockers": [], "owner": "account"
+  }]
+}

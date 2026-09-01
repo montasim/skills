@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { chmodSync, existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
@@ -28,17 +28,22 @@ for (const [skillName, config] of Object.entries(configuration.packages)) {
     continue;
   }
   const wrapper = `#!/usr/bin/env node\n\nimport { runInstaller } from "./installer-runtime.js";\n\nrunInstaller(${JSON.stringify({ skillName, errorStatus: config.errorStatus, legacyNames: config.legacyNames || [], forceMigratesLegacy: Boolean(config.forceMigratesLegacy) }, null, 2)}, import.meta.url);\n`;
+  const executablePath = join(packageRoot, executable);
   const outputs = new Map([
     [join(packageRoot, "bin", "installer-runtime.js"), runtime],
-    [join(packageRoot, executable), wrapper],
+    [executablePath, wrapper],
   ]);
   for (const [path, expected] of outputs) {
     const actual = existsSync(path) ? readFileSync(path, "utf8") : "";
     if (check) {
       if (actual !== expected) errors.push(`${skillName}: generated installer is stale: ${path.slice(root.length + 1)}`);
+      if (path === executablePath && process.platform !== "win32" && existsSync(path) && (statSync(path).mode & 0o111) === 0) {
+        errors.push(`${skillName}: generated installer is not executable: ${path.slice(root.length + 1)}`);
+      }
     } else {
       mkdirSync(dirname(path), { recursive: true });
       writeFileSync(path, expected);
+      if (path === executablePath && process.platform !== "win32") chmodSync(path, 0o755);
     }
   }
 }

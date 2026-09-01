@@ -4,6 +4,7 @@ Licensing is defined per skill rather than by one repository-wide license.
 
 The following skill directories contain their own MIT License:
 
+- `build-android-app-from-web`
 - `find-ui-inconsistencies`
 - `publish-verified-github-release`
 - `deploy-prebuilt-app-to-netlify`

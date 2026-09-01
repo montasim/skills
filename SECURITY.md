@@ -10,4 +10,4 @@ Published packages follow the supported versions documented in their own securit
 
 ## Known development dependency advisory
 
-As of 2026-08-30, `pnpm audit` reports one high-severity advisory for `extract-zip@2.0.1` through Skillfolio's Netlify development tooling. The advisory identifies `2.0.2` as patched, but npm does not currently publish that version. This development-only dependency is not included in any of the twelve Agent Skill npm packages. The repository tracks the upstream fix and will update when an installable patched release is available.
+As of 2026-08-30, `pnpm audit` reports one high-severity advisory for `extract-zip@2.0.1` through Skillfolio's Netlify development tooling. The advisory identifies `2.0.2` as patched, but npm does not currently publish that version. This development-only dependency is not included in any of the thirteen Agent Skill npm packages. The repository tracks the upstream fix and will update when an installable patched release is available.

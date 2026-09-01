@@ -1,18 +1,18 @@
 # Skills
 
-> Twelve focused Agent Skills, independently installable from npm and discoverable through Skillfolio.
+> Thirteen focused Agent Skills, independently installable from npm and discoverable through Skillfolio.
 
 [![CI](https://github.com/montasim/skills/actions/workflows/ci.yml/badge.svg)](https://github.com/montasim/skills/actions/workflows/ci.yml)
 [![Node.js 18+](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white)](package.json)
-[![Agent Skills](https://img.shields.io/badge/Agent_Skills-12-0F766E)](#skill-catalog)
+[![Agent Skills](https://img.shields.io/badge/Agent_Skills-13-0F766E)](#skill-catalog)
 [![Support on SupportKori](https://img.shields.io/badge/Support_on-SupportKori-00B8B5)](https://www.supportkori.com/montasim)
 
-This repository is the canonical source and release workspace for twelve independently scoped Agent Skills and the Skillfolio web application. Each `skills/<name>` directory owns one portable `SKILL.md` contract, package installer, tests, documentation, and release identity. The collection covers frontend quality, documentation, repository management, deployment, release engineering, web visibility, and catalog maintenance without coupling the skills into one runtime package.
+This repository is the canonical source and release workspace for thirteen independently scoped Agent Skills and the Skillfolio web application. Each `skills/<name>` directory owns one portable `SKILL.md` contract, package installer, tests, documentation, and release identity. The collection covers mobile development, frontend quality, documentation, repository management, deployment, release engineering, web visibility, and catalog maintenance without coupling the skills into one runtime package.
 
 The private npm workspace is named `montasim-skills`; it is an orchestration surface and is never published as a combined package.
 
 > [!NOTE]
-> All twelve skill packages are publicly available on npm and have matching namespaced GitHub releases. `integrate-supportkori-widget` is intentionally published as `UNLICENSED`; public availability does not create an open-source license grant.
+> All thirteen skill packages are publicly available on npm and have matching namespaced GitHub releases. `integrate-supportkori-widget` is intentionally published as `UNLICENSED`; public availability does not create an open-source license grant.
 
 **[Browse Skillfolio](https://skillfoliox.netlify.app) · [Choose a skill](#skill-catalog) · [Contribute](CONTRIBUTING.md) · [Report an issue](https://github.com/montasim/skills/issues)**
 
@@ -20,6 +20,7 @@ The private npm workspace is named `montasim-skills`; it is an orchestration sur
 
 | Skill | Purpose | Distribution | Version | License |
 | --- | --- | --- | --- | --- |
+| [`build-android-app-from-web`](https://github.com/montasim/skills/tree/main/skills/build-android-app-from-web) | Build Android apps with verified web parity | [npm](https://www.npmjs.com/package/build-android-app-from-web) | 0.1.0 | MIT |
 | [`find-ui-inconsistencies`](https://github.com/montasim/skills/tree/main/skills/find-ui-inconsistencies) | Find visual and interaction inconsistencies | [npm](https://www.npmjs.com/package/find-ui-inconsistencies) | 0.1.0 | MIT |
 | [`publish-verified-github-release`](https://github.com/montasim/skills/tree/main/skills/publish-verified-github-release) | Publish evidence-backed GitHub releases | [npm](https://www.npmjs.com/package/publish-verified-github-release) | 0.2.0 | MIT |
 | [`fix-social-link-previews`](https://github.com/montasim/skills/tree/main/skills/fix-social-link-previews) | Fix and verify social link previews | [npm](https://www.npmjs.com/package/fix-social-link-previews) | 0.3.0 | MIT |
@@ -143,7 +144,7 @@ Every npm package remains independently versioned. Release tags use the collisio
 
 For example, `fix-social-link-previews-v0.4.0` resolves only the `fix-social-link-previews` workspace. The release workflow validates the tag, tests and packs that workspace, publishes a missing version through npm trusted publishing, verifies registry propagation, smoke-tests the installed CLI, and creates a GitHub release when one does not already exist. Re-running a released tag verifies the existing npm package and release without publishing a duplicate version.
 
-The initial twelve versions were published with authenticated npm ownership and independently verified against their GitHub tags. Future releases can use npm trusted publishing after each package is connected to `montasim/skills` and `.github/workflows/publish.yml`.
+The initial twelve imported versions were published with authenticated npm ownership and independently verified against their GitHub tags. Later skills use the same namespaced release workflow after their package-specific trusted-publishing connection is verified.
 
 ## Migration status and limitations
 
@@ -151,7 +152,7 @@ The initial twelve versions were published with authenticated npm ownership and 
 - The Skillfolio live site builds from `apps/skillfolio` on the central repository's `main` branch. The imported standalone repository remains a provenance and historical-issue record, not a deployment source.
 - Package metadata points to the central `montasim/skills` repository and is verified as part of each release.
 - Historical repositories should be archived only after a release from the monorepo installs and verifies successfully.
-- `integrate-supportkori-widget` and Skillfolio remain unlicensed. The SupportKori package is public but does not grant open-source reuse rights; the other eleven skills are MIT-licensed.
+- `integrate-supportkori-widget` and Skillfolio remain unlicensed. The SupportKori package is public but does not grant open-source reuse rights; the other twelve skills are MIT-licensed.
 - Skillfolio's Netlify development dependency graph has one upstream `extract-zip` advisory whose named patched version is not yet published on npm. It does not enter any skill package; see [SECURITY.md](SECURITY.md#known-development-dependency-advisory).
 - The repository deliberately uses normal directories rather than symlinked skill directories so local validation and packaging agree.
 
@@ -169,4 +170,4 @@ Built and maintained by [Montasim](https://github.com/montasim).
 
 ## License
 
-Licensing is defined per module. Eleven skills include the MIT License; `integrate-supportkori-widget` and the Skillfolio application are currently unlicensed. The aggregation and root tooling do not yet have a repository-wide open-source license. See [LICENSING.md](LICENSING.md).
+Licensing is defined per module. Twelve skills include the MIT License; `integrate-supportkori-widget` and the Skillfolio application are currently unlicensed. The aggregation and root tooling do not yet have a repository-wide open-source license. See [LICENSING.md](LICENSING.md).

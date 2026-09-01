@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build Android App from Web"
+  short_description: "Create Android apps with verified web parity"
+  default_prompt: "Use $build-android-app-from-web to build an Android app from this web application and verify every discovered capability."

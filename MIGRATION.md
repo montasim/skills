@@ -34,10 +34,14 @@ The application does not own managed release facts. `scripts/generate-skillfolio
 
 ## Current distribution decisions
 
-- All twelve skills are configured as independently versioned public npm workspaces and use namespaced GitHub release tags.
+- The twelve imported skills are configured as independently versioned public npm workspaces and use namespaced GitHub release tags.
 - `update-skillfolio-catalog` is publicly installable while retaining its bounded purpose: it updates an explicitly identified local Skillfolio catalog and does not deploy it implicitly.
 - `integrate-supportkori-widget` is publicly packaged as `UNLICENSED`. Its availability does not grant open-source reuse rights.
 - Host support is recorded as documented format support, installer-path testing, and live runtime verification. Format documentation alone is not a runtime claim.
+
+## Post-migration additions
+
+`build-android-app-from-web` was created in the canonical monorepo rather than imported from a standalone repository. It begins at version `0.1.0`, uses the shared installer runtime, is MIT-licensed, and follows the namespaced release identity `build-android-app-from-web-v0.1.0`.
 
 ## Remote cutover status
 

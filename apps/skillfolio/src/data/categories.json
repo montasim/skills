@@ -16,6 +16,10 @@
     "definition": "Reviews the consistency and usability of visible web interfaces."
   },
   {
+    "name": "Mobile Development",
+    "definition": "Builds and adapts mobile applications from existing product behavior."
+  },
+  {
     "name": "Release Engineering",
     "definition": "Creates, ships, and verifies versioned software releases."
   },

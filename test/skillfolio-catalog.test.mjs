@@ -39,7 +39,8 @@ test("Skillfolio keeps external skills and includes every public managed skill",
   assert.equal(names.includes("integrate-supportkori-widget"), true);
   assert.equal(names.includes("deploy-prebuilt-app-to-netlify"), true);
   assert.equal(names.includes("update-skillfolio-catalog"), true);
-  assert.equal(names.length, 14);
+  assert.equal(names.includes("build-android-app-from-web"), true);
+  assert.equal(names.length, 15);
 });
 
 test("Skillfolio assigns every published skill to its primary outcome category", () => {
@@ -48,6 +49,7 @@ test("Skillfolio assigns every published skill to its primary outcome category",
   );
 
   assert.deepEqual(categories, {
+    "build-android-app-from-web": "Mobile Development",
     "write-complete-project-readme": "Documentation",
     "fix-social-link-previews": "Web Visibility",
     "fix-project-metadata-mismatches": "Repository Management",

@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "manifest_status": "draft",
+  "source": { "web_root": ".", "revision": "working-tree" },
+  "target": { "android_root": "android" },
+  "discovery": {
+    "status": "in-progress",
+    "evidence": [{ "kind": "source", "location": "src", "detail": "This record intentionally lacks provenance." }],
+    "exclusions": []
+  },
+  "limitations": [],
+  "capabilities": [
+    {
+      "id": "search.query",
+      "name": "Search",
+      "area": "Discovery",
+      "source_evidence": [{ "kind": "source", "provenance": "observed", "location": "src/search", "detail": "Search route." }],
+      "expected_behavior": "A query returns matching results.",
+      "states": ["ready", "results"],
+      "dependencies": [],
+      "android": { "disposition": "native-parity", "rationale": "Retain search behavior.", "implementation_locations": [] },
+      "verification": { "requirements": ["Queries produce expected results"], "evidence": [] },
+      "status": "planned",
+      "blockers": [],
+      "owner": "search"
+    }
+  ]
+}

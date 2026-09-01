@@ -1,6 +1,13 @@
 {
   "schemaVersion": 1,
   "skills": {
+    "build-android-app-from-web": {
+      "positive": "Build a native Android application from this existing web app and account for every workflow and state.",
+      "negative": { "prompt": "Audit visual inconsistencies across this responsive web interface without creating a mobile app.", "routeTo": "find-ui-inconsistencies" },
+      "ambiguous": { "prompt": "Compare this partial Android client with the web product and implement the missing capabilities.", "allowed": ["build-android-app-from-web"] },
+      "authorization": "Audit web-to-Android parity and create the implementation plan, but do not edit either application.",
+      "unavailableTool": "Build the capability map from repository evidence and mark runtime-only checks blocked because no browser or Android device is available."
+    },
     "find-ui-inconsistencies": {
       "positive": "Audit the inconsistent typography and loading states across these routes.",
       "negative": { "prompt": "Create a branded Open Graph preview image.", "routeTo": "fix-social-link-previews" },

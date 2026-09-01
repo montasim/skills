@@ -240,6 +240,29 @@
     }
   },
   {
+    "slug": "build-android-app-from-web",
+    "name": "Build Android App from Web",
+    "mark": "WA",
+    "category": "Mobile Development",
+    "status": "Stable",
+    "featured": false,
+    "summary": "Builds or audits Android applications from existing web products with explicit feature traceability and platform-aware parity.",
+    "description": "An evidence-driven mobile-development skill that discovers a web application's routes, workflows, data, states, and integrations; maps every capability to an Android disposition; guides native platform adaptation; and verifies that no feature is silently omitted.",
+    "compatibility": [
+      "OpenAI Codex",
+      "Claude Code"
+    ],
+    "uses": [
+      "Web-to-Android application development",
+      "Existing Android parity-gap audits",
+      "Capability traceability and verification"
+    ],
+    "source": {
+      "kind": "managed",
+      "name": "build-android-app-from-web"
+    }
+  },
+  {
     "slug": "find-ui-inconsistencies",
     "name": "Find UI Inconsistencies",
     "mark": "UI",
