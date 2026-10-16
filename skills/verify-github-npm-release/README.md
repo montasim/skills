@@ -38,6 +38,19 @@ npx --yes --package=verify-github-npm-release@latest verify-github-npm-release \
 
 The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` or an exact `--path` as needed.
 
+Use the same command with the target for your host:
+
+```sh
+npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target claude
+npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target gemini
+npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target antigravity
+npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target antigravity-cli
+npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target zcode
+npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target cursor
+npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target copilot
+npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target opencode
+```
+
 ```text
 Use $verify-github-npm-release to verify owner/project package-name 1.2.3, tag package-name-v1.2.3, latest dist-tag, CI, and catalog.json. Do not execute or change the package.
 ```

@@ -35,6 +35,20 @@ npx --yes --package=publish-verified-github-release@latest publish-verified-gith
 
 The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. `--target all` installs every preset; `--path /absolute/skills/root` supports another compatible host.
 
+Use the matching target for your host:
+
+```sh
+npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target codex
+npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target claude
+npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target gemini
+npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target antigravity
+npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target antigravity-cli
+npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target zcode
+npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target cursor
+npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target copilot
+npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target opencode
+```
+
 Draft only:
 
 ```text

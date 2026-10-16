@@ -34,6 +34,31 @@ Node.js 18 or newer is required for the installer. Python 3 is required for the 
 
 The shared installer supports user and project scopes, guarded replacement, dry runs, and the repository's documented agent-host targets.
 
+Choose a host-specific command:
+
+```sh
+# OpenAI Codex
+npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target codex
+# Claude Code
+npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target claude
+# Gemini CLI
+npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target gemini
+# Google Antigravity
+npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target antigravity
+# Antigravity CLI
+npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target antigravity-cli
+# ZCode
+npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target zcode
+# Cursor
+npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target cursor
+# GitHub Copilot
+npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target copilot
+# OpenCode
+npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target opencode
+```
+
+Use `--target all` for every supported preset or add `--scope project` for a repository-local install.
+
 ```text
 Use $build-android-app-from-web to build an Android app from this web application, account for every discovered capability, and verify the completed app.
 ```

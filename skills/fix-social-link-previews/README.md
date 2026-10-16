@@ -7,46 +7,63 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Support on SupportKori](https://img.shields.io/badge/Support_on-SupportKori-00B8B5)](https://www.supportkori.com/montasim)
 
-Fix Social Link Previews gives an AI coding agent a raw-response-first workflow for missing, small, stale, or inaccessible link cards. It verifies canonical, Open Graph, and Twitter metadata; follows the preview asset response; checks MIME type and dimensions; chooses the target framework's native metadata surface; and distinguishes implementation defects from a messaging platform's private rendering and cache.
+Fix Social Link Previews gives an AI coding agent a raw-response-first workflow for missing, small, stale, or inaccessible link cards. It checks the page metadata and the image response together, repairs framework-native metadata when needed, and separates implementation defects from a platform's private rendering and cache.
 
-```sh
-npx --yes --package=fix-social-link-previews@latest fix-social-link-previews --target codex
-```
+Use it when:
 
-**[npm package](https://www.npmjs.com/package/fix-social-link-previews) · [source](https://github.com/montasim/skills/tree/main/skills/fix-social-link-previews) · [issues](https://github.com/montasim/skills/issues)**
-
-## Use it when
-
-- Shared URLs show no image, the wrong image, or a small card.
-- Metadata exists in the browser DOM but not in the server response seen by crawlers.
-- `og:image` redirects, requires authentication, serves HTML, or declares the wrong MIME type.
-- A site relies on SVG or WebP where broad messaging-crawler support is needed.
-- A clean implementation still shows an old card and cache behavior must be diagnosed safely.
+- a shared URL has no image, the wrong image, or a small card;
+- metadata appears in the browser but not in the raw response seen by crawlers;
+- `og:image` redirects, requires authentication, serves HTML, or declares the wrong MIME type;
+- a site relies on SVG or WebP where broad messaging-crawler support is needed; or
+- the implementation is valid but a platform still shows an old card.
 
 The skill does not promise an exact WhatsApp, Slack, Discord, LinkedIn, Facebook, or X layout. Those platforms control rendering, eligibility, cropping, truncation, and caching.
 
-## Install and invoke
+**[npm package](https://www.npmjs.com/package/fix-social-link-previews) · [source](https://github.com/montasim/skills/tree/main/skills/fix-social-link-previews) · [issues](https://github.com/montasim/skills/issues)**
 
-Node.js 18 or newer is required for the installer and deterministic checker.
+## Install
+
+Node.js 18 or newer is required. Choose the command for the AI agent you use; the package and skill are the same in every case.
+
+| AI agent | Installation command |
+| --- | --- |
+| OpenAI Codex | `npx --yes --package=fix-social-link-previews@latest fix-social-link-previews --target codex` |
+| Claude Code | `npx --yes --package=fix-social-link-previews@latest fix-social-link-previews --target claude` |
+| Gemini CLI | `npx --yes --package=fix-social-link-previews@latest fix-social-link-previews --target gemini` |
+| Google Antigravity | `npx --yes --package=fix-social-link-previews@latest fix-social-link-previews --target antigravity` |
+| Antigravity CLI | `npx --yes --package=fix-social-link-previews@latest fix-social-link-previews --target antigravity-cli` |
+| ZCode | `npx --yes --package=fix-social-link-previews@latest fix-social-link-previews --target zcode` |
+| Cursor | `npx --yes --package=fix-social-link-previews@latest fix-social-link-previews --target cursor` |
+| GitHub Copilot | `npx --yes --package=fix-social-link-previews@latest fix-social-link-previews --target copilot` |
+| OpenCode | `npx --yes --package=fix-social-link-previews@latest fix-social-link-previews --target opencode` |
+
+Install for every supported preset at once:
 
 ```sh
-npx --yes --package=fix-social-link-previews@latest fix-social-link-previews \
-  --target codex --scope project
+npx --yes --package=fix-social-link-previews@latest fix-social-link-previews --target all
 ```
 
-The shared installer also supports Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` for every preset or `--path /absolute/skills/root` for another compatible host.
+Add `--scope project` to install into the current repository instead of the user-level skill directory. Use an absolute `--path` when installing into another compatible Agent Skills root.
+
+## Invoke it
+
+After installation, ask the agent to inspect a repository, local HTML file, or deployed URL:
 
 ```text
-Use $fix-social-link-previews to audit the deployed home page and repair its large-image preview. Verify the raw response and asset.
+Use $fix-social-link-previews to audit the deployed home page and repair its large-image preview. Verify the raw response and asset. Do not deploy.
 ```
+
+For a cache investigation:
 
 ```text
-/fix-social-link-previews Check whether this valid implementation is hidden by a stale platform cache. Do not deploy.
+/fix-social-link-previews Check whether this valid implementation is hidden by a stale platform cache. Audit the clean URL first and do not change canonical metadata.
 ```
 
-## What it verifies
+The skill preserves valid metadata and assets, makes the smallest framework-native repair, and does not deploy, commit, push, publish, invalidate caches, or use authenticated preview debuggers without explicit authorization.
 
-| Surface | Required evidence |
+## What it checks
+
+| Surface | Evidence required |
 | --- | --- |
 | Page | Title, description, canonical URL, coherent Open Graph fields, and `summary_large_image` Twitter metadata in raw HTML |
 | Image | Public HTTPS response, PNG or JPEG, matching MIME declaration, useful alt text, and large-card dimensions |
@@ -54,9 +71,11 @@ Use $fix-social-link-previews to audit the deployed home page and repair its lar
 | Framework | Metadata is emitted through the project's existing server, head, or prerender mechanism |
 | Cache diagnosis | The clean URL is valid before a query variant or official re-scrape tool is used as a diagnostic |
 
-The preferred broad-compatibility asset is a branded 1200×630 PNG or JPEG with critical content kept away from crop-prone edges.
+For broad compatibility, prefer a branded 1200×630 PNG or JPEG with critical content kept away from crop-prone edges.
 
-## Run the checker directly
+## Deterministic checker
+
+Run the bundled checker directly when you want a machine-readable audit or a repeatable CI check:
 
 ```sh
 # Deployed page
@@ -69,7 +88,7 @@ node /absolute/skill/root/scripts/check-social-preview.mjs dist/index.html \
 
 Add `--json` for machine-readable evidence.
 
-| Exit | Meaning |
+| Exit code | Meaning |
 | --- | --- |
 | `0` | The deterministic audit is clean |
 | `1` | Metadata or asset findings require review |
@@ -77,9 +96,9 @@ Add `--json` for machine-readable evidence.
 
 The checker validates raw metadata and image responses. It does not reproduce proprietary platform caches or card-selection algorithms.
 
-## Repair workflow
+## Recommended workflow
 
-1. Detect framework, router, rendering model, public asset path, SEO authority, and verified production origin.
+1. Detect the framework, router, rendering model, public asset path, SEO authority, and verified production origin.
 2. Inspect raw server or built HTML before trusting a hydrated browser DOM.
 3. Preserve a clean implementation; otherwise repair incomplete, conflicting, client-only, or stale metadata.
 4. Create a versioned branded raster only from verified project identity and visual assets.
@@ -101,9 +120,7 @@ fix-social-link-previews/
 
 The framework reference covers static HTML, Vite, TanStack Start, Next.js, React Router, Astro, SvelteKit, Nuxt, server frameworks, and deployment asset paths while deferring to installed versions and current official documentation.
 
-## Installer, development, and safety
-
-Use `--scope user|project`, `--dry-run`, `--force`, `--migrate`, a provider list, or an exact `--path`. Installation copies the skill; it does not audit a site or change metadata.
+## Development and safety
 
 ```sh
 git clone https://github.com/montasim/skills.git
@@ -113,12 +130,8 @@ npm test --workspace skills/fix-social-link-previews
 npm run pack:check --workspace skills/fix-social-link-previews
 ```
 
-- Protected pages and expiring image signatures are not reliable crawler targets.
-- WebP is recognized but reported as an interoperability risk; SVG-only social images are not accepted as broad-compatible proof.
-- The skill does not deploy, commit, push, publish, invalidate caches, or use authenticated preview debuggers without explicit authorization.
+Protected pages and expiring image signatures are not reliable crawler targets. WebP is recognized but reported as an interoperability risk; SVG-only social images are not accepted as broad-compatible proof.
 
-## Support, contribution, and license
+Read the [contribution guide](https://github.com/montasim/skills/blob/main/CONTRIBUTING.md), [support policy](https://github.com/montasim/skills/blob/main/SUPPORT.md), and [security policy](https://github.com/montasim/skills/blob/main/SECURITY.md) before contributing. For bug reports, include a sanitized URL, relevant response headers, Node.js version, expected result, and actual result—never cookies, credentials, private deployments, or signed asset URLs.
 
-For public bug reports, include the sanitized URL, relevant response headers, Node.js version, expected result, and actual result—never cookies, credentials, private deployments, or signed asset URLs. Use [GitHub Issues](https://github.com/montasim/skills/issues), and follow the repository [support](https://github.com/montasim/skills/blob/main/SUPPORT.md), [contribution](https://github.com/montasim/skills/blob/main/CONTRIBUTING.md), and [security](https://github.com/montasim/skills/blob/main/SECURITY.md) guidance.
-
-Built and maintained by [Montasim](https://github.com/montasim). Optional [SupportKori funding](https://www.supportkori.com/montasim) supports compatibility research. Licensed under the [MIT License](LICENSE).
+Licensed under the [MIT License](LICENSE).

@@ -37,6 +37,20 @@ npx --yes --package=update-skillfolio-catalog@latest update-skillfolio-catalog \
 
 The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` or an exact `--path` when needed.
 
+Use the matching target for your host:
+
+```sh
+npx --yes --package=update-skillfolio-catalog@latest update-skillfolio-catalog --target codex
+npx --yes --package=update-skillfolio-catalog@latest update-skillfolio-catalog --target claude
+npx --yes --package=update-skillfolio-catalog@latest update-skillfolio-catalog --target gemini
+npx --yes --package=update-skillfolio-catalog@latest update-skillfolio-catalog --target antigravity
+npx --yes --package=update-skillfolio-catalog@latest update-skillfolio-catalog --target antigravity-cli
+npx --yes --package=update-skillfolio-catalog@latest update-skillfolio-catalog --target zcode
+npx --yes --package=update-skillfolio-catalog@latest update-skillfolio-catalog --target cursor
+npx --yes --package=update-skillfolio-catalog@latest update-skillfolio-catalog --target copilot
+npx --yes --package=update-skillfolio-catalog@latest update-skillfolio-catalog --target opencode
+```
+
 ```text
 Use $update-skillfolio-catalog to add the published package@example-version to /absolute/path/to/skillfolio. Update exactly one skill and do not push or deploy.
 ```

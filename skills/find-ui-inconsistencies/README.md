@@ -43,6 +43,20 @@ npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies \
 
 The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--path /absolute/skills/root` for another filesystem-backed Agent Skills host. Restart the selected host or begin a new session after installation.
 
+Host-specific installation commands are:
+
+```sh
+npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target codex
+npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target claude
+npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target gemini
+npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target antigravity
+npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target antigravity-cli
+npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target zcode
+npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target cursor
+npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target copilot
+npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target opencode
+```
+
 Representative prompts:
 
 ```text

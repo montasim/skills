@@ -37,6 +37,19 @@ npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-wi
 
 The shared installer also supports Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` for every preset or `--path /absolute/skills/root` for another compatible host.
 
+Use the matching target for your host:
+
+```sh
+npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target claude
+npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target gemini
+npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target antigravity
+npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target antigravity-cli
+npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target zcode
+npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target cursor
+npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target copilot
+npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target opencode
+```
+
 ```text
 Use $integrate-supportkori-widget to audit the landing page and extension popup. Repair only surfaces that can safely keep the SupportKori panel in-app.
 ```

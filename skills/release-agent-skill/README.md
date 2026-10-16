@@ -37,6 +37,20 @@ npx --yes --package=release-agent-skill@latest release-agent-skill \
 
 The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` or an exact `--path` as needed.
 
+Use the matching target for your host:
+
+```sh
+npx --yes --package=release-agent-skill@latest release-agent-skill --target codex
+npx --yes --package=release-agent-skill@latest release-agent-skill --target claude
+npx --yes --package=release-agent-skill@latest release-agent-skill --target gemini
+npx --yes --package=release-agent-skill@latest release-agent-skill --target antigravity
+npx --yes --package=release-agent-skill@latest release-agent-skill --target antigravity-cli
+npx --yes --package=release-agent-skill@latest release-agent-skill --target zcode
+npx --yes --package=release-agent-skill@latest release-agent-skill --target cursor
+npx --yes --package=release-agent-skill@latest release-agent-skill --target copilot
+npx --yes --package=release-agent-skill@latest release-agent-skill --target opencode
+```
+
 Prepare only:
 
 ```text

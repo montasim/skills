@@ -38,6 +38,19 @@ npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready \
 
 The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` or an exact `--path` as needed.
 
+Use the same command with the target for your host:
+
+```sh
+npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target claude
+npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target gemini
+npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target antigravity
+npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target antigravity-cli
+npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target zcode
+npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target cursor
+npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target copilot
+npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target opencode
+```
+
 ```text
 Use $make-app-netlify-ready to diagnose this monorepo's Netlify base-directory error, implement the smallest local repair, and verify a production build. Do not deploy.
 ```

@@ -38,6 +38,20 @@ npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-
 
 The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` or an exact `--path` as needed.
 
+For a specific host, use the matching target:
+
+```sh
+npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target codex
+npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target claude
+npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target gemini
+npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target antigravity
+npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target antigravity-cli
+npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target zcode
+npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target cursor
+npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target copilot
+npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target opencode
+```
+
 ```text
 Use $fix-project-metadata-mismatches to audit this repository's package identity, versions, URLs, install commands, and compatibility claims. Report only.
 ```

@@ -35,6 +35,19 @@ npx --yes --package=make-project-github-ready@latest make-project-github-ready \
 
 The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` or an exact `--path` as needed.
 
+Use the same command with the target for your host:
+
+```sh
+npx --yes --package=make-project-github-ready@latest make-project-github-ready --target claude
+npx --yes --package=make-project-github-ready@latest make-project-github-ready --target gemini
+npx --yes --package=make-project-github-ready@latest make-project-github-ready --target antigravity
+npx --yes --package=make-project-github-ready@latest make-project-github-ready --target antigravity-cli
+npx --yes --package=make-project-github-ready@latest make-project-github-ready --target zcode
+npx --yes --package=make-project-github-ready@latest make-project-github-ready --target cursor
+npx --yes --package=make-project-github-ready@latest make-project-github-ready --target copilot
+npx --yes --package=make-project-github-ready@latest make-project-github-ready --target opencode
+```
+
 ```text
 Use $make-project-github-ready to audit this project and prepare the local repository files. Do not create or change anything on GitHub.
 ```
