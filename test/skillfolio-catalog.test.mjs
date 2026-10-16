@@ -91,7 +91,7 @@ test("Netlify separates repository base selection from app-local build settings"
   assert.match(repositoryConfig, /base\s*=\s*"apps\/skillfolio"/);
   assert.doesNotMatch(repositoryConfig, /command\s*=/);
   assert.doesNotMatch(repositoryConfig, /publish\s*=/);
-  assert.doesNotMatch(applicationConfig, /base\s*=/);
+  assert.match(applicationConfig, /base\s*=\s*"\."/);
   assert.match(applicationConfig, /command\s*=\s*"pnpm run build"/);
   assert.match(applicationConfig, /publish\s*=\s*"dist\/client"/);
 });

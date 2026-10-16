@@ -38,4 +38,16 @@ describe("SkillPlatformBadges", () => {
       "Also documented for Gemini CLI, Cursor, GitHub Copilot"
     )
   })
+
+  it("can show every platform when the full list is useful", () => {
+    render(
+      <SkillPlatformBadges
+        platforms={["OpenAI Codex", "Claude Code", "Gemini CLI"]}
+        showAll
+      />
+    )
+
+    expect(screen.getByText("Gemini CLI")).toBeTruthy()
+    expect(screen.queryByText(/platforms$/)).toBeNull()
+  })
 })

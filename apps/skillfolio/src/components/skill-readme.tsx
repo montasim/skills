@@ -15,6 +15,19 @@ type ReadmeState =
   | { status: "ready"; markdown: string }
   | { status: "error"; message: string }
 
+const useLocalReadme = (skill: Skill) =>
+  import.meta.env.DEV && Boolean(skill.sourceDirectory)
+const localReadmeBaseUrl = (skill: Skill) =>
+  `/__skillfolio/readmes/${skill.slug}`
+const localContentBaseUrl = (skill: Skill) =>
+  `/__skillfolio/resources/${skill.slug}`
+
+function readmeUrl(skill: Skill) {
+  return useLocalReadme(skill)
+    ? `${localReadmeBaseUrl(skill)}/README.md`
+    : skill.readmeUrl
+}
+
 function resolveUrl(value: string | undefined, skill: Skill, image = false) {
   if (
     !value ||
@@ -23,7 +36,11 @@ function resolveUrl(value: string | undefined, skill: Skill, image = false) {
   )
     return value
   const path = value.replace(/^\.?\//, "")
-  const baseUrl = image ? skill.rawContentBaseUrl : skill.sourceContentBaseUrl
+  const baseUrl = useLocalReadme(skill)
+    ? localContentBaseUrl(skill)
+    : image
+      ? skill.rawContentBaseUrl
+      : skill.sourceContentBaseUrl
   return `${baseUrl}/${path}`
 }
 
@@ -133,11 +150,12 @@ export function SkillReadme({ skill }: SkillReadmeProps) {
   const [state, setState] = useState<ReadmeState>({ status: "loading" })
   const [attempt, setAttempt] = useState(0)
   const components = useMemo(() => markdownComponents(skill), [skill])
+  const sourceUrl = readmeUrl(skill)
 
   useEffect(() => {
     const controller = new AbortController()
     setState({ status: "loading" })
-    fetch(skill.readmeUrl, {
+    fetch(sourceUrl, {
       headers: { Accept: "text/plain" },
       signal: controller.signal,
     })
@@ -158,7 +176,7 @@ export function SkillReadme({ skill }: SkillReadmeProps) {
         })
       })
     return () => controller.abort()
-  }, [attempt, skill.readmeUrl])
+  }, [attempt, sourceUrl])
 
   if (state.status === "error") {
     return (

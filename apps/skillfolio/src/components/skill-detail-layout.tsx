@@ -18,7 +18,7 @@ export function SkillDetailLayout({
   return (
     <main aria-label={label}>
       <section className="border-b border-ink/20">
-        <div className="mx-auto grid max-w-[1380px] items-end gap-10 px-5 py-12 lg:grid-cols-[minmax(0,1fr)_390px] lg:gap-16 lg:px-10 lg:py-14">
+        <div className="mx-auto grid max-w-[1380px] items-end gap-10 px-5 py-12 lg:grid-cols-2 lg:gap-16 lg:px-10 lg:py-14">
           {hero}
           {install}
         </div>

@@ -44,9 +44,9 @@ describe("Skill-detail frame", () => {
 
     expect(screen.getByRole("heading", { name: skill.name })).toBeTruthy()
     expect(screen.getByText("Install from npm")).toBeTruthy()
-    expect(
-      screen.getByRole("link", { name: /View on npm/ }).getAttribute("href")
-    ).toBe(skill.packageUrl)
+    expect(screen.queryByText("Repository")).toBeNull()
+    expect(screen.getByText("Installer tested")).toBeTruthy()
+    expect(screen.getByText("Runtime verified")).toBeTruthy()
     expect(
       screen.getByRole("link", { name: /View source/ }).getAttribute("href")
     ).toBe(skill.readmeSourceUrl)

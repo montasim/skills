@@ -48,7 +48,7 @@ The checked-in runtime catalog is generated, so both local builds and Netlify bu
 4. Copy the install command from the installation panel.
 5. Use **View on GitHub** or **View source** to inspect the original files.
 
-The README panel loads from `raw.githubusercontent.com` in the browser. If GitHub is unavailable, blocked, or rate-limited, use the retry control or open the source repository directly.
+In development, managed-skill READMEs and their relative assets load from the local `skills/` directories. Production and server builds load the README content from the skill's GitHub repository via `raw.githubusercontent.com`. If GitHub is unavailable, blocked, or rate-limited in production, use the retry control or open the source repository directly.
 
 ## Catalog ownership
 
@@ -182,7 +182,7 @@ The site is deployed at [skillfoliox.netlify.app](https://skillfoliox.netlify.ap
 Netlify configuration is intentionally split so both monorepo builds and app-local development resolve paths correctly:
 
 - Root `netlify.toml` selects the base directory `apps/skillfolio`.
-- This directory's `netlify.toml` defines build command `pnpm run build` and publish directory `dist/client` without repeating the base.
+- This directory's `netlify.toml` defines local base `.`, build command `pnpm run build`, and publish directory `dist/client`; the explicit local base prevents Vite's Netlify adapter from resolving the monorepo base twice.
 - Node.js: 24
 - pnpm: 10.30.3
 - Canonical site URL: `https://skillfoliox.netlify.app`
@@ -219,7 +219,7 @@ The catalog generator and Netlify configuration live at the monorepo root becaus
 
 - The catalog is curated and generated locally; it does not poll GitHub or npm automatically.
 - The deployed site uses this monorepo as its Git source; uncommitted local changes do not reach Netlify.
-- README rendering depends on public GitHub and `raw.githubusercontent.com` availability.
+- Production README rendering depends on public GitHub and `raw.githubusercontent.com` availability; local development uses the checked-out skill files.
 - Private repositories are unsupported because there is no authentication flow.
 - Search and category filtering run in the browser against bundled JSON.
 - Skillfolio does not store user accounts, form submissions, or catalog data in a database.

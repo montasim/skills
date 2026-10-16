@@ -32,15 +32,23 @@ function platformBadgeClass(platform: string) {
 
 type SkillPlatformBadgesProps = {
   platforms: readonly string[]
+  label?: string
+  showAll?: boolean
   className?: string
 }
 
 export function SkillPlatformBadges({
   platforms,
+  label = "Documented format",
+  showAll = false,
   className,
 }: SkillPlatformBadgesProps) {
-  const visiblePlatforms = platforms.slice(0, visiblePlatformLimit)
-  const remainingPlatforms = platforms.slice(visiblePlatformLimit)
+  const visiblePlatforms = showAll
+    ? platforms
+    : platforms.slice(0, visiblePlatformLimit)
+  const remainingPlatforms = showAll
+    ? []
+    : platforms.slice(visiblePlatformLimit)
   const remainingLabel = `+${remainingPlatforms.length} ${
     remainingPlatforms.length === 1 ? "platform" : "platforms"
   }`
@@ -48,7 +56,7 @@ export function SkillPlatformBadges({
   return (
     <div className={cn("border-t border-ink/10 pt-4", className)}>
       <p className="font-mono text-meta tracking-[0.14em] text-ink/55 uppercase">
-        Documented format
+        {label}
       </p>
       <ul
         className="mt-2 flex flex-wrap gap-1.5"

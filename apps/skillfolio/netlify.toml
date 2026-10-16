@@ -1,4 +1,7 @@
 [build]
+  # This file is also loaded when Vite runs from apps/skillfolio locally.
+  # Keep its base explicit so it does not resolve the monorepo base twice.
+  base = "."
   command = "pnpm run build"
   publish = "dist/client"
 

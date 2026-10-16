@@ -33,14 +33,20 @@ describe("Repository README", () => {
     render(<SkillReadme skill={skill} />)
 
     expect(await screen.findByRole("heading", { name: "Example" })).toBeTruthy()
+    const expectedContentBase = import.meta.env.DEV
+      ? `/__skillfolio/resources/${skill.slug}`
+      : skill.sourceContentBaseUrl
+    const expectedReadmeUrl = import.meta.env.DEV
+      ? `/__skillfolio/readmes/${skill.slug}/README.md`
+      : skill.readmeUrl
     expect(
       screen.getByRole("link", { name: "Guide" }).getAttribute("href")
-    ).toBe(`${skill.sourceContentBaseUrl}/docs/guide.md`)
+    ).toBe(`${expectedContentBase}/docs/guide.md`)
     expect(screen.getByRole("img", { name: "Logo" }).getAttribute("src")).toBe(
-      `${skill.rawContentBaseUrl}/assets/logo.png`
+      `${expectedContentBase}/assets/logo.png`
     )
     expect(fetchMock).toHaveBeenCalledWith(
-      skill.readmeUrl,
+      expectedReadmeUrl,
       expect.objectContaining({ signal: expect.any(AbortSignal) })
     )
   })

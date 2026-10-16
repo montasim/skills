@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router"
 import { CopyButton } from "@/components/copy-button"
 import { SkillDetailLayout } from "@/components/skill-detail-layout"
 import { SkillReadme } from "@/components/skill-readme"
+import { SkillPlatformBadges } from "@/components/skill-platform-badges"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -11,7 +12,6 @@ import {
   DiamondIcon,
   ExternalLinkIcon,
   FileDocIcon,
-  GithubLogoIcon,
   PackageCheckIcon,
 } from "@/components/ui/icons"
 import { Separator } from "@/components/ui/separator"
@@ -104,63 +104,8 @@ function ReadySkillDetail({ skill }: { skill: Skill }) {
       }
       sidebar={
         <aside className="lg:sticky lg:top-24">
-          <p className="font-mono text-meta tracking-[0.18em] text-ink/45 uppercase">
-            Repository
-          </p>
-          <Separator className="mt-4 h-0.5 bg-ink" />
-          <dl className="divide-y divide-ink/15 text-sm">
-            <div className="flex justify-between gap-4 py-4">
-              <dt className="text-ink/55">Owner</dt>
-              <dd className="font-semibold">{skill.repositoryOwner}</dd>
-            </div>
-            <div className="flex justify-between gap-4 py-4">
-              <dt className="text-ink/55">Branch</dt>
-              <dd className="font-mono text-xs">{skill.branch}</dd>
-            </div>
-            <div className="flex justify-between gap-4 py-4">
-              <dt className="text-ink/55">Document</dt>
-              <dd className="font-mono text-xs">README.md</dd>
-            </div>
-            {skill.package && skill.packageUrl ? (
-              <div className="flex justify-between gap-4 py-4">
-                <dt className="text-ink/55">Package</dt>
-                <dd className="min-w-0 text-right font-mono text-xs">
-                  <a
-                    href={skill.packageUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="break-all underline decoration-ink/25 underline-offset-4 hover:text-brand"
-                  >
-                    {skill.package}
-                  </a>
-                </dd>
-              </div>
-            ) : null}
-          </dl>
-          {skill.packageUrl ? (
-            <Button
-              asChild
-              variant="outline"
-              className="mt-5 h-11 w-full justify-between rounded-none border-2 border-ink bg-white hover:bg-ink hover:text-white"
-            >
-              <a href={skill.packageUrl} target="_blank" rel="noreferrer">
-                <PackageCheckIcon /> View on npm
-                <ExternalLinkIcon className="size-3" />
-              </a>
-            </Button>
-          ) : null}
-          <Button
-            asChild
-            variant="outline"
-            className={`${skill.packageUrl ? "mt-3" : "mt-5"} h-11 w-full justify-between rounded-none border-2 border-ink bg-white hover:bg-ink hover:text-white`}
-          >
-            <a href={skill.repository} target="_blank" rel="noreferrer">
-              <GithubLogoIcon /> View on GitHub
-              <ExternalLinkIcon className="size-3" />
-            </a>
-          </Button>
           {skill.hostEvidence ? (
-            <div className="mt-8">
+            <div>
               <p className="font-mono text-meta tracking-[0.18em] text-ink/45 uppercase">
                 Compatibility evidence
               </p>
@@ -173,16 +118,20 @@ function ReadySkillDetail({ skill }: { skill: Skill }) {
                   </dd>
                 </div>
                 <div className="py-3">
-                  <dt className="text-ink/55">Installer tested</dt>
-                  <dd className="mt-1 leading-6">
-                    {skill.hostEvidence.installerTested.join(", ")}
-                  </dd>
+                  <SkillPlatformBadges
+                    platforms={skill.hostEvidence.installerTested}
+                    label="Installer tested"
+                    showAll
+                    className="border-0 pt-0"
+                  />
                 </div>
                 <div className="py-3">
-                  <dt className="text-ink/55">Runtime verified</dt>
-                  <dd className="mt-1 leading-6">
-                    {skill.hostEvidence.runtimeVerified.join(", ")}
-                  </dd>
+                  <SkillPlatformBadges
+                    platforms={skill.hostEvidence.runtimeVerified}
+                    label="Runtime verified"
+                    showAll
+                    className="border-0 pt-0"
+                  />
                 </div>
                 <div className="flex justify-between gap-4 py-3">
                   <dt className="text-ink/55">Audited</dt>
