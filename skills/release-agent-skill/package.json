@@ -1,6 +1,6 @@
 {
   "name": "release-agent-skill",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Install a portable skill that validates, packages, publishes, releases, and verifies Agent Skills.",
   "type": "module",
   "bin": {

@@ -18,13 +18,13 @@ test("Skillfolio derives managed release facts from the root catalog", () => {
     (entry) => entry.slug === "fix-social-link-previews",
   );
 
-  assert.equal(readme.version, "0.4.0");
+  assert.equal(readme.version, "0.4.1");
   assert.equal(readme.package, "write-complete-project-readme");
   assert.equal(
     readme.installCommand,
     "npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target codex",
   );
-  assert.equal(social.version, "0.3.0");
+  assert.equal(social.version, "0.3.1");
   assert.equal(readme.hostEvidence.format, "Agent Skills structure validated");
   assert.deepEqual(readme.hostEvidence.runtimeVerified, ["OpenAI Codex"]);
   assert.deepEqual(readme.compatibility, readme.hostEvidence.documentedHosts);

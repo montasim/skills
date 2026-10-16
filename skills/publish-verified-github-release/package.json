@@ -1,6 +1,6 @@
 {
   "name": "publish-verified-github-release",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Install a portable, cross-provider skill for evidence-based GitHub releases.",
   "type": "module",
   "bin": {

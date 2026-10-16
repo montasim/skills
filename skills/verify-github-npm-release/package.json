@@ -1,6 +1,6 @@
 {
   "name": "verify-github-npm-release",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Install a portable Codex and Claude skill for auditing GitHub and npm releases.",
   "type": "module",
   "bin": {

@@ -1,6 +1,6 @@
 {
   "name": "update-skillfolio-catalog",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Install a portable skill for synchronizing a verified skill with a local Skillfolio catalog.",
   "type": "module",
   "bin": {

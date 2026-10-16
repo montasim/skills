@@ -1,6 +1,6 @@
 {
   "name": "fix-project-metadata-mismatches",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Install a portable skill that audits and synchronizes project metadata.",
   "type": "module",
   "bin": {

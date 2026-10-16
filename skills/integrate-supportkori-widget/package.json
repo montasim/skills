@@ -1,6 +1,6 @@
 {
   "name": "integrate-supportkori-widget",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Install a portable skill that audits or integrates theme-consistent SupportKori widgets.",
   "type": "module",
   "bin": {

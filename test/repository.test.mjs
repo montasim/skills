@@ -22,30 +22,30 @@ test("catalog covers each direct skill directory", () => {
 });
 
 test("namespaced release tags resolve one npm workspace", () => {
-  assert.deepEqual(resolveRelease("fix-social-link-previews-v0.3.0", root), {
+  assert.deepEqual(resolveRelease("fix-social-link-previews-v0.3.1", root), {
     name: "fix-social-link-previews",
-    version: "0.3.0",
+    version: "0.3.1",
     workspace: "skills/fix-social-link-previews",
-    tag: "fix-social-link-previews-v0.3.0",
+    tag: "fix-social-link-previews-v0.3.1",
   });
   assert.throws(() => resolveRelease("v0.1.0", root), /exactly one/);
-  assert.deepEqual(resolveRelease("deploy-prebuilt-app-to-netlify-v0.1.0", root), {
+  assert.deepEqual(resolveRelease("deploy-prebuilt-app-to-netlify-v0.1.1", root), {
     name: "deploy-prebuilt-app-to-netlify",
-    version: "0.1.0",
+    version: "0.1.1",
     workspace: "skills/deploy-prebuilt-app-to-netlify",
-    tag: "deploy-prebuilt-app-to-netlify-v0.1.0",
+    tag: "deploy-prebuilt-app-to-netlify-v0.1.1",
   });
-  assert.deepEqual(resolveRelease("update-skillfolio-catalog-v0.1.0", root), {
+  assert.deepEqual(resolveRelease("update-skillfolio-catalog-v0.1.1", root), {
     name: "update-skillfolio-catalog",
-    version: "0.1.0",
+    version: "0.1.1",
     workspace: "skills/update-skillfolio-catalog",
-    tag: "update-skillfolio-catalog-v0.1.0",
+    tag: "update-skillfolio-catalog-v0.1.1",
   });
-  assert.deepEqual(resolveRelease("integrate-supportkori-widget-v0.1.0", root), {
+  assert.deepEqual(resolveRelease("integrate-supportkori-widget-v0.1.1", root), {
     name: "integrate-supportkori-widget",
-    version: "0.1.0",
+    version: "0.1.1",
     workspace: "skills/integrate-supportkori-widget",
-    tag: "integrate-supportkori-widget-v0.1.0",
+    tag: "integrate-supportkori-widget-v0.1.1",
   });
 });
 

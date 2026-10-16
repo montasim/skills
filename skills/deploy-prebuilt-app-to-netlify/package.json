@@ -1,6 +1,6 @@
 {
   "name": "deploy-prebuilt-app-to-netlify",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Install a portable skill for safely uploading verified local build artifacts to Netlify.",
   "type": "module",
   "bin": {

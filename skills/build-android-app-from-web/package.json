@@ -1,6 +1,6 @@
 {
   "name": "build-android-app-from-web",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Install a portable skill that builds Android applications with verified parity to existing web applications.",
   "type": "module",
   "bin": {

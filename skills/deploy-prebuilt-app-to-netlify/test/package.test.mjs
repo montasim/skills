@@ -21,7 +21,7 @@ function run(args, options = {}) {
 }
 
 test("package exposes the public installer and staged portable skill", () => {
-  assert.equal(manifest.version, "0.1.0");
+  assert.equal(manifest.version, "0.1.1");
   assert.equal(manifest.license, "MIT");
   assert.equal(manifest.publishConfig.access, "public");
   assert.deepEqual(manifest.files, ["bin/", "skills/"]);

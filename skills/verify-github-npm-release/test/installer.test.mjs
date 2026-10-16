@@ -18,7 +18,7 @@ test('prints help and version without requiring a target', async () => {
   const help = await exec(process.execPath, [bin, '--help'])
   const version = await exec(process.execPath, [bin, '--version'])
   assert.match(help.stdout, /--target <codex\|claude\|both>/)
-  assert.equal(version.stdout.trim(), '0.1.0')
+  assert.equal(version.stdout.trim(), '0.1.1')
 })
 
 test('requires an explicit target', async () => {

@@ -5,7 +5,7 @@ import test from 'node:test'
 test('exposes one dependency-free installer and one portable skill', async () => {
   const pkg = JSON.parse(await fs.readFile('package.json', 'utf8'))
   assert.equal(pkg.name, 'verify-github-npm-release')
-  assert.equal(pkg.version, '0.1.0')
+  assert.equal(pkg.version, '0.1.1')
   assert.equal(pkg.bin['verify-github-npm-release'], 'bin/verify-github-npm-release.js')
   assert.deepEqual(pkg.files, ['bin/', 'skills/'])
   assert.equal(pkg.engines.node, '>=18')

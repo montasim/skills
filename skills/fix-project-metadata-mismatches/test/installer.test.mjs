@@ -90,7 +90,7 @@ test('rejects a symlink destination', (t) => {
 })
 
 test('package contract exposes only installer and nested skill', () => {
-  assert.equal(manifest.version, '0.1.0')
+  assert.equal(manifest.version, '0.1.1')
   assert.equal(manifest.type, 'module')
   assert.equal(manifest.engines.node, '>=18')
   assert.equal(manifest.license, 'MIT')

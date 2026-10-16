@@ -1,6 +1,6 @@
 {
   "name": "find-ui-inconsistencies",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Install a portable skill that audits frontend visual and interaction consistency.",
   "type": "module",
   "bin": {

@@ -25,7 +25,7 @@ test('public package contract contains only portable payload roots', () => {
 
 test('help, version, and required target behave predictably', () => {
   assert.match(run(['--help']).stdout, /--target/)
-  assert.equal(run(['--version']).stdout.trim(), '0.1.0')
+  assert.equal(run(['--version']).stdout.trim(), '0.1.1')
   const missing = run([])
   assert.equal(missing.status, 1)
   assert.match(missing.stderr, /--target is required/)
