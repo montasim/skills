@@ -27,7 +27,23 @@ npx --yes --package=verify-github-npm-release@latest verify-github-npm-release -
 
 Use `publish-verified-github-release` to draft or change release notes. Use `release-agent-skill` when verification closes an authorized multi-stage shipment.
 
-## Install and invoke
+## Install
+
+The shared installer supports these nine Agent Skills hosts:
+
+| AI agent | Installation command |
+| --- | --- |
+| OpenAI Codex | `npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target codex` |
+| Claude Code | `npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target claude` |
+| Gemini CLI | `npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target gemini` |
+| Google Antigravity | `npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target antigravity` |
+| Antigravity CLI | `npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target antigravity-cli` |
+| ZCode | `npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target zcode` |
+| Cursor | `npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target cursor` |
+| GitHub Copilot | `npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target copilot` |
+| OpenCode | `npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target opencode` |
+
+Install every supported host with `--target all`.
 
 Node.js 18 or newer and Git are required for local checks. Online checks need npm registry access and GitHub access; private targets may require authentication.
 
@@ -36,20 +52,8 @@ npx --yes --package=verify-github-npm-release@latest verify-github-npm-release \
   --target codex --scope project
 ```
 
-The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` or an exact `--path` as needed.
 
-Use the same command with the target for your host:
-
-```sh
-npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target claude
-npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target gemini
-npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target antigravity
-npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target antigravity-cli
-npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target zcode
-npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target cursor
-npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target copilot
-npx --yes --package=verify-github-npm-release@latest verify-github-npm-release --target opencode
-```
+## Invoke it
 
 ```text
 Use $verify-github-npm-release to verify owner/project package-name 1.2.3, tag package-name-v1.2.3, latest dist-tag, CI, and catalog.json. Do not execute or change the package.

@@ -24,7 +24,23 @@ npx --yes --package=publish-verified-github-release@latest publish-verified-gith
 
 Use `verify-github-npm-release` for a read-only audit of an existing release. Use `release-agent-skill` when GitHub release creation is one stage of a complete Agent Skill shipment.
 
-## Install and invoke
+## Install
+
+The shared installer supports these nine Agent Skills hosts:
+
+| AI agent | Installation command |
+| --- | --- |
+| OpenAI Codex | `npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target codex` |
+| Claude Code | `npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target claude` |
+| Gemini CLI | `npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target gemini` |
+| Google Antigravity | `npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target antigravity` |
+| Antigravity CLI | `npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target antigravity-cli` |
+| ZCode | `npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target zcode` |
+| Cursor | `npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target cursor` |
+| GitHub Copilot | `npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target copilot` |
+| OpenCode | `npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target opencode` |
+
+Install every supported host with `--target all`.
 
 The installer and bundled evidence collector require Node.js 18 or newer. Git is required for repository evidence; authenticated GitHub access is needed only for an authorized remote mutation.
 
@@ -33,23 +49,10 @@ npx --yes --package=publish-verified-github-release@latest publish-verified-gith
   --target codex --scope project
 ```
 
-The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. `--target all` installs every preset; `--path /absolute/skills/root` supports another compatible host.
-
-Use the matching target for your host:
-
-```sh
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target codex
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target claude
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target gemini
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target antigravity
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target antigravity-cli
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target zcode
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target cursor
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target copilot
-npx --yes --package=publish-verified-github-release@latest publish-verified-github-release --target opencode
-```
 
 Draft only:
+
+## Invoke it
 
 ```text
 Use $publish-verified-github-release to draft notes for v1.4.0 from v1.3.2. Do not change GitHub.

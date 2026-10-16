@@ -27,7 +27,23 @@ npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --targe
 
 Use `deploy-prebuilt-app-to-netlify` only after the application is locally ready and a draft or production manual upload is explicitly requested.
 
-## Install and invoke
+## Install
+
+The shared installer supports these nine Agent Skills hosts:
+
+| AI agent | Installation command |
+| --- | --- |
+| OpenAI Codex | `npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target codex` |
+| Claude Code | `npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target claude` |
+| Gemini CLI | `npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target gemini` |
+| Google Antigravity | `npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target antigravity` |
+| Antigravity CLI | `npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target antigravity-cli` |
+| ZCode | `npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target zcode` |
+| Cursor | `npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target cursor` |
+| GitHub Copilot | `npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target copilot` |
+| OpenCode | `npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target opencode` |
+
+Install every supported host with `--target all`.
 
 Node.js 18 or newer is required for the installer. Python 3 is required for the bundled TOML-aware auditor; the target app's own package manager and framework toolchain are required for complete verification.
 
@@ -36,20 +52,8 @@ npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready \
   --target codex --scope project
 ```
 
-The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` or an exact `--path` as needed.
 
-Use the same command with the target for your host:
-
-```sh
-npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target claude
-npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target gemini
-npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target antigravity
-npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target antigravity-cli
-npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target zcode
-npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target cursor
-npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target copilot
-npx --yes --package=make-app-netlify-ready@latest make-app-netlify-ready --target opencode
-```
+## Invoke it
 
 ```text
 Use $make-app-netlify-ready to diagnose this monorepo's Netlify base-directory error, implement the smallest local repair, and verify a production build. Do not deploy.

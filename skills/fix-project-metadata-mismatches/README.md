@@ -27,7 +27,23 @@ npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-
 
 Use `make-project-github-ready` for community files, repository visibility, GitHub topics, and remote settings. Use `release-agent-skill` when synchronization is one stage of an end-to-end release.
 
-## Install and invoke
+## Install
+
+The shared installer supports these nine Agent Skills hosts:
+
+| AI agent | Installation command |
+| --- | --- |
+| OpenAI Codex | `npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target codex` |
+| Claude Code | `npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target claude` |
+| Gemini CLI | `npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target gemini` |
+| Google Antigravity | `npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target antigravity` |
+| Antigravity CLI | `npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target antigravity-cli` |
+| ZCode | `npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target zcode` |
+| Cursor | `npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target cursor` |
+| GitHub Copilot | `npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target copilot` |
+| OpenCode | `npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target opencode` |
+
+Install every supported host with `--target all`.
 
 Node.js 18 or newer is required for the installer and bundled metadata auditor. The target repository's own package manager may be needed to regenerate lockfiles or derived metadata.
 
@@ -36,21 +52,8 @@ npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-
   --target codex --scope project
 ```
 
-The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` or an exact `--path` as needed.
 
-For a specific host, use the matching target:
-
-```sh
-npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target codex
-npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target claude
-npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target gemini
-npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target antigravity
-npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target antigravity-cli
-npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target zcode
-npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target cursor
-npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target copilot
-npx --yes --package=fix-project-metadata-mismatches@latest fix-project-metadata-mismatches --target opencode
-```
+## Invoke it
 
 ```text
 Use $fix-project-metadata-mismatches to audit this repository's package identity, versions, URLs, install commands, and compatibility claims. Report only.

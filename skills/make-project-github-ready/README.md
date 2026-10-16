@@ -24,7 +24,23 @@ npx --yes --package=make-project-github-ready@latest make-project-github-ready -
 
 Use `fix-project-metadata-mismatches` for repeated local names, versions, URLs, install commands, and compatibility claims. Use `release-agent-skill` when repository readiness is one stage of an Agent Skill release.
 
-## Install and invoke
+## Install
+
+The shared installer supports these nine Agent Skills hosts:
+
+| AI agent | Installation command |
+| --- | --- |
+| OpenAI Codex | `npx --yes --package=make-project-github-ready@latest make-project-github-ready --target codex` |
+| Claude Code | `npx --yes --package=make-project-github-ready@latest make-project-github-ready --target claude` |
+| Gemini CLI | `npx --yes --package=make-project-github-ready@latest make-project-github-ready --target gemini` |
+| Google Antigravity | `npx --yes --package=make-project-github-ready@latest make-project-github-ready --target antigravity` |
+| Antigravity CLI | `npx --yes --package=make-project-github-ready@latest make-project-github-ready --target antigravity-cli` |
+| ZCode | `npx --yes --package=make-project-github-ready@latest make-project-github-ready --target zcode` |
+| Cursor | `npx --yes --package=make-project-github-ready@latest make-project-github-ready --target cursor` |
+| GitHub Copilot | `npx --yes --package=make-project-github-ready@latest make-project-github-ready --target copilot` |
+| OpenCode | `npx --yes --package=make-project-github-ready@latest make-project-github-ready --target opencode` |
+
+Install every supported host with `--target all`.
 
 Node.js 18 or newer is required for the installer and local repository auditor. Remote stages need authenticated GitHub access.
 
@@ -33,20 +49,8 @@ npx --yes --package=make-project-github-ready@latest make-project-github-ready \
   --target codex --scope project
 ```
 
-The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` or an exact `--path` as needed.
 
-Use the same command with the target for your host:
-
-```sh
-npx --yes --package=make-project-github-ready@latest make-project-github-ready --target claude
-npx --yes --package=make-project-github-ready@latest make-project-github-ready --target gemini
-npx --yes --package=make-project-github-ready@latest make-project-github-ready --target antigravity
-npx --yes --package=make-project-github-ready@latest make-project-github-ready --target antigravity-cli
-npx --yes --package=make-project-github-ready@latest make-project-github-ready --target zcode
-npx --yes --package=make-project-github-ready@latest make-project-github-ready --target cursor
-npx --yes --package=make-project-github-ready@latest make-project-github-ready --target copilot
-npx --yes --package=make-project-github-ready@latest make-project-github-ready --target opencode
-```
+## Invoke it
 
 ```text
 Use $make-project-github-ready to audit this project and prepare the local repository files. Do not create or change anything on GitHub.

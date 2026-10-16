@@ -27,7 +27,23 @@ npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --tar
 
 Use a general accessibility audit for standards compliance beyond visible interface states. Use a product redesign skill when the goal is a new visual direction rather than consistency within the current one.
 
-## Install and invoke
+## Install
+
+The shared installer supports these nine Agent Skills hosts:
+
+| AI agent | Installation command |
+| --- | --- |
+| OpenAI Codex | `npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target codex` |
+| Claude Code | `npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target claude` |
+| Gemini CLI | `npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target gemini` |
+| Google Antigravity | `npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target antigravity` |
+| Antigravity CLI | `npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target antigravity-cli` |
+| ZCode | `npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target zcode` |
+| Cursor | `npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target cursor` |
+| GitHub Copilot | `npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target copilot` |
+| OpenCode | `npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target opencode` |
+
+Install every supported host with `--target all`.
 
 Node.js 18 or newer is required for the installer.
 
@@ -41,23 +57,9 @@ npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies \
   --target all
 ```
 
-The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--path /absolute/skills/root` for another filesystem-backed Agent Skills host. Restart the selected host or begin a new session after installation.
-
-Host-specific installation commands are:
-
-```sh
-npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target codex
-npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target claude
-npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target gemini
-npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target antigravity
-npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target antigravity-cli
-npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target zcode
-npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target cursor
-npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target copilot
-npx --yes --package=find-ui-inconsistencies@latest find-ui-inconsistencies --target opencode
-```
-
 Representative prompts:
+
+## Invoke it
 
 ```text
 Use $find-ui-inconsistencies to audit the dashboard, settings, and billing routes at mobile and desktop widths. Report only; do not edit.

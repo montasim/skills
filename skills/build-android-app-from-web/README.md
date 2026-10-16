@@ -28,36 +28,29 @@ npx --yes --package=build-android-app-from-web@latest build-android-app-from-web
 
 Use a general Android-development workflow instead when no existing web product defines the source behavior. Use a frontend consistency audit when the task concerns only the web interface.
 
-## Install and invoke
+## Install
+
+The shared installer supports these nine Agent Skills hosts:
+
+| AI agent | Installation command |
+| --- | --- |
+| OpenAI Codex | `npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target codex` |
+| Claude Code | `npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target claude` |
+| Gemini CLI | `npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target gemini` |
+| Google Antigravity | `npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target antigravity` |
+| Antigravity CLI | `npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target antigravity-cli` |
+| ZCode | `npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target zcode` |
+| Cursor | `npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target cursor` |
+| GitHub Copilot | `npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target copilot` |
+| OpenCode | `npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target opencode` |
+
+Install every supported host with `--target all`.
 
 Node.js 18 or newer is required for the installer. Python 3 is required for the bundled parity-manifest validator. Android implementation requires the target project's JDK, Android SDK, build system, and any emulator or device needed for runtime proof.
 
-The shared installer supports user and project scopes, guarded replacement, dry runs, and the repository's documented agent-host targets.
-
-Choose a host-specific command:
-
-```sh
-# OpenAI Codex
-npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target codex
-# Claude Code
-npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target claude
-# Gemini CLI
-npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target gemini
-# Google Antigravity
-npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target antigravity
-# Antigravity CLI
-npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target antigravity-cli
-# ZCode
-npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target zcode
-# Cursor
-npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target cursor
-# GitHub Copilot
-npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target copilot
-# OpenCode
-npx --yes --package=build-android-app-from-web@latest build-android-app-from-web --target opencode
-```
-
 Use `--target all` for every supported preset or add `--scope project` for a repository-local install.
+
+## Invoke it
 
 ```text
 Use $build-android-app-from-web to build an Android app from this web application, account for every discovered capability, and verify the completed app.

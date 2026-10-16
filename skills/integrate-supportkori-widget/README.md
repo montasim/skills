@@ -26,7 +26,23 @@ npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-wi
 
 This is not a generic donation-button skill. It follows SupportKori's widget contract and reports `platform-blocked` when the requested embedded behavior would violate extension policy, framing rules, or security boundaries.
 
-## Install and invoke
+## Install
+
+The shared installer supports these nine Agent Skills hosts:
+
+| AI agent | Installation command |
+| --- | --- |
+| OpenAI Codex | `npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target codex` |
+| Claude Code | `npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target claude` |
+| Gemini CLI | `npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target gemini` |
+| Google Antigravity | `npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target antigravity` |
+| Antigravity CLI | `npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target antigravity-cli` |
+| ZCode | `npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target zcode` |
+| Cursor | `npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target cursor` |
+| GitHub Copilot | `npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target copilot` |
+| OpenCode | `npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target opencode` |
+
+Install every supported host with `--target all`.
 
 Node.js 18 or newer is required for the installer and source auditor.
 
@@ -35,20 +51,7 @@ npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-wi
   --target codex --scope project
 ```
 
-The shared installer also supports Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` for every preset or `--path /absolute/skills/root` for another compatible host.
-
-Use the matching target for your host:
-
-```sh
-npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target claude
-npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target gemini
-npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target antigravity
-npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target antigravity-cli
-npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target zcode
-npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target cursor
-npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target copilot
-npx --yes --package=integrate-supportkori-widget@latest integrate-supportkori-widget --target opencode
-```
+## Invoke it
 
 ```text
 Use $integrate-supportkori-widget to audit the landing page and extension popup. Repair only surfaces that can safely keep the SupportKori panel in-app.

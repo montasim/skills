@@ -46,7 +46,14 @@
       ],
       "installerTested": [
         "OpenAI Codex",
-        "Claude Code"
+        "Claude Code",
+        "Gemini CLI",
+        "Google Antigravity",
+        "Antigravity CLI",
+        "ZCode",
+        "Cursor",
+        "GitHub Copilot",
+        "OpenCode"
       ],
       "runtimeVerified": [
         "OpenAI Codex"

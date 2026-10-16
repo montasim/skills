@@ -26,7 +26,23 @@ npx --yes --package=release-agent-skill@latest release-agent-skill --target code
 
 Use a specialist directly for a single job: `fix-project-metadata-mismatches`, `make-project-github-ready`, `publish-verified-github-release`, `update-skillfolio-catalog`, or `verify-github-npm-release`.
 
-## Install and invoke
+## Install
+
+The shared installer supports these nine Agent Skills hosts:
+
+| AI agent | Installation command |
+| --- | --- |
+| OpenAI Codex | `npx --yes --package=release-agent-skill@latest release-agent-skill --target codex` |
+| Claude Code | `npx --yes --package=release-agent-skill@latest release-agent-skill --target claude` |
+| Gemini CLI | `npx --yes --package=release-agent-skill@latest release-agent-skill --target gemini` |
+| Google Antigravity | `npx --yes --package=release-agent-skill@latest release-agent-skill --target antigravity` |
+| Antigravity CLI | `npx --yes --package=release-agent-skill@latest release-agent-skill --target antigravity-cli` |
+| ZCode | `npx --yes --package=release-agent-skill@latest release-agent-skill --target zcode` |
+| Cursor | `npx --yes --package=release-agent-skill@latest release-agent-skill --target cursor` |
+| GitHub Copilot | `npx --yes --package=release-agent-skill@latest release-agent-skill --target copilot` |
+| OpenCode | `npx --yes --package=release-agent-skill@latest release-agent-skill --target opencode` |
+
+Install every supported host with `--target all`.
 
 Node.js 18 or newer is required for local validation. Publication may also require Git, authenticated GitHub access, npm authentication, and destination-specific tools.
 
@@ -35,23 +51,10 @@ npx --yes --package=release-agent-skill@latest release-agent-skill \
   --target codex --scope project
 ```
 
-The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` or an exact `--path` as needed.
-
-Use the matching target for your host:
-
-```sh
-npx --yes --package=release-agent-skill@latest release-agent-skill --target codex
-npx --yes --package=release-agent-skill@latest release-agent-skill --target claude
-npx --yes --package=release-agent-skill@latest release-agent-skill --target gemini
-npx --yes --package=release-agent-skill@latest release-agent-skill --target antigravity
-npx --yes --package=release-agent-skill@latest release-agent-skill --target antigravity-cli
-npx --yes --package=release-agent-skill@latest release-agent-skill --target zcode
-npx --yes --package=release-agent-skill@latest release-agent-skill --target cursor
-npx --yes --package=release-agent-skill@latest release-agent-skill --target copilot
-npx --yes --package=release-agent-skill@latest release-agent-skill --target opencode
-```
 
 Prepare only:
+
+## Invoke it
 
 ```text
 Use $release-agent-skill to prepare package version 0.2.0, validate every installer target, inspect the archive, and draft release notes. Do not commit, push, publish, tag, or release.

@@ -24,7 +24,23 @@ npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to
 
 Use `make-app-netlify-ready` when the task is configuration audit, build-contract repair, adapter work, or deployment preparation without a remote upload.
 
-## Install and invoke
+## Install
+
+The shared installer supports these nine Agent Skills hosts:
+
+| AI agent | Installation command |
+| --- | --- |
+| OpenAI Codex | `npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target codex` |
+| Claude Code | `npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target claude` |
+| Gemini CLI | `npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target gemini` |
+| Google Antigravity | `npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target antigravity` |
+| Antigravity CLI | `npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target antigravity-cli` |
+| ZCode | `npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target zcode` |
+| Cursor | `npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target cursor` |
+| GitHub Copilot | `npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target copilot` |
+| OpenCode | `npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target opencode` |
+
+Install every supported host with `--target all`.
 
 Node.js 18 or newer is required for the installer and offline preflight. An authorized deployment also needs Netlify CLI access and an authenticated, already linked site.
 
@@ -33,21 +49,8 @@ npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to
   --target codex --scope project
 ```
 
-The shared installer supports Codex, Claude Code, Gemini CLI, Google Antigravity, Antigravity CLI, ZCode, Cursor, GitHub Copilot, and OpenCode. Use `--target all` or an exact `--path` when needed.
 
-For an explicit host installation, replace `codex` with the target you use:
-
-```sh
-npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target codex
-npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target claude
-npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target gemini
-npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target antigravity
-npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target antigravity-cli
-npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target zcode
-npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target cursor
-npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target copilot
-npx --yes --package=deploy-prebuilt-app-to-netlify@latest deploy-prebuilt-app-to-netlify --target opencode
-```
+## Invoke it
 
 ```text
 Use $deploy-prebuilt-app-to-netlify to create a fresh local build, upload a draft deploy to the linked site, and verify the root and one nested route.
