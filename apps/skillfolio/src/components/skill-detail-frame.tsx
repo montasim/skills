@@ -12,6 +12,7 @@ import {
   DiamondIcon,
   ExternalLinkIcon,
   FileDocIcon,
+  GithubLogoIcon,
   PackageCheckIcon,
 } from "@/components/ui/icons"
 import { Separator } from "@/components/ui/separator"
@@ -104,6 +105,44 @@ function ReadySkillDetail({ skill }: { skill: Skill }) {
       }
       sidebar={
         <aside className="lg:sticky lg:top-24">
+          <div className="mb-8">
+            <p className="font-mono text-meta tracking-[0.18em] text-ink/45 uppercase">
+              Repository
+            </p>
+            <Separator className="mt-4 bg-ink/20" />
+            <div className="flex justify-between gap-4 py-3 text-sm">
+              <span className="text-ink/55">Owner</span>
+              <span className="font-medium">{skill.repositoryOwner}</span>
+            </div>
+            <div className="space-y-3">
+              {skill.packageUrl ? (
+                <Button
+                  asChild
+                  variant="outline"
+                  className="h-11 w-full justify-between rounded-none border-ink/70 bg-white text-sm hover:border-brand hover:bg-brand-soft/30"
+                >
+                  <a href={skill.packageUrl} target="_blank" rel="noreferrer">
+                    <span className="flex items-center gap-2">
+                      <PackageCheckIcon className="size-4" /> View on npm
+                    </span>
+                    <ExternalLinkIcon className="size-3" />
+                  </a>
+                </Button>
+              ) : null}
+              <Button
+                asChild
+                variant="outline"
+                className="h-11 w-full justify-between rounded-none border-ink/70 bg-white text-sm hover:border-brand hover:bg-brand-soft/30"
+              >
+                <a href={skill.repository} target="_blank" rel="noreferrer">
+                  <span className="flex items-center gap-2">
+                    <GithubLogoIcon className="size-4" /> View on GitHub
+                  </span>
+                  <ExternalLinkIcon className="size-3" />
+                </a>
+              </Button>
+            </div>
+          </div>
           {skill.hostEvidence ? (
             <div>
               <p className="font-mono text-meta tracking-[0.18em] text-ink/45 uppercase">
@@ -142,7 +181,9 @@ function ReadySkillDetail({ skill }: { skill: Skill }) {
               </dl>
             </div>
           ) : null}
-          <div className="mt-8 hidden lg:block">
+          <div
+            className={`${skill.hostEvidence ? "mt-8" : "mt-0"} hidden lg:block`}
+          >
             <p className="font-mono text-meta tracking-[0.18em] text-ink/45 uppercase">
               Good for
             </p>
