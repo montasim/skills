@@ -11,10 +11,6 @@ Write Complete Project README gives an AI coding agent an evidence-first documen
 
 The skill writes exactly one artifact: `<project-root>/README.md`. It does not create licenses, funding files, screenshots, social previews, governance files, topics, releases, or nested READMEs.
 
-```sh
-npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target codex
-```
-
 **[npm package](https://www.npmjs.com/package/write-complete-project-readme) · [source](https://github.com/montasim/skills/tree/main/skills/write-complete-project-readme) · [issues](https://github.com/montasim/skills/issues)**
 
 ## Use it when
@@ -27,14 +23,27 @@ npx --yes --package=write-complete-project-readme@latest write-complete-project-
 
 Do not use it for audit-only reports, organization/profile READMEs, nested documentation indexes, translations, badge-only edits, or non-README assets.
 
-## Install and invoke
+## Install
 
-Node.js 18 or newer is required for the dependency-free installer and deterministic checker. This package retains a mature custom installer for Codex and Claude Code because it supports conservative auto-detection and transactional migration from previous Codex skill roots.
+Node.js 18 or newer is required for the dependency-free installer and deterministic checker. The custom installer preserves conservative Codex/Claude auto-detection and transactional migration from previous Codex skill roots while supporting the complete verified host matrix.
+
+| AI agent | Installation command |
+| --- | --- |
+| OpenAI Codex | `npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target codex` |
+| Claude Code | `npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target claude` |
+| Gemini CLI | `npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target gemini` |
+| Google Antigravity | `npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target antigravity` |
+| Antigravity CLI | `npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target antigravity-cli` |
+| ZCode | `npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target zcode` |
+| Cursor | `npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target cursor` |
+| GitHub Copilot | `npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target copilot` |
+| OpenCode | `npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target opencode` |
+
+Install every supported host at once with `--target all`.
+
+ZCode has a documented user-level skills root only; use an explicit user-scope install for ZCode when installing project-local targets.
 
 ```sh
-# Explicit user installation
-npx --yes --package=write-complete-project-readme@latest write-complete-project-readme --target codex
-
 # Project-local installation for both supported hosts
 npx --yes --package=write-complete-project-readme@latest write-complete-project-readme \
   --target both --scope project
@@ -45,6 +54,8 @@ npx --yes --package=write-complete-project-readme@latest write-complete-project-
 ```
 
 Restart the selected host or begin a new session after installation.
+
+## Invoke it
 
 ```text
 Use $write-complete-project-readme to regenerate this project's root README from verified repository evidence. Lead with the CLI workflow and preserve verified migration warnings.
@@ -129,7 +140,7 @@ External links, prose truth, accessibility beyond empty image alt text, and the 
 
 | Option | Behavior |
 | --- | --- |
-| `--target auto\|codex\|claude\|both` | Select destination; strict `auto` succeeds only when exactly one host is detected |
+| `--target <host>\|all\|both\|auto` | Select one host, every host, both legacy hosts, or strict Codex/Claude auto-detection |
 | `--scope user\|project` | Select the standard user or repository-local root |
 | `--path <absolute-root>` | Use one custom skills root; incompatible with `both` and explicit `--scope` |
 | `--dry-run` | Report destinations, migration sources, and actions without writing |
@@ -162,7 +173,7 @@ npm test --workspace skills/write-complete-project-readme
 npm run pack:check --workspace skills/write-complete-project-readme
 ```
 
-Tests cover Codex and Claude destinations, auto-detection, scopes, custom paths, migration, rollback, checker behavior, portability, and package contents. Releases use the monorepo's namespaced tag form:
+Tests cover all host destinations, Codex/Claude auto-detection, scopes, custom paths, migration, rollback, checker behavior, portability, and package contents. Releases use the monorepo's namespaced tag form:
 
 ```text
 write-complete-project-readme-v<version>

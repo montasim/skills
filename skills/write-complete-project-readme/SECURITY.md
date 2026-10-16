@@ -12,7 +12,7 @@ The installer writes only to the destinations shown in its plan:
 - Claude Code project: `<repo>/.claude/skills/write-complete-project-readme`
 - Custom: `<exact-root>/write-complete-project-readme` for one target selected with `--path`
 
-`--target auto` uses read-only environment, directory, and `PATH` signals. It never executes Codex or Claude Code. Detection selects a destination; it is not caller identity, authentication, or authorization. An explicit `--target` takes precedence, and automatic mode refuses when it detects both hosts or neither host.
+`--target auto` uses read-only environment, directory, and `PATH` signals for legacy Codex/Claude detection. It never executes an agent. Detection selects a destination; it is not caller identity, authentication, or authorization. An explicit `--target` takes precedence, and automatic mode refuses when it detects both legacy hosts or neither host.
 
 `--path` cannot be combined with `--target both` or an explicit `--scope`. Existing current destinations are preserved unless `--force` is explicit. The installer rejects symlink and non-directory targets, overlapping roots, and destinations that overlap the packaged skill source.
 
@@ -24,7 +24,7 @@ Install and migration operations stage the packaged skill and back up affected d
 
 ## Host and data boundaries
 
-The dependency-free installer and README checker perform no network requests, analytics, or telemetry after the package has been retrieved. `agents/openai.yaml` is Codex UI metadata; the shared `SKILL.md`, references, and checker define portable behavior for both supported hosts.
+The dependency-free installer and README checker perform no network requests, analytics, or telemetry after the package has been retrieved. `agents/openai.yaml` is Codex UI metadata; the shared `SKILL.md`, references, and checker define portable behavior for all supported hosts.
 
 Installing into Claude Code does not upload the skill to claude.ai or an Anthropic API integration. Those surfaces require separate skill uploads and have their own access controls.
 

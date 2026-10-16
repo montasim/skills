@@ -5,12 +5,12 @@ Use [GitHub Issues](https://github.com/montasim/skills/issues) for reproducible 
 For installer reports, include:
 
 - package version and the complete command, including `--target`, `--scope`, `--path`, `--force`, `--migrate`, and `--dry-run` options that matter;
-- whether Codex, Claude Code, or both were intended;
+- which supported host target or targets were intended;
 - Node.js version, operating system, expected result, exit status, and actual output;
 - for automatic-detection problems, which relevant environment variables, agent directories, or executable names were present, with sensitive path details removed;
 - for rollback problems, the sanitized transaction paths and which original installations remain.
 
-For skill behavior, say whether the host matched a natural-language request through the shared `SKILL.md` description or you used the explicit invocation (`$write-complete-project-readme` for Codex or `/write-complete-project-readme` for Claude Code). Include the project type, expected README outcome, checker diagnostics, and a minimal public reproduction when possible.
+For skill behavior, say whether the host matched a natural-language request through the shared `SKILL.md` description or you used an explicit invocation. Include the target host, project type, expected README outcome, checker diagnostics, and a minimal public reproduction when possible.
 
 Installer automatic detection is not caller identity or host skill activation; selecting the wrong destination is best reproduced with the detection signals above. The local Claude Code installer does not make a skill available in claude.ai or an Anthropic API integration, which requires a separate skill upload.
 

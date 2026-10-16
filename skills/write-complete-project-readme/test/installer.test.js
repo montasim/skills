@@ -200,6 +200,15 @@ test("installs both user targets and prints both invocation forms", () => {
   assertNoTransactions(codexRoot, claudeRoot);
 });
 
+test("installs an explicit non-legacy host target", () => {
+  const root = temporaryRoot();
+  const env = isolatedEnvironment(root);
+  const result = run(["--target", "gemini"], { cwd: root, env });
+
+  assert.equal(result.status, 0, result.stderr);
+  assertInstalled(join(root, "home", ".gemini", "skills", skillName));
+});
+
 test("uses the current directory for project scope outside a Git worktree", () => {
   const root = temporaryRoot();
   const project = join(root, "project");

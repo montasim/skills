@@ -1,7 +1,7 @@
 {
   "name": "write-complete-project-readme",
   "version": "0.4.0",
-  "description": "Install an evidence-based project README skill for Codex and Claude Code.",
+  "description": "Install an evidence-based project README skill for Codex, Claude Code, and other supported Agent Skills hosts.",
   "type": "module",
   "bin": {
     "write-complete-project-readme": "bin/write-complete-project-readme.js"

@@ -16,7 +16,7 @@ The test suite covers installer transactions, legacy migration, deterministic RE
 
 When changing the installer, cover the relevant v0.3.0 matrix:
 
-- explicit `codex`, `claude`, and `both` targets;
+- explicit host targets, `all`, legacy `both`, and `auto` detection;
 - strict `auto` detection with exactly one, zero, and two detected hosts;
 - `user` and `project` scopes, including Git-root and current-directory resolution;
 - `CLAUDE_CONFIG_DIR` and the standard `~/.agents`, `~/.claude`, `.agents`, and `.claude` roots;
@@ -29,7 +29,7 @@ When changing the installer, cover the relevant v0.3.0 matrix:
 
 Automatic detection is a destination heuristic, not caller identity. Tests must control environment variables, agent directories, and `PATH` explicitly rather than depending on the developer machine.
 
-The installed `SKILL.md`, references, and checker are shared by Codex and Claude Code. Its frontmatter description is the portable discovery and trigger contract for natural-language activation on both hosts; `$write-complete-project-readme` and `/write-complete-project-readme` are explicit host syntax. Keep host-specific behavior out of the portable skill contract. `skills/write-complete-project-readme/agents/openai.yaml` is Codex UI metadata and must remain optional for Claude Code.
+The installed `SKILL.md`, references, and checker are shared by all supported hosts. Its frontmatter description is the portable discovery and trigger contract for natural-language activation; `$write-complete-project-readme` and `/write-complete-project-readme` remain Codex/Claude explicit syntax. Keep host-specific behavior out of the portable skill contract. `skills/write-complete-project-readme/agents/openai.yaml` is Codex UI metadata and must remain optional for other hosts.
 
 Validate the bundled skill with Codex's `quick_validate.py` when that development utility is available:
 

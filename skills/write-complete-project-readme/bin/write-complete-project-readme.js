@@ -30,7 +30,19 @@ import { fileURLToPath } from "node:url";
 
 const skillName = "write-complete-project-readme";
 const legacySkillNames = [];
-const validTargets = new Set(["auto", "codex", "claude", "both"]);
+const hostDefinitions = Object.freeze({
+  codex: { label: "Codex", user: [".agents", "skills"], project: [".agents", "skills"] },
+  claude: { label: "Claude Code", user: [".claude", "skills"], project: [".claude", "skills"] },
+  gemini: { label: "Gemini CLI", user: [".gemini", "skills"], project: [".gemini", "skills"] },
+  antigravity: { label: "Google Antigravity", user: [".gemini", "config", "skills"], project: [".agents", "skills"] },
+  "antigravity-cli": { label: "Antigravity CLI", user: [".gemini", "antigravity-cli", "skills"], project: [".agent", "skills"] },
+  zcode: { label: "ZCode", user: [".zcode", "skills"], project: null },
+  cursor: { label: "Cursor", user: [".cursor", "skills"], project: [".cursor", "skills"] },
+  copilot: { label: "GitHub Copilot", user: [".copilot", "skills"], project: [".github", "skills"] },
+  opencode: { label: "OpenCode", user: [".config", "opencode", "skills"], project: [".opencode", "skills"] },
+});
+const hostNames = Object.keys(hostDefinitions);
+const validTargets = new Set(["auto", ...hostNames, "both", "all"]);
 const validScopes = new Set(["user", "project"]);
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const skillSource = join(packageRoot, "skills", skillName);
@@ -39,13 +51,13 @@ const packageJson = JSON.parse(readFileSync(join(packageRoot, "package.json"), "
 function usage() {
   return `Write Complete Project README ${packageJson.version}
 
-Install the ${skillName} skill for Codex, Claude Code, or both agents.
+Install the ${skillName} skill for Codex, Claude Code, or both agents, plus the other supported Agent Skills hosts.
 
 Usage:
   write-complete-project-readme [options]
 
 Options:
-  --target <agent>    auto, codex, claude, or both (default: auto)
+  --target <agent>    auto, codex, claude, or both; ${hostNames.filter((name) => !["codex", "claude"].includes(name)).join(", ")}, all (default: auto)
   --scope <scope>     user or project (default: user)
   --path <directory>  Use an exact custom skills root
   --force             Replace an existing ${skillName} installation
@@ -55,14 +67,12 @@ Options:
   --version, -v       Show the package version
 
 Destinations:
-  Codex user          ~/.agents/skills/${skillName}
-  Codex project       <git-root>/.agents/skills/${skillName}
-  Claude Code user    \${CLAUDE_CONFIG_DIR:-~/.claude}/skills/${skillName}
-  Claude Code project <git-root>/.claude/skills/${skillName}
+  User/project roots follow each host's documented Agent Skills layout.
 
 Detection:
-  auto installs only when exactly one supported agent is detected. If both or
-  neither are detected, select --target codex, --target claude, or --target both.
+  auto detects only Codex and Claude Code for backward-compatible migration.
+  For other hosts, select an explicit target. If both or neither legacy hosts
+  are detected, select an explicit target or --target both.
   Detection inspects environment variables, agent directories, and PATH; it
   never executes an agent command.
 
@@ -72,7 +82,7 @@ Migration:
   may migrate Codex while freshly installing Claude Code.
 
 Constraints:
-  --path cannot be combined with --target both or an explicit --scope.`;
+  --path cannot be combined with --target both or an explicit --scope. --target all also requires a standard skills root.`;
 }
 
 function fail(message) {
@@ -107,9 +117,9 @@ function parseArgs(args) {
       index += 1;
     } else if (argument === "--target") {
       const value = args[index + 1];
-      if (!value || value.startsWith("-")) throw new Error("--target requires auto, codex, claude, or both");
+      if (!value || value.startsWith("-")) throw new Error(`--target requires ${hostNames.join(", ")}, all, auto, or both`);
       if (!validTargets.has(value)) {
-        throw new Error(`invalid --target ${value}; expected auto, codex, claude, or both`);
+        throw new Error(`invalid --target ${value}; expected ${hostNames.join(", ")}, all, auto, or both`);
       }
       options.target = value;
       index += 1;
@@ -291,16 +301,12 @@ function resolveTarget(requestedTarget, root) {
 
 function selectedSkillsRoot(agent, options, root) {
   if (options.path) return resolve(options.path);
-
-  if (options.scope === "project") {
-    return join(root, agent === "codex" ? ".agents" : ".claude", "skills");
+  const parts = hostDefinitions[agent][options.scope];
+  if (!parts) throw new Error(`${hostDefinitions[agent].label} has no documented ${options.scope} scope skill root`);
+  if (agent === "claude" && options.scope === "user" && process.env.CLAUDE_CONFIG_DIR) {
+    return join(resolve(process.env.CLAUDE_CONFIG_DIR), "skills");
   }
-
-  if (agent === "codex") return join(homedir(), ".agents", "skills");
-  const claudeRoot = process.env.CLAUDE_CONFIG_DIR
-    ? resolve(process.env.CLAUDE_CONFIG_DIR)
-    : join(homedir(), ".claude");
-  return join(claudeRoot, "skills");
+  return join(options.scope === "project" ? root : homedir(), ...parts);
 }
 
 function codexLegacyRoots(options, root) {
@@ -316,16 +322,24 @@ function codexLegacyRoots(options, root) {
 }
 
 function makeTargets(resolvedTarget, options, root) {
-  const agents = resolvedTarget === "both" ? ["codex", "claude"] : [resolvedTarget];
-  return agents.map((agent) => {
+  const agents = resolvedTarget === "both" ? ["codex", "claude"] : resolvedTarget === "all" ? hostNames : [resolvedTarget];
+  const targets = agents.map((agent) => {
     const skillsRoot = selectedSkillsRoot(agent, options, root);
     return {
       agent,
       destination: join(skillsRoot, skillName),
-      label: agent === "codex" ? "Codex" : "Claude Code",
+      label: hostDefinitions[agent].label,
       legacyRoots: agent === "codex" ? codexLegacyRoots(options, root) : [],
       skillsRoot,
     };
+  });
+  if (resolvedTarget !== "all") return targets;
+  const seenRoots = new Set();
+  return targets.filter((target) => {
+    const key = canonicalKey(target.skillsRoot);
+    if (seenRoots.has(key)) return false;
+    seenRoots.add(key);
+    return true;
   });
 }
 
@@ -333,8 +347,8 @@ function validateOptions(options, resolvedTarget) {
   if (options.path && options.scopeExplicit) {
     throw new Error("--path cannot be combined with --scope; a custom path is already an exact skills root");
   }
-  if (options.path && resolvedTarget === "both") {
-    throw new Error("--path cannot be combined with --target both; select one agent or omit --path");
+  if (options.path && ["both", "all"].includes(resolvedTarget)) {
+    throw new Error("--path cannot be combined with --target both or all; select one agent or omit --path");
   }
 }
 
